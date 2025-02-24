@@ -1,0 +1,161 @@
+[2025-01-07 19:44:13] Received POST request
+[2025-01-07 19:44:13] POST data: Array
+(
+    [appointment_date] => 2025-01-09
+    [appointment_time] => 23:43
+    [client_name] => Artem
+    [phone] => +3898712345
+    [email] => artdfjk@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване
+)
+
+[2025-01-07 19:44:13] Database connection successful
+[2025-01-07 19:44:13] Processed form data:
+[2025-01-07 19:44:13] Name: Artem
+[2025-01-07 19:44:13] Phone: +3898712345
+[2025-01-07 19:44:13] Email: artdfjk@gmail.com
+[2025-01-07 19:44:13] Service: Дамско подстригване
+[2025-01-07 19:44:13] Date: 2025-01-09
+[2025-01-07 19:44:13] Time: 23:43
+[2025-01-07 19:44:13] Comment: 
+[2025-01-07 19:44:13] Appointment saved successfully for Artem
+[2025-01-07 19:44:13] Connection closed
+[2025-01-07 20:00:21] Received POST request
+[2025-01-07 20:00:21] POST data: Array
+(
+    [client_name] => Awerwe
+    [phone] => +3591234567
+    [email] => qwerty@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване
+    [appointment_date] => 2025-01-13
+    [appointment_time] => 09:30
+)
+
+[2025-01-07 20:00:21] Database connection successful
+[2025-01-07 20:00:21] Processed form data:
+[2025-01-07 20:00:21] Name: Awerwe
+[2025-01-07 20:00:21] Phone: +3591234567
+[2025-01-07 20:00:21] Email: qwerty@gmail.com
+[2025-01-07 20:00:21] Service: Дамско подстригване
+[2025-01-07 20:00:21] Date: 2025-01-13
+[2025-01-07 20:00:21] Time: 09:30
+[2025-01-07 20:00:21] Comment: 
+[2025-01-07 20:00:21] Appointment saved successfully for Awerwe
+[2025-01-07 20:00:21] Connection closed
+[2025-01-07 20:12:33] Received POST request
+[2025-01-07 20:12:33] POST data: Array
+(
+    [client_name] => Arttttt
+    [phone] => +35998765543
+    [email] => zsader@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване
+    [appointment_date] => 2025-01-08
+    [appointment_time] => 09:30
+)
+
+[2025-01-07 20:12:33] Database connection successful
+[2025-01-07 20:12:33] Processed form data:
+[2025-01-07 20:12:33] Name: Arttttt
+[2025-01-07 20:12:33] Phone: +35998765543
+[2025-01-07 20:12:33] Email: zsader@gmail.com
+[2025-01-07 20:12:33] Service: Дамско подстригване
+[2025-01-07 20:12:33] Date: 2025-01-08
+[2025-01-07 20:12:33] Time: 09:30
+[2025-01-07 20:12:33] Comment: 
+[2025-01-07 20:12:33] Appointment saved successfully for Arttttt
+[2025-01-07 20:12:33] Connection closed
+[2025-01-11 18:34:50] Received POST request
+[2025-01-11 18:34:50] POST data: Array
+(
+    [client_name] => zaza
+    [phone] => 0874848484
+    [email] => za@za.za
+    [comment] => zaza
+    [service] => Дамско подстригване, Сешоар (на къса коса)
+    [appointment_date] => 2025-01-25
+    [appointment_time] => 17:00
+)
+
+[2025-01-11 18:34:50] Database connection successful
+[2025-01-11 18:34:50] Processed form data:
+[2025-01-11 18:34:50] Name: zaza
+[2025-01-11 18:34:50] Phone: 0874848484
+[2025-01-11 18:34:50] Email: za@za.za
+[2025-01-11 18:34:50] Service: Дамско подстригване, Сешоар (на къса коса)
+[2025-01-11 18:34:50] Date: 2025-01-25
+[2025-01-11 18:34:50] Time: 17:00
+[2025-01-11 18:34:50] Comment: zaza
+[2025-01-11 18:34:50] Appointment saved successfully for zaza
+[2025-01-11 18:34:50] Connection closed
+[2025-01-12 19:01:27] Received POST request
+[2025-01-12 19:01:27] POST data: Array
+(
+    [client_name] => ajajaj
+    [phone] => 0930848592
+    [email] => a@a.a
+    [comment] => 
+    [service] => Дамско подстригване
+    [appointment_date] => 2025-01-13
+    [appointment_time] => 13:00
+)
+
+[2025-01-12 19:01:27] Database connection successful
+[2025-01-12 19:01:27] Processed form data:
+[2025-01-12 19:01:27] Name: ajajaj
+[2025-01-12 19:01:27] Phone: 0930848592
+[2025-01-12 19:01:27] Email: a@a.a
+[2025-01-12 19:01:27] Service: Дамско подстригване
+[2025-01-12 19:01:27] Date: 2025-01-13
+[2025-01-12 19:01:27] Time: 13:00
+[2025-01-12 19:01:27] Comment: 
+[2025-01-12 19:01:27] Appointment saved successfully for ajajaj
+[2025-01-12 19:01:27] Connection closed
+[2025-01-12 19:53:39] Received POST request
+[2025-01-12 19:53:39] POST data: Array
+(
+    [client_name] => aa
+    [phone] => 04949494994
+    [email] => a@a.a
+    [comment] => a
+    [service] => Удължаване на коса с щипки (1 ред)
+    [appointment_date] => 2025-01-13
+    [appointment_time] => 13:00
+)
+
+[2025-01-12 19:53:39] Database connection successful
+[2025-01-12 19:53:39] Processed form data:
+[2025-01-12 19:53:39] Name: aa
+[2025-01-12 19:53:39] Phone: 04949494994
+[2025-01-12 19:53:39] Email: a@a.a
+[2025-01-12 19:53:39] Service: Удължаване на коса с щипки (1 ред)
+[2025-01-12 19:53:39] Date: 2025-01-13
+[2025-01-12 19:53:39] Time: 13:00
+[2025-01-12 19:53:39] Comment: a
+[2025-01-12 19:53:39] Appointment saved successfully for aa
+[2025-01-12 19:53:39] Connection closed
+[2025-01-19 16:33:15] Received POST request
+[2025-01-19 16:33:15] POST data: Array
+(
+    [client_name] => hjgj
+    [phone] => 0885767644
+    [email] => aa@a.a
+    [comment] => 
+    [service] => Измиване на коса + маска
+    [appointment_date] => 2025-01-26
+    [appointment_time] => 15:30
+)
+
+[2025-01-19 16:33:15] Database connection successful
+[2025-01-19 16:33:15] Processed form data:
+[2025-01-19 16:33:15] Name: hjgj
+[2025-01-19 16:33:15] Phone: 0885767644
+[2025-01-19 16:33:15] Email: aa@a.a
+[2025-01-19 16:33:15] Service: Измиване на коса + маска
+[2025-01-19 16:33:15] Date: 2025-01-26
+[2025-01-19 16:33:15] Time: 15:30
+[2025-01-19 16:33:15] Comment: 
+[2025-01-19 16:33:15] Appointment saved successfully for hjgj
+[2025-01-19 16:33:15] Connection closed

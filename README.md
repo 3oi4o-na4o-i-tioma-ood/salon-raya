@@ -20,7 +20,7 @@ A modern, responsive website for a barber shop with an online booking system. Bu
 
 1. Clone the repository to your web server directory:
 ```bash
-git clone https://github.com/yourusername/barbershop.git
+git clone https://github.com/yourusername/salon_raya.git
 ```
 
 2. Create a PostgreSQL database and import the database structure:
