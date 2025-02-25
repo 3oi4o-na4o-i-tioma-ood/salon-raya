@@ -23,19 +23,25 @@ session_start();
         <p class="subtitle">Изберете услугите, които желаете</p>
 
         <div class="hero-sections">
-            <div class="hero-section" data-category="hair">
-                <h2>Коса</h2>
-        </div>
-            <div class="hero-section" data-category="face">
-                <h2>Лице</h2>
-                    </div>
-            <div class="hero-section" data-category="epilation">
-                <h2>Епилация</h2>
-                </div>
-            <div class="hero-section" data-category="massage">
-                <h2>Масаж</h2>
+            <div class="service-category hero-section" data-category="hair">
+                <img src="images/icons/comb (2).png" alt="Коса" class="service-icon">
+                <h2 class="category-title">Коса</h2>
             </div>
-                    </div>
+            <div class="service-category hero-section" data-category="face">
+                <img src="images/icons/face (2).png" alt="Лице" class="service-icon">
+                <h2 class="category-title">Лице</h2>
+            </div>
+            
+            <div class="service-category hero-section" data-category="epilation">
+                <img src="images/icons/epilaciq (2).png" alt="Епилация" class="service-icon">
+                <h2 class="category-title">Епилация</h2>
+            </div>
+
+            <div class="service-category hero-section" data-category="massage">
+                <img src="images/icons/massage (2).png" alt="Масаж" class="service-icon">
+                <h2 class="category-title">Масаж</h2>
+            </div>
+        </div>
 
         <div class="service-selection">
             <!-- Hair Services -->
@@ -224,7 +230,7 @@ session_start();
             <div class="services-list">
                 <!-- Services will be populated by JavaScript -->
             </div>
-                    </div>
+        </div>
 
         <div class="booking-summary" style="display: none;">
             <div class="summary-content">

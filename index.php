@@ -68,7 +68,7 @@
     <section id="why-us" class="why-us">
         <div class="section-title">
             <span class="line"></span>
-            <h2>Нашите професионални инструменти</h2>
+            <h2>Фризьорски сало Райа</h2>
             <span class="line"></span>
         </div>
         <h2 class="main-title">Защо да изберете нашия салон?</h2>
@@ -78,28 +78,21 @@
                     <i class="fas fa-cut"></i>
                 </div>
                 <h3>Професионални<br>Инструменти</h3>
-                <p>Работим с най-<br>доброто оборудване<br>за бръснари от Wahl,<br>JrL, Andis и Babyliss</p>
+                <p>Работим с най-доброто оборудване<br>от ?</p>
             </div>
             <div class="feature-item">
                 <div class="icon">
                     <i class="fas fa-flask"></i>
                 </div>
                 <h3>Качествена<br>Козметика</h3>
-                <p>ашите бръснари<br>използват най-<br>доброто от American<br>Crew и Uppercut</p>
-            </div>
-            <div class="feature-item">
-                <div class="icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h3>Безпатни<br>Напитки</h3>
-                <p>Ако сте дошли по-<br>рано за часа си,<br>можете да се<br>насладите на</p>
+                <p>Салон Райа<br>използва най-доброто от<br>Wella и Kerastase</p>
             </div>
             <div class="feature-item">
                 <div class="icon">
                     <i class="fas fa-star"></i>
                 </div>
-                <h3>Изживяване<br>За Мъже</h3>
-                <p>Ни сме автентична<br>бръснарница, която<br>предоставя уникално<br>преживяване за мъже</p>
+                <h3>Изживяване<br>за всеки</h3>
+                <p>Нашият салон предлага голямо разнообразие от услуги<br>както за жени,<br> така и за мъже</p>
             </div>
         </div>
     </section>
@@ -717,52 +710,32 @@
         
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <div class="testimonial-image">
-                    <img src="images/testimonials/client1.jpg" alt="Ради">
-                </div>
                 <div class="testimonial-content">
-                    <p>Сайтът на бръснарницата е истинска находка! Навигацията е лесна, информацията за услугите и цените е ясна и подробна...</p>
-                    <h3>Ради</h3>
+                    <p>Страхотно отношение и невероятен резултат. Услуга на такова ниво не съм получавала в популярните салони. С две ръце препоръчвам Диди.</p>
+                    <h3>safie</h3>
                     <span class="client-type">Клиент</span>
                 </div>
             </div>
 
             <div class="testimonial-card">
-                <div class="testimonial-image">
-                    <img src="images/testimonials/client2.jpg" alt="Димитър">
-                </div>
                 <div class="testimonial-content">
-                    <p>Бръснарницата е моето он място за грижа за вънния вид. Изключително съм доволен от удобството на резервациите, като...</p>
-                    <h3>Димитър</h3>
+                    <p>Exceptional work and professional attitude! Highly recommend!</p>
+                <h3>aleksandar</h3>
                     <span class="client-type">Клиент</span>
                 </div>
             </div>
 
             <div class="testimonial-card">
-                <div class="testimonial-image">
-                    <img src="images/testimonials/client3.jpg" alt="Ненко">
-                </div>
                 <div class="testimonial-content">
-                    <p>Открих мястото, където мога да получа точно това, което търся за поддържане на своя стил. Сайтът е интуитивен и предлага широка гама от...</p>
-                    <h3>Ненко</h3>
+                    <p>Wonderful service and professionalism. We'll definitely visit Didi again with my daughter. ❤️💫🙏</p>
+                    <h3>desislava</h3>
                     <span class="client-type">Клиент</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <p>&copy; 2023 Фризьорски салон Райа. Всички права запазени.</p>
-            <a href="sign-in.php" class="sign-in-icon">
-                <i class="far fa-user"></i>
-            </a>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 
     <script src="js/main.js"></script>
 </body>
