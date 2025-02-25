@@ -56,6 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .sign-in-container {
             position: relative;
         }
+
+        .error-message {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -63,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="index.php" class="back-button">
             <i class="fas fa-arrow-left"></i>
         </a>
-        <img src="images/salon/logo.png" alt="SALON RAYA LOGO" class="logo">
-        <h1>Вход</h1>
+        <div class="logo">Фризьорски салон Райа</div>
+        <h1>Вход за служител</h1>
         
         <?php if (isset($error)): ?>
             <div class="error-message"><?php echo $error; ?></div>
