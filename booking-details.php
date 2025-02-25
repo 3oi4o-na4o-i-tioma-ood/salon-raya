@@ -192,10 +192,6 @@ session_start();
         }
 
         .back-button {
-            position: absolute;
-            left: -40px;
-            top: 50%;
-            transform: translateY(-50%);
             background: none;
             border: none;
             color: #666;
@@ -736,9 +732,6 @@ session_start();
             <button class="back-button" onclick="window.history.back()">
                 <i class="fas fa-arrow-left"></i>
             </button>
-            <div class="logo-img">
-                <!-- Add your logo image here -->
-            </div>
             <div class="booking-header-text">
                 <h1>Резервация на час</h1>
                 <p>Моля, попълнете вашите данни</p>

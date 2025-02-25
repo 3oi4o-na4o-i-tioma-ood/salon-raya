@@ -1,3 +1,13 @@
+.booking-container {
+    padding-top: 80px;
+}
+
+.booking-container .title,
+.booking-container .subtitle {
+    text-align: center;
+    color: white;
+}
+
 .booking-page {
     max-width: 1200px;
     margin: 80px auto 0;
@@ -7,7 +17,6 @@
 }
 
 .booking-header {
-    text-align: center;
     margin-bottom: 2rem;
 }
 
@@ -39,6 +48,7 @@
 .service-selection {
     display: flex;
     gap: 2rem;
+    padding: 1em;
     margin-top: 2rem;
 }
 
@@ -47,7 +57,6 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 300px;
-    background: white;
     border-right: 1px solid #eee;
     padding-right: 2rem;
 }
@@ -65,11 +74,11 @@
 }
 
 .subcategory:hover {
-    background: rgba(164, 132, 232, 0.1);
+    background: #a484e8;
 }
 
 .subcategory.active {
-    background: rgba(164, 132, 232, 0.2);
+    background: #a484e8;
 }
 
 .subcategory h3 {
@@ -86,7 +95,7 @@
 
 .services-list {
     flex: 1;
-    padding: 0 1rem;
+    padding: 0;
 }
 
 .service-item {
@@ -340,4 +349,4 @@
 
 .options-btn:hover {
     opacity: 0.8;
-} 
+}

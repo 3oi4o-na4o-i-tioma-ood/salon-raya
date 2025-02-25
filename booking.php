@@ -14,12 +14,12 @@ session_start();
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src="images/logo.png" alt="Salon Raya Logo">
+            Райа
         </div>
     </nav>
 
     <div class="booking-container">
-        <h1>Резервация на час</h1>
+        <h1 class="title">Резервация на час</h1>
         <p class="subtitle">Изберете услугите, които желаете</p>
 
         <div class="hero-sections">

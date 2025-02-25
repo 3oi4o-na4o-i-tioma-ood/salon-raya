@@ -159,3 +159,16 @@
 [2025-01-19 16:33:15] Comment: 
 [2025-01-19 16:33:15] Appointment saved successfully for hjgj
 [2025-01-19 16:33:15] Connection closed
+[2025-02-25 14:30:55] Received POST request
+[2025-02-25 14:30:55] POST data: Array
+(
+    [client_name] => Art
+    [phone] => 0876845187
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване
+    [appointment_date] => 2025-02-26
+    [appointment_time] => 10:00
+)
+
+[2025-02-25 14:30:56] Connection failed: Access denied for user 'root'@'localhost' (using password: NO)

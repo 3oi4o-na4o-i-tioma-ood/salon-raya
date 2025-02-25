@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">Фризьорски салон Райа</div>
+        <div class="logo">Райа</div>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -18,7 +18,7 @@
     </nav>
 
     <nav class="navbar-scrolled">
-        <div class="logo">Фризьорски салон Райа</div>
+        <div class="logo">Райа</div>
         <div class="hamburger">
             <span></span>
             <span></span>

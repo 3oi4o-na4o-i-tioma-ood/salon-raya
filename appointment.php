@@ -625,7 +625,7 @@ session_start();
             <button class="navbar-back" onclick="history.back()">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <div class="logo">ФРИЗЬОРСКИ САЛОН Райа</div>
+            <div class="logo">Райа</div>
         </div>
         <div class="hamburger">
             <span></span>
@@ -639,7 +639,7 @@ session_start();
             <button class="navbar-back" onclick="history.back()">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <div class="logo">ФРИЗЬОРСКИ САЛОН Райа</div>
+            <div class="logo">Райа</div>
         </div>
         <div class="hamburger">
             <span></span>
