@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo">Райа</div>
@@ -42,15 +44,23 @@
     </div>
 
     <section id="hero" class="hero">
-            <img src="images/hero/hero1.jpg" class="hero-image" alt="hero">
+        <img src="images/hero/hero1.jpg" class="hero-image" alt="hero">
         <div class="hero-content">
             <!-- <h1>Където стилът среща съвършенството.</h1> -->
             <h2 class="hero-subtitle">Фризьорски салон Райа</h2>
-            <p>Вярваме, че всеки заслужава не просто подстригване - а изключително и безупречно изживяване.</p>
+            <p>Вярваме, че всеки заслужава не просто подстригване - <br> а изключително и безупречно изживяване.</p>
         </div>
     </section>
 
     <section class="frame-section">
+        <svg class="clip-path-svg">
+            <clipPath id="frame-clip-path" clipPathUnits="objectBoundingBox">
+                <path
+                    d="M0,1 L0,0.207 C0.042,0.171,0.083,0.102,0.125,0.101 C0.167,0.102,0.208,0.171,0.25,0.182 C0.292,0.192,0.333,0.14,0.375,0.111 C0.417,0.08,0.458,0.071,0.5,0.091 C0.542,0.11,0.583,0.162,0.625,0.177 C0.667,0.192,0.708,0.171,0.75,0.151 C0.792,0.132,0.833,0.11,0.875,0.106 C0.917,0.102,0.958,0.11,1,0.111 L1,1">
+                </path>
+            </clipPath>
+        </svg>
+
         <div class="frame-content">
             <div class="frame-left">
                 <h2>Работно време</h2>
@@ -78,7 +88,7 @@
                     <i class="fas fa-cut"></i>
                 </div>
                 <h3>Професионални<br>Инструменти</h3>
-                <p>Работим с най-доброто оборудване<br>от ?</p>
+                <p>Работим с най-доброто оборудване<br>от panasonic и jaguar</p>
             </div>
             <div class="feature-item">
                 <div class="icon">
@@ -101,22 +111,22 @@
         <div class="service-choice">
             <h2>Choose your service</h2>
         </div>
-        
+
         <div class="salon-header">
             <h1>Нашите услуги</h1>
         </div>
-        
+
         <div class="service-categories">
             <div class="service-category">
                 <img src="images/icons/comb (2).png" alt="Коса" class="service-icon">
                 <h2 class="category-title">Коса</h2>
             </div>
-            
+
             <div class="service-category">
                 <img src="images/icons/face (2).png" alt="Лице" class="service-icon">
                 <h2 class="category-title">Лице</h2>
             </div>
-            
+
             <div class="service-category">
                 <img src="images/icons/epilaciq (2).png" alt="Епилация" class="service-icon">
                 <h2 class="category-title">Епилация</h2>
@@ -127,7 +137,7 @@
                 <h2 class="category-title">Масаж</h2>
             </div>
         </div>
-        
+
         <div class="service-list">
             <div class="service-categories-list hair-categories">
                 <div class="service-category-item active" data-category="haircuts">
@@ -196,230 +206,230 @@
             <div class="service-details-list">
                 <div class="service-details-category active" data-category="haircuts">
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Дамско подстригване</h3>
-                    <p>20 мин.</p>
-                </div>
-                <div class="service-price">35 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Дамско подстригване</h3>
+                            <p>20 мин.</p>
+                        </div>
+                        <div class="service-price">35 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Дамско подстригване + измиване и подсушаване</h3>
-                    <p>40 мин.</p>
-                </div>
-                <div class="service-price">от 55 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Дамско подстригване + измиване и подсушаване</h3>
+                            <p>40 мин.</p>
+                        </div>
+                        <div class="service-price">от 55 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Сешоар</h3>
-                    <p>40 мин. - 55 мин.</p>
-                </div>
-                <div class="service-price">от 55 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Сешоар</h3>
+                            <p>40 мин. - 55 мин.</p>
+                        </div>
+                        <div class="service-price">от 55 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Сешоар</h3>
-                    <p>40 мин. - 1 ч.</p>
-                </div>
-                <div class="service-price">от 45 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Сешоар</h3>
+                            <p>40 мин. - 1 ч.</p>
+                        </div>
+                        <div class="service-price">от 45 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Мъжко подстригване с ножица и машинка + измиване</h3>
-                    <p>30 мин.</p>
-                </div>
-                <div class="service-price">35 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Мъжко подстригване с ножица и машинка + измиване</h3>
+                            <p>30 мин.</p>
+                        </div>
+                        <div class="service-price">35 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Мъжко подстригване с машинка</h3>
-                    <p>20 мин.</p>
-                </div>
-                <div class="service-price">30 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Мъжко подстригване с машинка</h3>
+                            <p>20 мин.</p>
+                        </div>
+                        <div class="service-price">30 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Детско подстригване до 12 години</h3>
-                    <p>30 мин.</p>
-                </div>
-                <div class="service-price">25 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Детско подстригване до 12 години</h3>
+                            <p>30 мин.</p>
+                        </div>
+                        <div class="service-price">25 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Прическа с кок</h3>
-                    <p>1 ч.30 мин. - 2 ч.</p>
-                </div>
-                <div class="service-price">от 70 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Прическа с кок</h3>
+                            <p>1 ч.30 мин. - 2 ч.</p>
+                        </div>
+                        <div class="service-price">от 70 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Официална прическа</h3>
-                    <p>1 ч.30 мин. - 2 ч.</p>
-                </div>
-                <div class="service-price">от 75 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Официална прическа</h3>
+                            <p>1 ч.30 мин. - 2 ч.</p>
+                        </div>
+                        <div class="service-price">от 75 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Дамско подстригване на бретон</h3>
-                    <p>5 мин.</p>
-                </div>
-                <div class="service-price">5 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Дамско подстригване на бретон</h3>
+                            <p>5 мин.</p>
+                        </div>
+                        <div class="service-price">5 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Оформяне на врат</h3>
-                    <p>5 мин.</p>
-                </div>
-                <div class="service-price">4 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Оформяне на врат</h3>
+                            <p>5 мин.</p>
+                        </div>
+                        <div class="service-price">4 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Измиване на коса + маска</h3>
-                    <p>15 мин.</p>
-                </div>
-                <div class="service-price">22 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Измиване на коса + маска</h3>
+                            <p>15 мин.</p>
+                        </div>
+                        <div class="service-price">22 лв.</div>
+                    </div>
                 </div>
 
                 <div class="service-details-category" data-category="coloring">
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Боядисване с wella + сешоар</h3>
-                    <p>1 ч.20 мин.</p>
-                </div>
-                <div class="service-price">100 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Боядисване с wella + сешоар</h3>
+                            <p>1 ч.20 мин.</p>
+                        </div>
+                        <div class="service-price">100 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Боядисване с Wella</h3>
-                    <p>1 ч. - 2 ч.</p>
-                </div>
-                <div class="service-price">от 80 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Боядисване с Wella</h3>
+                            <p>1 ч. - 2 ч.</p>
+                        </div>
+                        <div class="service-price">от 80 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Боядисване с боя на клиента</h3>
-                    <p>1 ч.</p>
-                </div>
-                <div class="service-price">50 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Боядисване с боя на клиента</h3>
+                            <p>1 ч.</p>
+                        </div>
+                        <div class="service-price">50 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Обезцветяване</h3>
-                    <p>30 мин. - 1 ч.</p>
-                </div>
-                <div class="service-price">от 100 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Обезцветяване</h3>
+                            <p>30 мин. - 1 ч.</p>
+                        </div>
+                        <div class="service-price">от 100 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Кичури</h3>
-                    <p>2 ч.</p>
-                </div>
-                <div class="service-price">150 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Кичури</h3>
+                            <p>2 ч.</p>
+                        </div>
+                        <div class="service-price">150 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Матиране</h3>
-                    <p>30 мин.</p>
-                </div>
-                <div class="service-price">20 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Матиране</h3>
+                            <p>30 мин.</p>
+                        </div>
+                        <div class="service-price">20 лв.</div>
+                    </div>
                 </div>
 
                 <div class="service-details-category" data-category="curling">
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Изправяне с преса</h3>
-                    <p>1 ч.</p>
-                </div>
-                <div class="service-price">от 25 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Изправяне с преса</h3>
+                            <p>1 ч.</p>
+                        </div>
+                        <div class="service-price">от 25 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Измиване подстригване + Изправяне с сешоар</h3>
-                    <p>1 ч.10 мин.</p>
-                </div>
-                <div class="service-price">75 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Измиване подстригване + Изправяне с сешоар</h3>
+                            <p>1 ч.10 мин.</p>
+                        </div>
+                        <div class="service-price">75 лв.</div>
+                    </div>
                 </div>
 
                 <div class="service-details-category" data-category="extensions">
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Удължаване на коса с щипки</h3>
-                    <p>10 мин. - 50 мин.</p>
-                </div>
-                <div class="service-price">от 10 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Удължаване на коса с щипки</h3>
+                            <p>10 мин. - 50 мин.</p>
+                        </div>
+                        <div class="service-price">от 10 лв.</div>
+                    </div>
                 </div>
 
                 <div class="service-details-category" data-category="treatments">
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Кератинова терапия за коса</h3>
-                    <p>40 мин.</p>
-                </div>
-                <div class="service-price">70 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Кератинова терапия за коса</h3>
+                            <p>40 мин.</p>
+                        </div>
+                        <div class="service-price">70 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Терапия за бързо възстановяване на суха и изтощена коса</h3>
-                    <p>30 мин.</p>
-                </div>
-                <div class="service-price">40 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Терапия за бързо възстановяване на суха и изтощена коса</h3>
+                            <p>30 мин.</p>
+                        </div>
+                        <div class="service-price">40 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Арганова терапия за коса</h3>
-                    <p>30 мин.</p>
-                </div>
-                <div class="service-price">70 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Арганова терапия за коса</h3>
+                            <p>30 мин.</p>
+                        </div>
+                        <div class="service-price">70 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Ампула за коса против косопад</h3>
-                    <p>30 мин.</p>
-                </div>
-                <div class="service-price">22 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Ампула за коса против косопад</h3>
+                            <p>30 мин.</p>
+                        </div>
+                        <div class="service-price">22 лв.</div>
+                    </div>
 
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Маска за копринена коса</h3>
-                    <p>40 мин.</p>
-                </div>
-                <div class="service-price">35 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Маска за копринена коса</h3>
+                            <p>40 мин.</p>
+                        </div>
+                        <div class="service-price">35 лв.</div>
+                    </div>
                 </div>
 
                 <div class="service-details-category" data-category="beard">
                     <div class="service-detail-item">
-                <div class="service-info">
-                    <h3>Оформяне на брада</h3>
-                    <p>15 мин.</p>
-                </div>
-                <div class="service-price">20 лв.</div>
-            </div>
+                        <div class="service-info">
+                            <h3>Оформяне на брада</h3>
+                            <p>15 мин.</p>
+                        </div>
+                        <div class="service-price">20 лв.</div>
+                    </div>
                 </div>
 
                 <div class="service-details-category" data-category="other">
@@ -677,7 +687,7 @@
             <div class="line"></div>
         </div>
         <h2>Използваме качествени продукти</h2>
-        
+
         <div class="products-grid">
             <div class="product-card">
                 <div class="product-image">
@@ -707,11 +717,12 @@
             <div class="line"></div>
         </div>
         <h2>Отзиви</h2>
-        
+
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="testimonial-content">
-                    <p>Страхотно отношение и невероятен резултат. Услуга на такова ниво не съм получавала в популярните салони. С две ръце препоръчвам Диди.</p>
+                    <p>Страхотно отношение и невероятен резултат. Услуга на такова ниво не съм получавала в популярните
+                        салони. С две ръце препоръчвам Диди.</p>
                     <h3>safie</h3>
                     <span class="client-type">Клиент</span>
                 </div>
@@ -720,14 +731,15 @@
             <div class="testimonial-card">
                 <div class="testimonial-content">
                     <p>Exceptional work and professional attitude! Highly recommend!</p>
-                <h3>aleksandar</h3>
+                    <h3>aleksandar</h3>
                     <span class="client-type">Клиент</span>
                 </div>
             </div>
 
             <div class="testimonial-card">
                 <div class="testimonial-content">
-                    <p>Wonderful service and professionalism. We'll definitely visit Didi again with my daughter. ❤️💫🙏</p>
+                    <p>Wonderful service and professionalism. We'll definitely visit Didi again with my daughter. ❤️💫🙏
+                    </p>
                     <h3>desislava</h3>
                     <span class="client-type">Клиент</span>
                 </div>
@@ -739,4 +751,5 @@
 
     <script src="js/main.js"></script>
 </body>
-</html> 
+
+</html>

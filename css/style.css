@@ -164,10 +164,10 @@ body {
 .hero-content {
     position: absolute;
     text-align: center;
-    padding-top: 4rem;
     flex: 1;
     left: 50%;
     top: 50%;
+    width: 80%;
     transform: translate(-50%, -50%);
     z-index: 2;
 }
@@ -177,8 +177,9 @@ body {
     left: 0;
     top: 0;
     width: 100%;
+    min-height: 50vh;
     max-height: 70vh;
-    opacity: 0.6;
+    opacity: 0.4;
     object-fit: cover;
     z-index: 1;
 }
@@ -198,7 +199,7 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 5rem;
+    font-size: calc(3vw + 20px);
     margin-bottom: 1rem;
     color: white;
     /* color: #a484e8; */
@@ -209,7 +210,7 @@ body {
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: calc(1vw + 5px);
     margin-bottom: 1.5rem;
     color: var(--text-color);
     opacity: 0.8;
@@ -225,47 +226,35 @@ body {
         text-align: center;
         padding-left: 0;
     }
-
-    .hero-image {
-        max-width: 100%;
-        height: 400px;
-        order: 2;
-    }
 }
 
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 1.1rem;
     }
-
-    .hero-subtitle {
-        font-size: 2.5rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .hero-image {
-        height: 300px;
-    }
 }
 
 /* Frame Section */
+
+.clip-path-svg {
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
 .frame-section {
     position: relative;
     bottom: 100px;
     margin: 0 0 -100px 0;
     width: 100%;
-    background: var(--background-color);
+    background: none;
     padding: 0;
-    clip-path: path('M0,112L30,95.7C60,79,120,47,180,46.7C240,47,300,79,360,84C420,89,480,65,540,51.3C600,37,660,33,720,42C780,51,840,75,900,81.7C960,89,1020,79,1080,70C1140,61,1200,51,1260,49C1320,47,1380,51,1440,51.3C1500,51,1560,47,1620,56C1680,65,1740,89,1800,84C1860,79,1920,47,1980,28C2040,9,2100,5,2160,2.3C2220,0,2280,0,2340,0C2400,0,2460,0,2520,0C2580,0,2640,0,2700,11.7C2760,23,2820,47,2880,58.3C2940,70,3000,70,3060,63C3120,56,3180,42,3240,49C3300,56,3360,84,3420,84C3480,84,3540,56,3600,51.3C3660,47,3720,65,3780,67.7C3840,70,3900,56,3960,58.3C4020,61,4080,79,4140,72.3C4200,65,4260,33,4290,16.3L4320,0L4320,140L4290,140C4260,140,4200,140,4140,140C4080,140,4020,140,3960,140C3900,140,3840,140,3780,140C3720,140,3660,140,3600,140C3540,140,3480,140,3420,140C3360,140,3300,140,3240,140C3180,140,3120,140,3060,140C3000,140,2940,140,2880,140C2820,140,2760,140,2700,140C2640,140,2580,140,2520,140C2460,140,2400,140,2340,140C2280,140,2220,140,2160,140C2100,140,2040,140,1980,140C1920,140,1860,140,1800,140C1740,140,1680,140,1620,140C1560,140,1500,140,1440,140C1380,140,1320,140,1260,140 L 2000,600 0,600');
+    clip-path: url(#frame-clip-path);
 }
 
 .frame-content {
     position: relative;
     display: flex;
-    min-height: 450px;
     width: 100%;
     overflow: hidden;
 }
@@ -295,11 +284,10 @@ body {
 }
 
 .frame-left {
+    padding: 80px 0 80px 2rem;
     flex: 1;
-    background: #a484e8;
-    padding: 0;
+    background: rgb(227,181,169);
     box-sizing: border-box;
-    padding-left: 2rem;
     color: black;
     display: flex;
     flex-direction: column;
@@ -309,6 +297,7 @@ body {
 }
 
 .frame-left .timetable {
+    font-size: calc(0.75vw + 10px);
     display: grid;
     grid-template-columns: 1fr auto;
     column-gap: 1em;
@@ -316,7 +305,7 @@ body {
 }
 
 .frame-left h2 {
-    font-size: 3.5rem;
+    font-size: calc(2vw + 15px);
     margin-bottom: 2rem;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
@@ -328,11 +317,10 @@ body {
 }
 
 .frame-left .hours {
-    font-size: 1.2rem;
     margin-bottom: 0.3rem;
     margin-left: auto;
     width: 80%;
-    min-width: 300px;
+    min-width: calc(20vw + 50px);
     font-weight: 700;
     position: relative;
     display: flex;
@@ -363,33 +351,50 @@ body {
     overflow: hidden;
 }
 
-.frame-right .salon-image {
-    height: 300px;
+.salon-image {
+    width: calc(30% + 200px);
     object-fit: cover;
-    filter: brightness(0.9);
 }
 
-@media (max-width: 768px) {
-    .frame-section {
-        width: 95%;
-        padding: 1rem;
-        margin: 2rem auto;
+.services {
+    padding: 4rem calc(20% - 100px);
+    background-color: #111111;
+    color: var(--accent-white);
+}
+
+@media (max-width: 1000px) {
+    .services {
+        padding: 4rem 5%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .salon-image {
+        width: 100%;
+        clip-path: url(#frame-clip-path);
+        height: 30vh;
     }
 
     .frame-content {
-        flex-direction: column;
-        overflow: hidden;
+        flex-direction: column-reverse;
+    }
+
+    .frame-section {
+        clip-path: none;
+    }
+
+    .frame-left {
+        padding: 2rem 0;
+    }
+
+    .frame-left .hours {
+        min-width: calc(35vw + 50px);
     }
 
     .frame-content::before,
     .frame-content::after {
         width: 100%;
-    }
-
-    .frame-left, .frame-right {
-        clip-path: none;
-        margin-left: 0;
-        padding: 2rem;
     }
 
     .frame-right {
@@ -411,11 +416,7 @@ body {
     margin: 0;
 }
 
-.services {
-    padding: 4rem 10%;
-    background-color: #111111;
-    color: var(--accent-white);
-}
+
 
 .salon-header {
     text-align: center;
@@ -442,7 +443,6 @@ body {
     justify-content: center;
     gap: 4rem;
     margin: 3rem auto;
-    padding: 0 10%;
     max-width: 1200px;
     width: 100%;
 }
@@ -501,6 +501,19 @@ body {
     transition: all 0.3s ease;
 }
 
+@media screen and (max-width: 1000px) {
+    .service-categories-list {
+        overflow: auto;
+        max-height: 40vh;
+    }
+
+    .service-category-item {
+        padding: 0.5rem 1rem;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
 .service-category-item:hover,
 .service-category-item.active {
     background-color: rgba(164, 132, 232, 0.2);
@@ -521,6 +534,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     letter-spacing: 0.05em;
+    white-space: nowrap;
+    margin-left: 5px;
 }
 
 .service-details-list {
@@ -589,9 +604,14 @@ body {
     color: #fff;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .service-list {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .service-details-list {
+        padding: 0;
     }
 
     .service-detail-item {
@@ -644,7 +664,7 @@ body {
 
 .service-info {
     flex: 1;
-    padding-right: 4rem;
+    padding-right: 1rem;
 }
 
 .service-info h3 {
@@ -820,7 +840,6 @@ footer {
     top: 14px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -914,7 +933,6 @@ footer {
     color: #a484e8;
     font-size: 1.5rem;
     font-weight: 300;
-    white-space: nowrap;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 0.05em;
 }
@@ -984,6 +1002,12 @@ footer {
     text-align: center;
 }
 
+@media screen and (max-width: 1000px) {
+    .shop {
+        padding: 4rem 5%;
+    }
+}
+
 .shop-header {
     display: flex;
     align-items: center;
@@ -1002,7 +1026,6 @@ footer {
     color: #a484e8;
     font-size: 1.5rem;
     font-weight: 300;
-    white-space: nowrap;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 0.05em;
 }
@@ -1396,16 +1419,9 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 3rem 0;
+    margin: 1rem 0;
     gap: 1rem;
-    padding-left: 5%;
     width: fit-content;
-}
-
-.service-icon {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
 }
 
 .category-title {
@@ -1421,7 +1437,6 @@ footer {
 .service-categories {
     display: flex;
     gap: 4rem;
-    padding-left: 5%;
     margin: 3rem 0;
 }
 
@@ -1457,6 +1472,20 @@ footer {
     transition: all 0.3s ease;
 }
 
+@media screen and (max-width: 600px) {
+
+    .service-categories {
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .service-category {
+        width: 50%;
+    }
+}
+
+
+
 .service-category:hover,
 .service-category.active {
     transform: translateY(-10px) scale(1.05);
@@ -1471,14 +1500,6 @@ footer {
 .service-category.active .category-title {
     color: #b89df0;
     opacity: 1;
-}
-
-/* Specific sizing for epilaciq icon to match others visually */
-.service-category img[alt="Епилация"] {
-    width: 76px;
-    height: 76px;
-    transform: none;
-    padding: 0;
 }
 
 @media (max-width: 768px) {
