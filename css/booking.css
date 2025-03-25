@@ -40,7 +40,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.hero-sections {
+.services-sections{
     display: flex;
     justify-content: center;
 }
@@ -243,10 +243,6 @@
 }
 
 @media (max-width: 768px) {
-    .hero-sections {
-        flex-wrap: wrap;
-    }
-
     .service-selection {
         flex-direction: column;
     }

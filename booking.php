@@ -22,7 +22,7 @@ session_start();
         <h1 class="title">Резервация на час</h1>
         <p class="subtitle">Изберете услугите, които желаете</p>
 
-        <div class="hero-sections">
+        <div class="service-categories">
             <div class="service-category hero-section" data-category="hair">
                 <img src="images/icons/comb (2).png" alt="Коса" class="service-icon">
                 <h2 class="category-title">Коса</h2>
@@ -43,7 +43,7 @@ session_start();
             </div>
         </div>
 
-        <div class="service-selection">
+        <div class="service-list">
             <!-- Hair Services -->
             <div class="subcategories-list" data-category="hair">
                 <div class="subcategory" data-services='[

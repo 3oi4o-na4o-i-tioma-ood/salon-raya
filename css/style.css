@@ -455,6 +455,20 @@ body {
     width: fit-content;
     cursor: pointer;
     transition: transform 0.3s ease;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-category:focus {
+    outline: none;
+}
+
+.service-category:focus-visible {
+    outline: 2px solid #a484e8;
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .service-icon {

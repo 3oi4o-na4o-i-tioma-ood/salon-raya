@@ -38,16 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.booking-form')) {
         const dateInput = document.getElementById('date');
         const timeInput = document.getElementById('time');
-        
+
         // Set minimum date to today
         const today = new Date().toISOString().split('T')[0];
         dateInput.setAttribute('min', today);
-        
+
         // Set time restrictions (9 AM to 6 PM)
         timeInput.addEventListener('change', () => {
             const selectedTime = timeInput.value;
             const hour = parseInt(selectedTime.split(':')[0]);
-            
+
             if (hour < 9 || hour >= 18) {
                 alert('Please select a time between 9:00 AM and 6:00 PM');
                 timeInput.value = '';
@@ -58,11 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle service category clicks
     const serviceCategories = document.querySelectorAll('.service-category');
     const hairIcon = document.querySelector('.service-category img[alt="Коса"]').parentElement;
-    const faceIcon = document.querySelector('.service-category img[alt="Лице"]').parentElement;
-    const epilationIcon = document.querySelector('.service-category img[alt="Епилация"]').parentElement;
-    const massageIcon = document.querySelector('.service-category img[alt="Масаж"]').parentElement;
     let isFirstLoad = true;
-    
+
     // Function to simulate click on hair icon
     const clickHairIcon = () => {
         if (isFirstLoad) {
@@ -81,69 +78,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auto-click hair icon on page load
     clickHairIcon();
-    
-    serviceCategories.forEach(category => {
-        category.addEventListener('click', function() {
+
+    serviceCategories.forEach((category, categoryIndex) => {
+        category.addEventListener('click', function () {
             // Remove active class from all categories
             serviceCategories.forEach(cat => cat.classList.remove('active'));
-            
+
             // Add active class to clicked category
             this.classList.add('active');
-            
-            // If hair icon is clicked
-            if (this === hairIcon) {
-                document.querySelector('.hair-categories').style.display = 'flex';
-                document.querySelector('.face-categories').style.display = 'none';
-                document.querySelector('.epilation-categories').style.display = 'none';
-                document.querySelector('.massage-categories').style.display = 'none';
-                document.querySelector('.service-details-list').style.display = 'block';
-                document.querySelectorAll('.face-details, .epilation-details, .massage-details').forEach(cat => cat.style.display = 'none');
-                document.querySelector('.service-details-category[data-category="haircuts"]').style.display = 'block';
-            } 
-            // If face icon is clicked
-            else if (this === faceIcon) {
-                document.querySelector('.hair-categories').style.display = 'none';
-                document.querySelector('.face-categories').style.display = 'flex';
-                document.querySelector('.epilation-categories').style.display = 'none';
-                document.querySelector('.massage-categories').style.display = 'none';
-                document.querySelector('.service-details-list').style.display = 'block';
-                document.querySelectorAll('.service-details-category:not(.face-details)').forEach(cat => cat.style.display = 'none');
-                document.querySelector('.service-details-category[data-category="makeup"]').style.display = 'block';
+
+            const categories = ['hair', 'face', 'epilation', 'massage'];
+
+            for (const categoryClassIndex in categories) {
+                const categoryClass = categories[categoryClassIndex] + '-categories';
+                const detailsClass = categories[categoryClassIndex] + '-details';
+
+                const isVisible = categoryIndex === Number(categoryClassIndex);
+
+                console.log(categoryClass, detailsClass, isVisible);
+                document.querySelector(`.${categoryClass}`).style.display = isVisible ? 'flex' : 'none';
+                document.querySelector(`.${detailsClass}`).style.display = isVisible ? 'block' : 'none';
             }
-            // If epilation icon is clicked
-            else if (this === epilationIcon) {
-                document.querySelector('.hair-categories').style.display = 'none';
-                document.querySelector('.face-categories').style.display = 'none';
-                document.querySelector('.epilation-categories').style.display = 'flex';
-                document.querySelector('.massage-categories').style.display = 'none';
-                document.querySelector('.service-details-list').style.display = 'block';
-                document.querySelectorAll('.service-details-category:not(.epilation-details)').forEach(cat => cat.style.display = 'none');
-                document.querySelector('.service-details-category[data-category="women"]').style.display = 'block';
-            }
-            // If massage icon is clicked
-            else if (this === massageIcon) {
-                document.querySelector('.hair-categories').style.display = 'none';
-                document.querySelector('.face-categories').style.display = 'none';
-                document.querySelector('.epilation-categories').style.display = 'none';
-                document.querySelector('.massage-categories').style.display = 'flex';
-                document.querySelector('.service-details-list').style.display = 'block';
-                document.querySelectorAll('.service-details-category:not(.massage-details)').forEach(cat => cat.style.display = 'none');
-                document.querySelector('.service-details-category[data-category="classic"]').style.display = 'block';
-            }
-            else {
-                // Hide all services for other icons
-                document.querySelector('.hair-categories').style.display = 'none';
-                document.querySelector('.face-categories').style.display = 'none';
-                document.querySelector('.epilation-categories').style.display = 'none';
-                document.querySelector('.massage-categories').style.display = 'none';
-                document.querySelector('.service-details-list').style.display = 'none';
-            }
+
+            document.querySelector('.service-details-list').style.display = 'block';
         });
     });
 
     // Service category switching
     const categoryItems = document.querySelectorAll('.service-category-item');
-    
+
     categoryItems.forEach(item => {
         item.addEventListener('click', () => {
             const category = item.dataset.category;
@@ -172,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle appointment form submission
     const appointmentForm = document.getElementById('appointment-form');
     if (appointmentForm) {
-        appointmentForm.addEventListener('submit', function(e) {
+        appointmentForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
             // Get form data
@@ -183,19 +146,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Резервацията е успешно запазена!');
-                    appointmentForm.reset();
-                } else {
-                    alert('Възникна грешка при запазването на резервацията. Моля, опитайте отново.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Възникна грешка при комуникацията със сървъра. Моля, опитайте отново.');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Резервацията е успешно запазена!');
+                        appointmentForm.reset();
+                    } else {
+                        alert('Възникна грешка при запазването на резервацията. Моля, опитайте отново.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Възникна грешка при комуникацията със сървъра. Моля, опитайте отново.');
+                });
         });
     }
 }); 

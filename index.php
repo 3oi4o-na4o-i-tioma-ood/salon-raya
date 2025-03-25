@@ -117,25 +117,25 @@
         </div>
 
         <div class="service-categories">
-            <div class="service-category">
+            <button class="service-category">
                 <img src="images/icons/comb (2).png" alt="Коса" class="service-icon">
                 <h2 class="category-title">Коса</h2>
-            </div>
+            </button>
 
-            <div class="service-category">
+            <button class="service-category">
                 <img src="images/icons/face (2).png" alt="Лице" class="service-icon">
                 <h2 class="category-title">Лице</h2>
-            </div>
+            </button>
 
-            <div class="service-category">
+            <button class="service-category">
                 <img src="images/icons/epilaciq (2).png" alt="Епилация" class="service-icon">
                 <h2 class="category-title">Епилация</h2>
-            </div>
+            </button>
 
-            <div class="service-category">
+            <button class="service-category">
                 <img src="images/icons/massage (2).png" alt="Масаж" class="service-icon">
                 <h2 class="category-title">Масаж</h2>
-            </div>
+            </button>
         </div>
 
         <div class="service-list">
@@ -204,7 +204,7 @@
             </div>
 
             <div class="service-details-list">
-                <div class="service-details-category active" data-category="haircuts">
+                <div class="service-details-category hair-details active" data-category="haircuts">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Дамско подстригване</h3>
@@ -302,7 +302,7 @@
                     </div>
                 </div>
 
-                <div class="service-details-category" data-category="coloring">
+                <div class="service-details-category hair-details" data-category="coloring">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Боядисване с wella + сешоар</h3>
@@ -352,7 +352,7 @@
                     </div>
                 </div>
 
-                <div class="service-details-category" data-category="curling">
+                <div class="service-details-category hair-details" data-category="curling">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Изправяне с преса</h3>
@@ -370,7 +370,7 @@
                     </div>
                 </div>
 
-                <div class="service-details-category" data-category="extensions">
+                <div class="service-details-category hair-details" data-category="extensions">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Удължаване на коса с щипки</h3>
@@ -380,7 +380,7 @@
                     </div>
                 </div>
 
-                <div class="service-details-category" data-category="treatments">
+                <div class="service-details-category hair-details" data-category="treatments">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Кератинова терапия за коса</h3>
@@ -422,7 +422,7 @@
                     </div>
                 </div>
 
-                <div class="service-details-category" data-category="beard">
+                <div class="service-details-category hair-details" data-category="beard">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Оформяне на брада</h3>
@@ -432,7 +432,7 @@
                     </div>
                 </div>
 
-                <div class="service-details-category" data-category="other">
+                <div class="service-details-category hair-details" data-category="other">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Пробиване на уши</h3>
