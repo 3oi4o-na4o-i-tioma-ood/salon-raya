@@ -208,3 +208,72 @@
 [2025-03-25 21:12:06] Comment: h
 [2025-03-25 21:12:06] Appointment saved successfully for hkjhk
 [2025-03-25 21:12:06] Connection closed
+[2025-03-26 16:48:05] Received POST request
+[2025-03-26 16:48:05] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване
+    [appointment_date] => 2025-03-27
+    [appointment_time] => 16:30
+)
+
+[2025-03-26 16:48:05] Database connection successful
+[2025-03-26 16:48:05] Processed form data:
+[2025-03-26 16:48:05] Name: Artem
+[2025-03-26 16:48:05] Phone: 0871234567
+[2025-03-26 16:48:05] Email: arttema9@gmail.com
+[2025-03-26 16:48:05] Service: Дамско подстригване
+[2025-03-26 16:48:05] Date: 2025-03-27
+[2025-03-26 16:48:05] Time: 16:30
+[2025-03-26 16:48:05] Comment: 
+[2025-03-26 16:48:05] Appointment saved successfully for Artem
+[2025-03-26 16:48:05] Connection closed
+[2025-03-26 18:02:40] Received POST request
+[2025-03-26 18:02:40] POST data: Array
+(
+    [client_name] => Artem1
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Мъжко подстригване с ножица и машинка + измиване
+    [appointment_date] => 2025-03-31
+    [appointment_time] => 11:00
+)
+
+[2025-03-26 18:02:40] Database connection successful
+[2025-03-26 18:02:40] Processed form data:
+[2025-03-26 18:02:40] Name: Artem1
+[2025-03-26 18:02:40] Phone: 0871234567
+[2025-03-26 18:02:40] Email: arttema9@gmail.com
+[2025-03-26 18:02:40] Service: Мъжко подстригване с ножица и машинка + измиване
+[2025-03-26 18:02:40] Date: 2025-03-31
+[2025-03-26 18:02:40] Time: 11:00
+[2025-03-26 18:02:40] Comment: 
+[2025-03-26 18:02:40] Appointment saved successfully for Artem1
+[2025-03-26 18:02:40] Connection closed
+[2025-03-26 18:15:44] Received POST request
+[2025-03-26 18:15:44] POST data: Array
+(
+    [client_name] => Artem2
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване + измиване и подсушаване (на средно дълга коса)
+    [appointment_date] => 2025-03-29
+    [appointment_time] => 16:30
+)
+
+[2025-03-26 18:15:44] Database connection successful
+[2025-03-26 18:15:44] Processed form data:
+[2025-03-26 18:15:44] Name: Artem2
+[2025-03-26 18:15:44] Phone: 0871234567
+[2025-03-26 18:15:44] Email: arttema9@gmail.com
+[2025-03-26 18:15:44] Service: Дамско подстригване + измиване и подсушаване (на средно дълга коса)
+[2025-03-26 18:15:44] Date: 2025-03-29
+[2025-03-26 18:15:44] Time: 16:30
+[2025-03-26 18:15:44] Comment: 
+[2025-03-26 18:15:44] Appointment saved successfully for Artem2
+[2025-03-26 18:15:44] Connection closed
