@@ -651,8 +651,8 @@ session_start();
     <div class="nav-menu">
         <a href="index.php#hero">Начало</a>
         <a href="index.php#services">Услуги</a>
-        <a href="index.php#about">За нас</a>
-        <a href="index.php#contact">Контакти</a>
+        <a href="za-nas.php">За Нас</a>
+        <a href="contacts.php">Контакти</a>
     </div>
 
     <div class="appointment-container">

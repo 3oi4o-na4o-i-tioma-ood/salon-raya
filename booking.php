@@ -16,6 +16,12 @@ session_start();
         <div class="logo">
             Райа
         </div>
+        <div class="nav-menu">
+            <a href="index.php#hero">Начало</a>
+            <a href="index.php#services">Услуги</a>
+            <a href="za-nas.php">За Нас</a>
+            <a href="contacts.php">Контакти</a>
+        </div>
     </nav>
 
     <div class="booking-container">

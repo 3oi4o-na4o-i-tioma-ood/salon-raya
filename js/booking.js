@@ -168,4 +168,44 @@ document.addEventListener('DOMContentLoaded', function() {
             firstSubcategory.click();
         }
     }
+
+    // Get the service parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedService = urlParams.get('service');
+
+    // If a service is selected, show the appropriate category and subcategory
+    if (selectedService) {
+        // Map the service parameter to the appropriate category and subcategory
+        const serviceMap = {
+            'haircuts': { category: 'hair', subcategory: 0 },
+            'coloring': { category: 'hair', subcategory: 1 },
+            'curling': { category: 'hair', subcategory: 2 },
+            'extensions': { category: 'hair', subcategory: 3 },
+            'treatments': { category: 'hair', subcategory: 4 },
+            'beard': { category: 'hair', subcategory: 5 },
+            'other': { category: 'hair', subcategory: 6 },
+            'makeup': { category: 'face', subcategory: 0 },
+            'permanent': { category: 'face', subcategory: 1 },
+            'women': { category: 'epilation', subcategory: 0 },
+            'men': { category: 'epilation', subcategory: 1 },
+            'classic': { category: 'massage', subcategory: 0 },
+            'sport': { category: 'massage', subcategory: 1 }
+        };
+
+        if (serviceMap[selectedService]) {
+            const { category, subcategory } = serviceMap[selectedService];
+            
+            // Show the appropriate category
+            const categoryElement = document.querySelector(`.service-category[data-category="${category}"]`);
+            if (categoryElement) {
+                categoryElement.click();
+                
+                // Show the appropriate subcategory
+                const subcategoryElement = document.querySelector(`.subcategories-list[data-category="${category}"] .subcategory:nth-child(${subcategory + 1})`);
+                if (subcategoryElement) {
+                    subcategoryElement.click();
+                }
+            }
+        }
+    }
 }); 

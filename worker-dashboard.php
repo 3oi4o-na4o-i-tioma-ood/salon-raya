@@ -6,7 +6,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 }
 
 // Database connection
-$conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
+$conn = new mysqli('localhost', 'root', '', 'salon_raya');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

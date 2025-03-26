@@ -31,8 +31,8 @@
     <div class="nav-menu">
         <a href="#hero">Начало</a>
         <a href="#services">Услуги</a>
-        <a href="#about">За нас</a>
-        <a href="#contact">Контакти</a>
+        <a href="za-nas.php">За Нас</a>
+        <a href="contacts.php">Контакти</a>
     </div>
 
     <div class="booking-button-container">
@@ -211,6 +211,7 @@
                             <p>20 мин.</p>
                         </div>
                         <div class="service-price">35 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -219,6 +220,7 @@
                             <p>40 мин.</p>
                         </div>
                         <div class="service-price">от 55 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -227,6 +229,7 @@
                             <p>40 мин. - 55 мин.</p>
                         </div>
                         <div class="service-price">от 55 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -235,6 +238,7 @@
                             <p>40 мин. - 1 ч.</p>
                         </div>
                         <div class="service-price">от 45 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -243,6 +247,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">35 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -251,6 +256,7 @@
                             <p>20 мин.</p>
                         </div>
                         <div class="service-price">30 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -259,6 +265,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">25 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -267,6 +274,7 @@
                             <p>1 ч.30 мин. - 2 ч.</p>
                         </div>
                         <div class="service-price">от 70 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -275,6 +283,7 @@
                             <p>1 ч.30 мин. - 2 ч.</p>
                         </div>
                         <div class="service-price">от 75 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -283,6 +292,7 @@
                             <p>5 мин.</p>
                         </div>
                         <div class="service-price">5 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -291,6 +301,7 @@
                             <p>5 мин.</p>
                         </div>
                         <div class="service-price">4 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -299,6 +310,7 @@
                             <p>15 мин.</p>
                         </div>
                         <div class="service-price">22 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -309,6 +321,7 @@
                             <p>1 ч.20 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -317,6 +330,7 @@
                             <p>1 ч. - 2 ч.</p>
                         </div>
                         <div class="service-price">от 80 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -325,6 +339,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">50 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -333,6 +348,7 @@
                             <p>30 мин. - 1 ч.</p>
                         </div>
                         <div class="service-price">от 100 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -341,6 +357,7 @@
                             <p>2 ч.</p>
                         </div>
                         <div class="service-price">150 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -349,6 +366,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">20 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -359,6 +377,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">от 25 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -367,6 +386,7 @@
                             <p>1 ч.10 мин.</p>
                         </div>
                         <div class="service-price">75 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -377,6 +397,7 @@
                             <p>10 мин. - 50 мин.</p>
                         </div>
                         <div class="service-price">от 10 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -387,6 +408,7 @@
                             <p>40 мин.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -395,6 +417,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">40 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -403,6 +426,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -411,6 +435,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">22 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -419,6 +444,7 @@
                             <p>40 мин.</p>
                         </div>
                         <div class="service-price">35 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -429,6 +455,7 @@
                             <p>15 мин.</p>
                         </div>
                         <div class="service-price">20 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -439,6 +466,7 @@
                             <p>10 мин.</p>
                         </div>
                         <div class="service-price">25 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -449,6 +477,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -501,6 +530,7 @@
                             <p>2 ч.</p>
                         </div>
                         <div class="service-price">450 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -511,6 +541,7 @@
                             <p>15 мин.</p>
                         </div>
                         <div class="service-price">30 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -577,6 +608,7 @@
                             <p>10 мин.</p>
                         </div>
                         <div class="service-price">15 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -657,6 +689,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -674,6 +707,7 @@
                             <p>50 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
             </div>

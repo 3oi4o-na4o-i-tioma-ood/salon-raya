@@ -185,3 +185,26 @@
 )
 
 [2025-02-25 16:18:11] Connection failed: Access denied for user 'root'@'localhost' (using password: NO)
+[2025-03-25 21:12:06] Received POST request
+[2025-03-25 21:12:06] POST data: Array
+(
+    [client_name] => hkjhk
+    [phone] => 0975578755
+    [email] => 4@44.3
+    [comment] => h
+    [service] => Измиване на коса + маска, Оформяне на врат
+    [appointment_date] => 2025-03-29
+    [appointment_time] => 15:00
+)
+
+[2025-03-25 21:12:06] Database connection successful
+[2025-03-25 21:12:06] Processed form data:
+[2025-03-25 21:12:06] Name: hkjhk
+[2025-03-25 21:12:06] Phone: 0975578755
+[2025-03-25 21:12:06] Email: 4@44.3
+[2025-03-25 21:12:06] Service: Измиване на коса + маска, Оформяне на врат
+[2025-03-25 21:12:06] Date: 2025-03-29
+[2025-03-25 21:12:06] Time: 15:00
+[2025-03-25 21:12:06] Comment: h
+[2025-03-25 21:12:06] Appointment saved successfully for hkjhk
+[2025-03-25 21:12:06] Connection closed
