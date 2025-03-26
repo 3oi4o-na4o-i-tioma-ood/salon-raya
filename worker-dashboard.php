@@ -369,14 +369,16 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 
     <script>
         let audioPermissionGranted = false;
-        let audioContext = null;
-        let audioElement = null;
+        let audioContext;
+        let audioElement;
         let serviceWorkerRegistration = null;
+        let pushSubscription = null;
 
         // Check if notifications are already enabled
         if ('Notification' in window) {
             if (Notification.permission === 'granted') {
                 document.getElementById('notificationPopup').classList.add('hidden');
+                initializePushNotifications();
             } else if (Notification.permission === 'denied') {
                 document.getElementById('notificationPopup').classList.add('hidden');
             }
@@ -390,29 +392,42 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                         console.log('Notification permission granted');
                         document.getElementById('notificationPopup').classList.add('hidden');
                         initializeAudio();
+                        initializePushNotifications();
                     }
                 });
             }
         });
 
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/notification-worker.js')
-                    .then(function(registration) {
-                        serviceWorkerRegistration = registration;
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed: ', err);
-                    });
-            });
+        // Initialize push notifications
+        async function initializePushNotifications() {
+            try {
+                // Register service worker
+                serviceWorkerRegistration = await navigator.serviceWorker.register('/notification-worker.js');
+
+                // Request push subscription
+                pushSubscription = await serviceWorkerRegistration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: 'BG5UHBERE8s7_dbqGPohOTitg5VbEpC4CWdanwIL0g5AXl_1MjkEPIDmEwF4UnCSEzGiPJ7moFWKjEGzLehH-EM'
+                });
+
+                // Send subscription to server
+                const response = await fetch('save_push_subscription.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(pushSubscription)
+                });
+                await response.json();
+            } catch (error) {
+                console.error('Push notification setup failed:', error);
+            }
         }
 
         // Initialize audio on user interaction
         function initializeAudio() {
             if (!audioElement) {
-                audioElement = new Audio('/sound/notification.mp3');
+                audioElement = new Audio('sounds/notification.mp3');
                 audioElement.load();
             }
             if (!audioContext) {
@@ -425,68 +440,12 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         function showNotification(reservation) {
             const message = `${reservation.client_name} резервира ${reservation.service} за ${new Date(reservation.appointment_date).toLocaleDateString('bg-BG')} в ${reservation.appointment_time}`;
             
-            // Try to use service worker first (for mobile)
             if (serviceWorkerRegistration) {
                 serviceWorkerRegistration.showNotification('Нова Резервация!', {
-                    body: message,
-                    data: { message }
-                });
-            } 
-            // Fallback to regular notifications (for desktop)
-            else if ('Notification' in window && Notification.permission === 'granted') {
-                new Notification('Нова Резервация!', {
                     body: message
                 });
             }
-
-            // Play notification sound if permission is granted
-            if (audioPermissionGranted && audioElement) {
-                audioElement.currentTime = 0;
-                audioElement.play().catch(e => console.log('Audio play failed:', e));
-            }
-
-            // Add visual indicator
-            const indicator = document.createElement('div');
-            indicator.className = 'new-reservation-indicator';
-            indicator.innerHTML = `
-                <div class="indicator-content">
-                    <i class="fas fa-bell"></i>
-                    <span>Нова резервация от ${reservation.client_name} за ${new Date(reservation.appointment_date).toLocaleDateString('bg-BG')} в ${reservation.appointment_time}</span>
-                </div>
-            `;
-            document.body.appendChild(indicator);
-
-            // Remove indicator after 5 seconds
-            setTimeout(() => {
-                indicator.remove();
-            }, 5000);
         }
-
-        // Function to check for new reservations
-        function checkNewReservations() {
-            fetch('check_new_reservations.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success && data.newReservations.length > 0) {
-                        // Show notification for each new reservation
-                        data.newReservations.forEach(reservation => {
-                            // Only show notification if the reservation was created within the last 15 seconds
-                            const reservationTime = new Date(reservation.created_at);
-                            const now = new Date();
-                            const secondsDiff = (now - reservationTime) / 1000;
-                            
-                            if (secondsDiff <= 15) {
-                                console.log('Showing notification for recent reservation:', reservation);
-                                showNotification(reservation);
-                            }
-                        });
-                    }
-                })
-                .catch(error => console.error('Error checking for new reservations:', error));
-        }
-
-        // Check for new reservations every 15 seconds
-        setInterval(checkNewReservations, 15000);
     </script>
 </body>
 </html> 

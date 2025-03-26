@@ -413,7 +413,7 @@
 
                     <div class="service-detail-item">
                         <div class="service-info">
-                            <h3>Терапия за бързо възстановяване на суха и изтощена коса</h3>
+                            <h3>Терапия за бързо възстановяване на суха и изтощена коса с Wella</h3>
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">40 лв.</div>
