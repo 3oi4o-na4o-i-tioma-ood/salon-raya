@@ -17,15 +17,28 @@ function logMessage($message) {
 logMessage("Received POST request");
 logMessage("POST data: " . print_r($_POST, true));
 
+session_start();
+require_once 'vendor/autoload.php';
+
+use Minishlink\WebPush\WebPush;
+use Minishlink\WebPush\Subscription;
+
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'salon_raya');
 if ($conn->connect_error) {
     logMessage("Connection failed: " . $conn->connect_error);
-    die(json_encode(['success' => false, 'message' => 'Database connection failed']));
+    die(json_encode(['success' => false, 'message' => 'Database connection failed: ' . $conn->connect_error]));
 }
 
 $conn->set_charset("utf8mb4");
 logMessage("Database connection successful");
+
+// VAPID keys
+$vapidKeys = [
+    'subject' => 'mailto:arttema9@gmail.com',
+    'publicKey' => 'BG5UHBERE8s7_dbqGPohOTitg5VbEpC4CWdanwIL0g5AXl_1MjkEPIDmEwF4UnCSEzGiPJ7moFWKjEGzLehH-EM',
+    'privateKey' => 'PnpEpw1WzQBVikCRbM_VQhmtShZ1_--eF84nein21fw'
+];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data
@@ -64,6 +77,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         logMessage("Appointment saved successfully for $client_name");
+        
+        // Send push notification
+        try {
+            // Get all push subscriptions
+            $pushStmt = $conn->prepare("SELECT endpoint, p256dh, auth FROM push_subscriptions");
+            $pushStmt->execute();
+            $pushResult = $pushStmt->get_result();
+            $subscriptions = $pushResult->fetch_all(MYSQLI_ASSOC);
+
+            logMessage("Found " . count($subscriptions) . " push subscriptions");
+
+            if (!empty($subscriptions)) {
+                // Initialize WebPush
+                $webPush = new WebPush([
+                    'VAPID' => $vapidKeys
+                ]);
+
+                // Prepare notification message
+                $message = json_encode([
+                    'message' => "$client_name резервира $service за " . date('d.m.Y', strtotime($appointment_date)) . " в $appointment_time"
+                ]);
+
+                logMessage("Sending push notification with message: " . $message);
+
+                // Send to all subscriptions
+                foreach ($subscriptions as $subscription) {
+                    try {
+                        $report = $webPush->sendOneNotification(
+                            Subscription::create([
+                                'endpoint' => $subscription['endpoint'],
+                                'keys' => [
+                                    'p256dh' => $subscription['p256dh'],
+                                    'auth' => $subscription['auth']
+                                ]
+                            ]),
+                            $message
+                        );
+
+                        // Check if subscription is still valid
+                        if ($report->isSubscriptionExpired()) {
+                            logMessage("Subscription expired, removing: " . $subscription['endpoint']);
+                            // Remove expired subscription
+                            $deleteStmt = $conn->prepare("DELETE FROM push_subscriptions WHERE endpoint = ?");
+                            $deleteStmt->bind_param("s", $subscription['endpoint']);
+                            $deleteStmt->execute();
+                        }
+                    } catch (Exception $e) {
+                        logMessage("Error sending to subscription: " . $e->getMessage());
+                    }
+                }
+            } else {
+                logMessage("No push subscriptions found in database");
+            }
+        } catch (Exception $e) {
+            logMessage("Error sending push notification: " . $e->getMessage());
+            logMessage("Stack trace: " . $e->getTraceAsString());
+        }
+
         echo json_encode(['success' => true, 'message' => 'Appointment saved successfully']);
     } else {
         logMessage("Execute failed: " . $stmt->error);

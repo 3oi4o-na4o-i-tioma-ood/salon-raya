@@ -304,11 +304,12 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if (data.success) {
                 window.location.href = 'booking-confirmation.php';
+            } else {
+                console.error('Booking failed:', data.message);
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            // Still proceed to confirmation page even if there's an error
             window.location.href = 'booking-confirmation.php';
         });
     });

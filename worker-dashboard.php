@@ -39,7 +39,7 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                 Изход
             </a>
             <div class="salon-info">
-                <img src="images/salon/logo.png" alt="SALON RAYA LOGO" class="dashboard-logo">
+                <img src="images/logo.svg" alt="SALON RAYA LOGO" class="dashboard-logo">
                 <div class="salon-details">
                     <h1>Салон Рая</h1>
                     <p>ул. Хайдушка гора 120</p>
@@ -280,6 +280,172 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         text-decoration: none;
         color: #999 !important;
     }
+
+    .new-reservation-indicator {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4CAF50;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: slideIn 0.3s ease-out;
+    }
+
+    .indicator-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .indicator-content i {
+        font-size: 20px;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .notification-popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+        text-align: center;
+        max-width: 90%;
+        width: 400px;
+    }
+
+    .notification-popup h3 {
+        margin: 0 0 15px 0;
+        color: #333;
+    }
+
+    .notification-popup p {
+        margin: 0 0 20px 0;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    .notification-popup button {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .notification-popup button:hover {
+        background: #45a049;
+    }
+
+    .notification-popup.hidden {
+        display: none;
+    }
     </style>
+
+    <div id="notificationPopup" class="notification-popup">
+        <h3>Разрешете Известията</h3>
+        <p>Натиснете бутона по-долу, за да разрешите известия за нови резервации.</p>
+        <button id="enableNotifications">Разреши известия</button>
+    </div>
+
+    <script>
+        let audioPermissionGranted = false;
+        let audioContext;
+        let audioElement;
+        let serviceWorkerRegistration = null;
+        let pushSubscription = null;
+
+        // Check if notifications are already enabled
+        if ('Notification' in window) {
+            if (Notification.permission === 'granted') {
+                document.getElementById('notificationPopup').classList.add('hidden');
+                initializePushNotifications();
+            } else if (Notification.permission === 'denied') {
+                document.getElementById('notificationPopup').classList.add('hidden');
+            }
+        }
+
+        // Handle notification permission button click
+        document.getElementById('enableNotifications').addEventListener('click', function() {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === 'granted') {
+                        console.log('Notification permission granted');
+                        document.getElementById('notificationPopup').classList.add('hidden');
+                        initializeAudio();
+                        initializePushNotifications();
+                    }
+                });
+            }
+        });
+
+        // Initialize push notifications
+        async function initializePushNotifications() {
+            try {
+                // Register service worker
+                serviceWorkerRegistration = await navigator.serviceWorker.register('/notification-worker.js');
+
+                // Request push subscription
+                pushSubscription = await serviceWorkerRegistration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: 'BG5UHBERE8s7_dbqGPohOTitg5VbEpC4CWdanwIL0g5AXl_1MjkEPIDmEwF4UnCSEzGiPJ7moFWKjEGzLehH-EM'
+                });
+
+                // Send subscription to server
+                const response = await fetch('save_push_subscription.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(pushSubscription)
+                });
+                await response.json();
+            } catch (error) {
+                console.error('Push notification setup failed:', error);
+            }
+        }
+
+        // Initialize audio on user interaction
+        function initializeAudio() {
+            if (!audioElement) {
+                audioElement = new Audio('sounds/notification.mp3');
+                audioElement.load();
+            }
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            audioPermissionGranted = true;
+        }
+
+        // Function to show notification
+        function showNotification(reservation) {
+            const message = `${reservation.client_name} резервира ${reservation.service} за ${new Date(reservation.appointment_date).toLocaleDateString('bg-BG')} в ${reservation.appointment_time}`;
+            
+            if (serviceWorkerRegistration) {
+                serviceWorkerRegistration.showNotification('Нова Резервация!', {
+                    body: message
+                });
+            }
+        }
+    </script>
 </body>
 </html> 
