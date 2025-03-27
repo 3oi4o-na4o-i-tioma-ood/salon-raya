@@ -815,6 +815,136 @@
     <?php include 'footer.php'; ?>
 
     <script src="js/main.js"></script>
+    <script>
+        // Add this script to fix service links without parameters
+        document.addEventListener('DOMContentLoaded', function() {
+            // Map of Cyrillic service names to Latin slugs
+            const serviceNameMap = {
+                // Haircuts
+                'Дамско подстригване': 'damsko-podstrigvane',
+                'Дамско подстригване + измиване и подсушаване': 'damsko-podstrigvane-izmivane',
+                'Дамско подстригване на бретон': 'damsko-podstrigvane-breton',
+                'Мъжко подстригване с ножица и машинка + измиване': 'mujko-podstrigvane',
+                'Мъжко подстригване с машинка': 'mujko-podstrigvane-mashinka',
+                'Детско подстригване до 12 години': 'detsko-podstrigvane',
+                'Официална прическа': 'oficialna-pricheska',
+                'Прическа с кок': 'pricheska-s-kok',
+                'Оформяне на врат': 'oformyane-vrat',
+                'Измиване на коса + маска': 'izmivane-maska',
+                
+                // Coloring
+                'Боядисване с wella + сешоар': 'boyadisvane-wella',
+                'Боядисване с Wella': 'boyadisvane-wella-base',
+                'Боядисване с боя на клиента': 'boyadisvane-client',
+                'Обезцветяване': 'obezcvetyavane',
+                'Кичури': 'kichuri',
+                'Матиране': 'matirane',
+                
+                // Straightening
+                'Изправяне с преса': 'izpravyane-presa',
+                'Измиване подстригване + Изправяне с сешоар': 'izmivane-podstrigvane-izpravyane',
+                
+                // Extensions
+                'Удължаване на коса с щипки': 'udalyavane-kosa',
+                
+                // Treatments
+                'Кератинова терапия за коса': 'keratinova-terapiya',
+                'Терапия за бързо възстановяване на суха и изтощена коса с Wella': 'terapiya-vazstanovyavane',
+                'Арганова терапия за коса': 'arganova-terapiya',
+                'Ампула за коса против косопад': 'ampula-kostopad',
+                'Маска за копринена коса': 'maska-koprinena',
+                
+                // Beard
+                'Оформяне на брада': 'oformyane-brada',
+                'Тониране на сиви коси': 'tonirane-kosi',
+                
+                // Other
+                'Пробиване на уши': 'probirane-ushi',
+                
+                // Makeup
+                'Професионален грим': 'profesionalen-grim',
+                'Вечерен грим': 'vecheren-grim',
+                'Сватбен грим': 'svatben-grim',
+                'Официален грим': 'oficialen-grim',
+                'Ежедневен грим': 'ezhedneven-grim',
+                'Абитуриентски грим': 'abiturientski-grim',
+                'Фото грим': 'foto-grim',
+                
+                // Permanent
+                'Перманентен грим на вежди': 'permanenten-vejdi',
+                
+                // Women's Epilation
+                'Подмишници - кола маска': 'podmishnitsi-kola',
+                'Цели крака - кола маска': 'celi-kraka-kola',
+                '1/2 крака - кола маска': 'polovin-kraka-kola',
+                'Цели ръце - кола маска': 'celi-race-kola',
+                'Цяло тяло - кола маска': 'cyalo-tyalo-kola',
+                'Брадичка - кола маска': 'bradichka-kola',
+                'Горна устна - кола маска': 'gorna-ustna-kola',
+                'Бакенбарди - кола маска': 'bakenbardi-kola',
+                'Скули - кола маска': 'skuli-kola',
+                
+                // Men's Epilation
+                'Гръб - кола маска': 'grab-kola',
+                'Гърди + корем - кола маска': 'gradi-korem-kola',
+                'Гърди - кола маска': 'gradi-kola',
+                'Корем - кола маска': 'korem-kola',
+                'Кръст - кола маска': 'krast-kola',
+                'Врат - кола маска': 'vrat-kola',
+                
+                // Massage
+                'Релаксиращ масаж': 'relaksirasht-masaj',
+                'Класически масаж при Вики': 'klasicheski-masaj',
+                'Спортен масаж': 'sporten-masaj'
+            };
+            
+            // Process all service links
+            document.querySelectorAll('.select-service-btn').forEach(link => {
+                // Skip links that already have parameters
+                if (link.href.includes('?')) return;
+                
+                // Get service name from the parent element
+                const serviceItem = link.closest('.service-detail-item');
+                if (!serviceItem) return;
+                
+                const serviceNameEl = serviceItem.querySelector('.service-info h3');
+                if (!serviceNameEl) return;
+                
+                const serviceName = serviceNameEl.textContent.trim();
+                
+                // Get category and subcategory from parent elements
+                const categoryEl = link.closest('[data-category]');
+                if (!categoryEl) return;
+                
+                const subcategory = categoryEl.getAttribute('data-category');
+                let mainCategory = '';
+                
+                // Determine main category from the class of the parent
+                if (categoryEl.classList.contains('hair-details')) {
+                    mainCategory = 'hair';
+                } else if (categoryEl.classList.contains('face-details')) {
+                    mainCategory = 'face';
+                } else if (categoryEl.classList.contains('epilation-details')) {
+                    mainCategory = 'epilation';
+                } else if (categoryEl.classList.contains('massage-details')) {
+                    mainCategory = 'massage';
+                }
+                
+                if (!mainCategory || !subcategory) return;
+                
+                // Get a Latin slug from the mapping or generate a fallback
+                let detailSlug = serviceNameMap[serviceName];
+                
+                // If no mapping found, use a simple fallback (just the subcategory)
+                if (!detailSlug) {
+                    detailSlug = subcategory + '-service';
+                }
+                
+                // Update link href with parameters
+                link.href = `booking.php?category=${mainCategory}&service=${subcategory}&detail=${detailSlug}`;
+            });
+        });
+    </script>
 </body>
 
 </html>

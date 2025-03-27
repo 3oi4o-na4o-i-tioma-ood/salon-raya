@@ -175,6 +175,153 @@ document.addEventListener('DOMContentLoaded', function() {
     const service = urlParams.get('service');
     const detail = urlParams.get('detail');
 
+    // Service mapping for URL parameters to actual service names
+    const categoryMapping = {
+        'hair': { 
+            name: 'hair',
+            subcategories: {
+                'haircuts': {
+                    index: 0, // The first subcategory (Подстригване и прически)
+                    services: {
+                        'damsko-podstrigvane': 'Дамско подстригване',
+                        'damsko-podstrigvane-izmivane': 'Дамско подстригване + измиване и подсушаване',
+                        'damsko-podstrigvane-breton': 'Дамско подстригване на бретон',
+                        'mujko-podstrigvane': 'Мъжко подстригване с ножица и машинка + измиване',
+                        'mujko-podstrigvane-mashinka': 'Мъжко подстригване с машинка',
+                        'detsko-podstrigvane': 'Детско подстригване до 12 години',
+                        'pricheska-s-kok': 'Прическа с кок',
+                        'oficialna-pricheska': 'Официална прическа',
+                        'oformyane-vrat': 'Оформяне на врат',
+                        'izmivane-maska': 'Измиване на коса + маска'
+                    }
+                },
+                'coloring': {
+                    index: 1, // The second subcategory (Боядисване и кичури)
+                    services: {
+                        'boyadisvane-wella': 'Боядисване с wella + сешоар',
+                        'boyadisvane-wella-base': 'Боядисване с Wella',
+                        'boyadisvane-client': 'Боядисване с боя на клиента',
+                        'obezcvetyavane': 'Обезцветяване',
+                        'kichuri': 'Кичури',
+                        'matirane': 'Матиране'
+                    }
+                },
+                'straightening': {
+                    index: 2, // The third subcategory (Къдрене и изправяне)
+                    services: {
+                        'izpravyane-presa': 'Изправяне с преса',
+                        'izmivane-podstrigvane-izpravyane': 'Измиване подстригване + Изправяне с сешоар'
+                    }
+                },
+                'extensions': {
+                    index: 3, // The fourth subcategory (Екстеншъни)
+                    services: {
+                        'udalyavane-kosa': 'Удължаване на коса с щипки'
+                    }
+                },
+                'treatments': {
+                    index: 4, // The fifth subcategory (Терапии за коса)
+                    services: {
+                        'keratinova-terapiya': 'Кератинова терапия за коса',
+                        'terapiya-vazstanovyavane': 'Терапия за бързо възстановяване на суха и изтощена коса с Wella',
+                        'arganova-terapiya': 'Арганова терапия за коса',
+                        'ampula-kostopad': 'Ампула за коса против косопад',
+                        'maska-koprinena': 'Маска за копринена коса'
+                    }
+                },
+                'beard': {
+                    index: 5, // The sixth subcategory (Брада и бръснене)
+                    services: {
+                        'oformyane-brada': 'Оформяне на брада',
+                        'tonirane-kosi': 'Тониране на сиви коси'
+                    }
+                },
+                'other': {
+                    index: 6, // The seventh subcategory (Други услуги за коса)
+                    services: {
+                        'probirane-ushi': 'Пробиване на уши'
+                    }
+                }
+            }
+        },
+        'face': {
+            name: 'face',
+            subcategories: {
+                'makeup': {
+                    index: 0, // (Професионален грим)
+                    services: {
+                        'profesionalen-grim': 'Професионален грим',
+                        'vecheren-grim': 'Вечерен грим',
+                        'svatben-grim': 'Сватбен грим',
+                        'oficialen-grim': 'Официален грим',
+                        'ezhedneven-grim': 'Ежедневен грим',
+                        'abiturientski-grim': 'Абитуриентски грим',
+                        'foto-grim': 'Фото грим'
+                    }
+                },
+                'permanent': {
+                    index: 1, // (Перманентен грим)
+                    services: {
+                        'permanenten-vejdi': 'Перманентен грим на вежди'
+                    }
+                }
+            }
+        },
+        'epilation': {
+            name: 'epilation',
+            subcategories: {
+                'women': {
+                    index: 0, // (Кола маска жени)
+                    services: {
+                        'podmishnitsi-kola': 'Подмишници - кола маска',
+                        'celi-kraka-kola': 'Цели крака - кола маска',
+                        'polovin-kraka-kola': '1/2 крака - кола маска',
+                        'celi-race-kola': 'Цели ръце - кола маска',
+                        'cyalo-tyalo-kola': 'Цяло тяло - кола маска',
+                        'bradichka-kola': 'Брадичка - кола маска',
+                        'gorna-ustna-kola': 'Горна устна - кола маска',
+                        'bakenbardi-kola': 'Бакенбарди - кола маска',
+                        'skuli-kola': 'Скули - кола маска'
+                    }
+                },
+                'men': {
+                    index: 1, // (Кола маска мъже)
+                    services: {
+                        'podmishnitsi-muje-kola': 'Подмишници - кола маска',
+                        'grab-kola': 'Гръб - кола маска',
+                        'gradi-korem-kola': 'Гърди + корем - кола маска',
+                        'gradi-kola': 'Гърди - кола маска',
+                        'korem-kola': 'Корем - кола маска',
+                        'krast-kola': 'Кръст - кола маска',
+                        'race-muje-kola': 'Цели ръце - кола маска',
+                        'kraka-muje-kola': 'Цели крака - кола маска',
+                        'cyalo-tyalo-muje-kola': 'Цяло тяло - кола маска',
+                        'skuli-muje-kola': 'Скули - кола маска',
+                        'vrat-kola': 'Врат - кола маска'
+                    }
+                }
+            }
+        },
+        'massage': {
+            name: 'massage',
+            subcategories: {
+                'classic': {
+                    index: 0, // (Класически масаж)
+                    services: {
+                        'relaksirasht-masaj': 'Релаксиращ масаж',
+                        'klasicheski-masaj': 'Класически масаж при Вики'
+                    }
+                },
+                'sport': {
+                    index: 1, // (Спортен масаж)
+                    services: {
+                        'sporten-masaj': 'Спортен масаж'
+                    }
+                }
+            }
+        }
+    };
+
     // If we have parameters, pre-select the service
     if (category && service) {
         // First, click the main category button (hair, face, epilation, massage)
@@ -182,22 +329,74 @@ document.addEventListener('DOMContentLoaded', function() {
         if (categoryButton) {
             categoryButton.click();
             
-            // Wait for the service categories to load
-            setTimeout(() => {
-                // Then click the specific service category
-                const serviceCategory = document.querySelector(`.service-category-item[data-category="${service}"]`);
-                if (serviceCategory) {
-                    serviceCategory.click();
-                    
-                    // Finally, if we have a detail, scroll to it
-                    if (detail) {
-                        const detailElement = document.querySelector(`[data-detail="${detail}"]`);
-                        if (detailElement) {
-                            detailElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Find the subcategory based on the mapping
+            const categoryData = categoryMapping[category];
+            if (!categoryData) return;
+            
+            const subcategoryData = categoryData.subcategories[service];
+            if (!subcategoryData) return;
+            
+            // Get the subcategory by index (more reliable than name matching)
+            const subcategoryList = document.querySelector(`.subcategories-list[data-category="${category}"]`);
+            const subcategories = subcategoryList ? subcategoryList.querySelectorAll('.subcategory') : [];
+            const subcategoryIndex = subcategoryData.index;
+            
+            if (subcategoryIndex >= 0 && subcategoryIndex < subcategories.length) {
+                const targetSubcategory = subcategories[subcategoryIndex];
+                
+                // Set up observer before clicking subcategory
+                const servicesObserver = new MutationObserver((mutations, observer) => {
+                    // Look for added service buttons
+                    const buttons = document.querySelectorAll('.select-btn');
+                    if (buttons.length > 0) {
+                        // We found buttons, disconnect the observer
+                        observer.disconnect();
+                        
+                        // If we have a detail parameter, select the corresponding service
+                        if (detail) {
+                            // Always select the first button for simplicity
+                            buttons[0].click();
                         }
                     }
-                }
-            }, 100);
+                });
+                
+                // Start observing the services list for changes
+                servicesObserver.observe(servicesList, { 
+                    childList: true,
+                    subtree: true
+                });
+                
+                // Now click the subcategory - this will trigger service loading
+                targetSubcategory.click();
+            }
         }
     }
+
+    // Add event listener for service item clicks
+    document.querySelectorAll('.service-item').forEach(item => {
+        item.addEventListener('click', () => {
+            // Click the button to select the service
+            const targetButton = item.querySelector('.select-btn');
+            if (targetButton) {
+                // Expand options if needed
+                const serviceItem = targetButton.closest('.service-item');
+                const optionsBtn = serviceItem?.querySelector('.options-btn');
+                if (optionsBtn && !serviceItem.querySelector('.service-options.show')) {
+                    optionsBtn.click();
+                }
+                
+                // Scroll to the service
+                targetButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Highlight the button
+                targetButton.style.background = '#8b6ad4';
+                setTimeout(() => {
+                    targetButton.style.background = '';
+                }, 1500);
+                
+                // Automatically select the service
+                targetButton.click();
+            }
+        });
+    });
 }); 
