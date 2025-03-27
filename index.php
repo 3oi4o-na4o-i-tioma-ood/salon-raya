@@ -211,7 +211,7 @@
                             <p>20 мин.</p>
                         </div>
                         <div class="service-price">35 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=hair&service=haircuts&detail=damsko-podstrigvane" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -321,7 +321,7 @@
                             <p>1 ч.20 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=hair&service=coloring&detail=boyadisvane-wella" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -377,7 +377,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">от 25 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=hair&service=curling&detail=izpravyane-pres" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -397,7 +397,7 @@
                             <p>10 мин. - 50 мин.</p>
                         </div>
                         <div class="service-price">от 10 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=hair&service=extensions&detail=udalyavane-kosa" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -408,7 +408,7 @@
                             <p>40 мин.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=hair&service=treatments&detail=keratinova-terapiya" class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -455,7 +455,7 @@
                             <p>15 мин.</p>
                         </div>
                         <div class="service-price">20 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=hair&service=beard&detail=oformyane-brada" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -466,82 +466,94 @@
                             <p>10 мин.</p>
                         </div>
                         <div class="service-price">25 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=hair&service=other&detail=probivane-ushi" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
-                <div class="service-details-category face-details" data-category="makeup" style="display: none;">
+                <div class="service-details-category face-details" data-category="makeup">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Професионален грим</h3>
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=face&service=makeup&detail=profesionalen-grim" class="select-service-btn">Избери</a>
                     </div>
+
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Вечерен грим</h3>
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
+                        <a href="booking.php?category=face&service=makeup&detail=vecheren-grim" class="select-service-btn">Избери</a>
                     </div>
+
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Сватбен грим</h3>
                             <p>1 ч.30 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
+                        <a href="booking.php?category=face&service=makeup&detail=svatben-grim" class="select-service-btn">Избери</a>
                     </div>
+
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Официален грим</h3>
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
+                        <a href="booking.php?category=face&service=makeup&detail=oficialen-grim" class="select-service-btn">Избери</a>
                     </div>
+
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Ежедневен грим</h3>
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
+                        <a href="booking.php?category=face&service=makeup&detail=ezhedneven-grim" class="select-service-btn">Избери</a>
                     </div>
+
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Абитуриентски грим</h3>
                             <p>1 ч.30 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
+                        <a href="booking.php?category=face&service=makeup&detail=abiturientski-grim" class="select-service-btn">Избери</a>
                     </div>
+
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Фото грим</h3>
                             <p>1 ч.30 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
+                        <a href="booking.php?category=face&service=makeup&detail=foto-grim" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
-                <div class="service-details-category face-details" data-category="permanent" style="display: none;">
+                <div class="service-details-category face-details" data-category="permanent">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Перманентен грим</h3>
                             <p>2 ч.</p>
                         </div>
                         <div class="service-price">450 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=face&service=permanent&detail=permanenten-grim" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
-                <div class="service-details-category epilation-details" data-category="women" style="display: none;">
+                <div class="service-details-category epilation-details" data-category="women">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Подмишници - кола маска</h3>
                             <p>15 мин.</p>
                         </div>
                         <div class="service-price">30 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=epilation&service=women&detail=podmishnitsi-kola" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -549,6 +561,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">60 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -556,6 +569,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">60 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -563,6 +577,7 @@
                             <p>20 мин.</p>
                         </div>
                         <div class="service-price">40 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -570,6 +585,7 @@
                             <p>1 ч.30 мин.</p>
                         </div>
                         <div class="service-price">120 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -577,6 +593,7 @@
                             <p>5 мин.</p>
                         </div>
                         <div class="service-price">10 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -584,6 +601,7 @@
                             <p>5 мин.</p>
                         </div>
                         <div class="service-price">10 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -591,6 +609,7 @@
                             <p>5 мин.</p>
                         </div>
                         <div class="service-price">10 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -598,17 +617,18 @@
                             <p>5 мин.</p>
                         </div>
                         <div class="service-price">10 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
-                <div class="service-details-category epilation-details" data-category="men" style="display: none;">
+                <div class="service-details-category epilation-details" data-category="men">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Подмишници - кола маска</h3>
                             <p>10 мин.</p>
                         </div>
                         <div class="service-price">15 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=epilation&service=men&detail=podmishnitsi-kola" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -616,6 +636,7 @@
                             <p>20 мин.</p>
                         </div>
                         <div class="service-price">40 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -623,6 +644,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">50 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -630,6 +652,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">40 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -637,6 +660,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">40 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -644,6 +668,7 @@
                             <p>20 мин.</p>
                         </div>
                         <div class="service-price">25 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -651,6 +676,7 @@
                             <p>30 мин.</p>
                         </div>
                         <div class="service-price">60 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -658,6 +684,7 @@
                             <p>40 мин.</p>
                         </div>
                         <div class="service-price">40 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -665,6 +692,7 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">200 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -672,6 +700,7 @@
                             <p>10 мин.</p>
                         </div>
                         <div class="service-price">10 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -679,17 +708,18 @@
                             <p>10 мин.</p>
                         </div>
                         <div class="service-price">10 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
-                <div class="service-details-category massage-details" data-category="classic" style="display: none;">
+                <div class="service-details-category massage-details" data-category="classic">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Релаксиращ масаж</h3>
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=massage&service=classic&detail=relaksirasht-masaj" class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -697,17 +727,18 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
+                        <a href="booking.php" class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
-                <div class="service-details-category massage-details" data-category="sport" style="display: none;">
+                <div class="service-details-category massage-details" data-category="sport">
                     <div class="service-detail-item">
                         <div class="service-info">
                             <h3>Спортен масаж</h3>
                             <p>50 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="booking.php" class="select-service-btn">Избери</a>
+                        <a href="booking.php?category=massage&service=sport&detail=sporten-masaj" class="select-service-btn">Избери</a>
                     </div>
                 </div>
             </div>
