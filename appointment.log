@@ -9245,3 +9245,319 @@ push subscription has unsubscribed or expired.
 [2025-03-26 22:16:05] Found 2 push subscriptions
 [2025-03-26 22:16:05] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0437\u0430 30.03.2025 \u0432 16:30"}
 [2025-03-26 22:16:05] Connection closed
+[2025-03-27 19:29:22] Received POST request
+[2025-03-27 19:29:22] POST data: Array
+(
+    [client_name] => dfhdf
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Удължаване на коса с щипки (2 реда)
+    [appointment_date] => 2025-04-10
+    [appointment_time] => 12:30
+)
+
+[2025-03-27 19:29:22] Database connection successful
+[2025-03-27 19:29:22] Processed form data:
+[2025-03-27 19:29:22] Name: dfhdf
+[2025-03-27 19:29:22] Phone: 0871234567
+[2025-03-27 19:29:22] Email: arttema9@gmail.com
+[2025-03-27 19:29:22] Service: Удължаване на коса с щипки (2 реда)
+[2025-03-27 19:29:22] Date: 2025-04-10
+[2025-03-27 19:29:22] Time: 12:30
+[2025-03-27 19:29:22] Comment: 
+[2025-03-27 19:29:22] Appointment saved successfully for dfhdf
+[2025-03-27 20:07:11] Received POST request
+[2025-03-27 20:07:11] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване, Дамско подстригване
+    [appointment_date] => 2025-04-01
+    [appointment_time] => 10:00
+)
+
+[2025-03-27 20:07:11] Database connection successful
+[2025-03-27 20:07:11] Processed form data:
+[2025-03-27 20:07:11] Name: Artem
+[2025-03-27 20:07:11] Phone: 0871234567
+[2025-03-27 20:07:11] Email: arttema9@gmail.com
+[2025-03-27 20:07:11] Service: Дамско подстригване, Дамско подстригване
+[2025-03-27 20:07:11] Date: 2025-04-01
+[2025-03-27 20:07:11] Time: 10:00
+[2025-03-27 20:07:11] Comment: 
+[2025-03-27 20:07:11] Appointment saved successfully for Artem
+[2025-03-27 20:07:11] Starting Google Calendar integration for appointment
+[2025-03-27 20:07:11] Loading Google API access token
+[2025-03-27 20:07:11] Token is valid
+[2025-03-27 20:07:11] Creating Calendar service
+[2025-03-27 20:07:11] Using primary calendar for all appointments
+[2025-03-27 20:07:11] Creating event for Artem on 2025-04-01 10:00:00
+[2025-03-27 20:11:31] Received POST request
+[2025-03-27 20:11:31] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+    [appointment_date] => 2025-04-06
+    [appointment_time] => 16:00
+)
+
+[2025-03-27 20:11:31] Database connection successful
+[2025-03-27 20:11:31] Processed form data:
+[2025-03-27 20:11:31] Name: Artem
+[2025-03-27 20:11:31] Phone: 0871234567
+[2025-03-27 20:11:31] Email: arttema9@gmail.com
+[2025-03-27 20:11:31] Service: Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+[2025-03-27 20:11:31] Date: 2025-04-06
+[2025-03-27 20:11:31] Time: 16:00
+[2025-03-27 20:11:31] Comment: 
+[2025-03-27 20:11:31] Appointment saved successfully for Artem
+[2025-03-27 20:11:31] ------------- STARTING GOOGLE CALENDAR INTEGRATION -------------
+[2025-03-27 20:11:31] Current directory: /Users/admin/Documents/Projects/personal/salon-raya
+[2025-03-27 20:11:31] Current script: /Users/admin/Documents/Projects/personal/salon-raya/save_appointment.php
+[2025-03-27 20:11:31] Credentials path: /Users/admin/Documents/Projects/personal/salon-raya/credentials/google-credentials.json
+[2025-03-27 20:11:31] Token path: /Users/admin/Documents/Projects/personal/salon-raya/credentials/google-token.json
+[2025-03-27 20:11:31] Credentials file exists. Permissions: 0644
+[2025-03-27 20:11:31] Readable: Yes
+[2025-03-27 20:11:31] Token file exists. Permissions: 0644
+[2025-03-27 20:11:31] Readable: Yes
+[2025-03-27 20:11:31] Starting Google Calendar integration for appointment
+[2025-03-27 20:11:31] Checking for Google API classes:
+[2025-03-27 20:11:31] ✓ Class exists: Google_Client
+[2025-03-27 20:11:31] ✓ Class exists: Google_Service_Calendar
+[2025-03-27 20:11:31] ✓ Class exists: Google_Service_Calendar_Event
+[2025-03-27 20:11:31] Loading Google API access token
+[2025-03-27 20:11:31] Token file content length: 515
+[2025-03-27 20:11:31] Token parsed successfully
+[2025-03-27 20:11:31] Token is valid
+[2025-03-27 20:11:31] Creating Calendar service
+[2025-03-27 20:11:31] Using primary calendar for all appointments
+[2025-03-27 20:11:31] Creating event for Artem on 2025-04-06 16:00:00
+[2025-03-27 20:14:50] Received POST request
+[2025-03-27 20:14:50] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Удължаване на коса с щипки (1 ред)
+    [appointment_date] => 2025-04-05
+    [appointment_time] => 13:00
+)
+
+[2025-03-27 20:14:50] Database connection successful
+[2025-03-27 20:14:50] Processed form data:
+[2025-03-27 20:14:50] Name: Artem
+[2025-03-27 20:14:50] Phone: 0871234567
+[2025-03-27 20:14:50] Email: arttema9@gmail.com
+[2025-03-27 20:14:50] Service: Удължаване на коса с щипки (1 ред)
+[2025-03-27 20:14:50] Date: 2025-04-05
+[2025-03-27 20:14:50] Time: 13:00
+[2025-03-27 20:14:50] Comment: 
+[2025-03-27 20:14:50] Appointment saved successfully for Artem
+[2025-03-27 20:14:50] ------------- STARTING GOOGLE CALENDAR INTEGRATION -------------
+[2025-03-27 20:14:50] Current directory: /Users/admin/Documents/Projects/personal/salon-raya
+[2025-03-27 20:14:50] Current script: /Users/admin/Documents/Projects/personal/salon-raya/save_appointment.php
+[2025-03-27 20:14:50] Credentials path: /Users/admin/Documents/Projects/personal/salon-raya/credentials/google-credentials.json
+[2025-03-27 20:14:50] Token path: /Users/admin/Documents/Projects/personal/salon-raya/credentials/google-token.json
+[2025-03-27 20:14:50] Credentials file exists. Permissions: 0644
+[2025-03-27 20:14:50] Readable: Yes
+[2025-03-27 20:14:50] Token file exists. Permissions: 0644
+[2025-03-27 20:14:50] Readable: Yes
+[2025-03-27 20:14:50] Starting Google Calendar integration for appointment
+[2025-03-27 20:14:50] Checking for Google API classes:
+[2025-03-27 20:14:50] ✓ Class exists: Google_Client
+[2025-03-27 20:14:50] ✓ Class exists: Google_Service_Calendar
+[2025-03-27 20:14:50] ✓ Class exists: Google_Service_Calendar_Event
+[2025-03-27 20:51:15] Received POST request
+[2025-03-27 20:51:15] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+    [appointment_date] => 2025-04-07
+    [appointment_time] => 15:00
+)
+
+[2025-03-27 20:51:15] Database connection successful
+[2025-03-27 20:51:15] Processed form data:
+[2025-03-27 20:51:15] Name: Artem
+[2025-03-27 20:51:15] Phone: 0871234567
+[2025-03-27 20:51:15] Email: arttema9@gmail.com
+[2025-03-27 20:51:15] Service: Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+[2025-03-27 20:51:15] Date: 2025-04-07
+[2025-03-27 20:51:15] Time: 15:00
+[2025-03-27 20:51:15] Comment: 
+[2025-03-27 20:51:15] Appointment saved successfully for Artem
+[2025-03-27 20:51:15] ------------- STARTING GOOGLE CALENDAR INTEGRATION -------------
+[2025-03-27 20:51:15] Current directory: /Users/admin/Documents/Projects/personal/salon-raya
+[2025-03-27 20:51:15] Current script: /Users/admin/Documents/Projects/personal/salon-raya/save_appointment.php
+[2025-03-27 20:51:15] Credentials path: /Users/admin/Documents/Projects/personal/salon-raya/credentials/google-credentials.json
+[2025-03-27 20:51:15] Token path: /Users/admin/Documents/Projects/personal/salon-raya/credentials/google-token.json
+[2025-03-27 20:51:15] Credentials file exists. Permissions: 0644
+[2025-03-27 20:51:15] Readable: Yes
+[2025-03-27 20:51:15] Token file exists. Permissions: 0644
+[2025-03-27 20:51:15] Readable: Yes
+[2025-03-27 20:51:15] Starting Google Calendar integration for appointment
+[2025-03-27 20:51:15] Checking for Google API classes:
+[2025-03-27 20:51:15] ✓ Class exists: Google_Client
+[2025-03-27 20:51:15] ✓ Class exists: Google_Service_Calendar
+[2025-03-27 20:51:15] ✓ Class exists: Google_Service_Calendar_Event
+[2025-03-27 20:56:07] Received POST request
+[2025-03-27 20:56:07] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване, Дамско подстригване
+    [appointment_date] => 2025-04-10
+    [appointment_time] => 15:00
+)
+
+[2025-03-27 20:56:07] Database connection successful
+[2025-03-27 20:56:07] Processed form data:
+[2025-03-27 20:56:07] Name: Artem
+[2025-03-27 20:56:07] Phone: 0871234567
+[2025-03-27 20:56:07] Email: arttema9@gmail.com
+[2025-03-27 20:56:07] Service: Дамско подстригване, Дамско подстригване
+[2025-03-27 20:56:07] Date: 2025-04-10
+[2025-03-27 20:56:07] Time: 15:00
+[2025-03-27 20:56:07] Comment: 
+[2025-03-27 20:56:08] Appointment saved successfully for Artem
+[2025-03-27 20:56:08] ------------- STARTING GOOGLE CALENDAR INTEGRATION -------------
+[2025-03-27 20:56:08] Starting Google Calendar integration for appointment
+[2025-03-27 20:56:08] Loading token
+[2025-03-27 20:56:08] Token expired, refreshing
+[2025-03-27 20:56:08] Token refreshed
+[2025-03-27 20:56:08] Creating Calendar service
+[2025-03-27 20:56:08] Finding primary calendar
+[2025-03-27 20:56:08] Found primary calendar: arttema9@gmail.com (ID: arttema9@gmail.com)
+[2025-03-27 20:56:08] Creating event for Artem on 2025-04-10 15:00:00
+[2025-03-27 20:59:19] Received POST request
+[2025-03-27 20:59:19] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+    [appointment_date] => 2025-04-11
+    [appointment_time] => 13:30
+)
+
+[2025-03-27 20:59:19] Database connection successful
+[2025-03-27 20:59:19] Processed form data:
+[2025-03-27 20:59:19] Name: Artem
+[2025-03-27 20:59:19] Phone: 0871234567
+[2025-03-27 20:59:19] Email: arttema9@gmail.com
+[2025-03-27 20:59:19] Service: Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+[2025-03-27 20:59:19] Date: 2025-04-11
+[2025-03-27 20:59:19] Time: 13:30
+[2025-03-27 20:59:19] Comment: 
+[2025-03-27 20:59:19] Appointment saved successfully for Artem
+[2025-03-27 20:59:19] ------------- STARTING GOOGLE CALENDAR INTEGRATION -------------
+[2025-03-27 20:59:19] Starting Google Calendar integration for appointment
+[2025-03-27 20:59:19] Loading token
+[2025-03-27 20:59:19] Creating Calendar service
+[2025-03-27 20:59:19] Finding primary calendar
+[2025-03-27 20:59:20] Found primary calendar: arttema9@gmail.com (ID: arttema9@gmail.com)
+[2025-03-27 20:59:20] Creating event for Artem on 2025-04-11 13:30:00
+[2025-03-27 21:01:40] Received POST request
+[2025-03-27 21:01:40] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+    [appointment_date] => 2025-04-11
+    [appointment_time] => 13:30
+)
+
+[2025-03-27 21:01:40] Database connection successful
+[2025-03-27 21:01:40] Processed form data:
+[2025-03-27 21:01:40] Name: Artem
+[2025-03-27 21:01:40] Phone: 0871234567
+[2025-03-27 21:01:40] Email: arttema9@gmail.com
+[2025-03-27 21:01:40] Service: Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+[2025-03-27 21:01:40] Date: 2025-04-11
+[2025-03-27 21:01:40] Time: 13:30
+[2025-03-27 21:01:40] Comment: 
+[2025-03-27 21:01:40] Appointment saved successfully for Artem
+[2025-03-27 21:01:40] ------------- STARTING GOOGLE CALENDAR INTEGRATION -------------
+[2025-03-27 21:01:40] Starting Google Calendar integration for appointment
+[2025-03-27 21:01:40] Loading token
+[2025-03-27 21:01:40] Creating Calendar service
+[2025-03-27 21:01:40] Finding primary calendar
+[2025-03-27 21:01:40] Found primary calendar: arttema9@gmail.com (ID: arttema9@gmail.com)
+[2025-03-27 21:01:40] Creating event for Artem on 2025-04-11 13:30:00
+[2025-03-27 21:01:40] Inserting event to calendar: arttema9@gmail.com
+[2025-03-27 21:01:40] API call completed in 0.46 seconds
+[2025-03-27 21:01:40] Event created successfully: https://www.google.com/calendar/event?eid=cmsyajV2N20ybG04dGx2MHA3OTJjMTJwNm8gYXJ0dGVtYTlAbQ
+[2025-03-27 21:01:40] Google Calendar integration complete. Result: Success
+[2025-03-27 21:01:40] ------------- ENDING GOOGLE CALENDAR INTEGRATION -------------
+[2025-03-27 21:01:40] Found 2 push subscriptions
+[2025-03-27 21:01:40] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u041c\u044a\u0436\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0441 \u043d\u043e\u0436\u0438\u0446\u0430 \u0438 \u043c\u0430\u0448\u0438\u043d\u043a\u0430 + \u0438\u0437\u043c\u0438\u0432\u0430\u043d\u0435, \u041c\u044a\u0436\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0441 \u043d\u043e\u0436\u0438\u0446\u0430 \u0438 \u043c\u0430\u0448\u0438\u043d\u043a\u0430 + \u0438\u0437\u043c\u0438\u0432\u0430\u043d\u0435 \u0437\u0430 11.04.2025 \u0432 13:30"}
+[2025-03-27 21:01:41] Connection closed
+[2025-03-27 21:21:04] Received POST request
+[2025-03-27 21:21:04] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+    [appointment_date] => 2025-04-02
+    [appointment_time] => 16:30
+)
+
+[2025-03-27 21:21:04] Database connection successful
+[2025-03-27 21:21:04] Processed form data:
+[2025-03-27 21:21:04] Name: Artem
+[2025-03-27 21:21:04] Phone: 0871234567
+[2025-03-27 21:21:04] Email: arttema9@gmail.com
+[2025-03-27 21:21:04] Service: Мъжко подстригване с ножица и машинка + измиване, Мъжко подстригване с ножица и машинка + измиване
+[2025-03-27 21:21:04] Date: 2025-04-02
+[2025-03-27 21:21:04] Time: 16:30
+[2025-03-27 21:21:04] Comment: 
+[2025-03-27 21:21:04] Appointment saved successfully for Artem
+[2025-03-27 21:21:05] Event created in Google Calendar: https://www.google.com/calendar/event?eid=bDZpdDcyNGVmMDR1ZGJlNmZzNnYyNjh2MTggYXJ0dGVtYTlAbQ
+[2025-03-27 21:21:05] Appointment added to Google Calendar successfully
+[2025-03-27 21:21:05] Found 2 push subscriptions
+[2025-03-27 21:21:05] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u041c\u044a\u0436\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0441 \u043d\u043e\u0436\u0438\u0446\u0430 \u0438 \u043c\u0430\u0448\u0438\u043d\u043a\u0430 + \u0438\u0437\u043c\u0438\u0432\u0430\u043d\u0435, \u041c\u044a\u0436\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0441 \u043d\u043e\u0436\u0438\u0446\u0430 \u0438 \u043c\u0430\u0448\u0438\u043d\u043a\u0430 + \u0438\u0437\u043c\u0438\u0432\u0430\u043d\u0435 \u0437\u0430 02.04.2025 \u0432 16:30"}
+[2025-03-27 21:21:06] Connection closed
+[2025-03-27 21:40:07] Received POST request
+[2025-03-27 21:40:07] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Гръб - кола маска
+    [appointment_date] => 2025-04-13
+    [appointment_time] => 14:30
+)
+
+[2025-03-27 21:40:07] Database connection successful
+[2025-03-27 21:40:07] Processed form data:
+[2025-03-27 21:40:07] Name: Artem
+[2025-03-27 21:40:07] Phone: 0871234567
+[2025-03-27 21:40:07] Email: arttema9@gmail.com
+[2025-03-27 21:40:07] Service: Гръб - кола маска
+[2025-03-27 21:40:07] Date: 2025-04-13
+[2025-03-27 21:40:07] Time: 14:30
+[2025-03-27 21:40:07] Comment: 
+[2025-03-27 21:40:07] Appointment saved successfully for Artem
+[2025-03-27 21:40:08] Event created in Google Calendar: https://www.google.com/calendar/event?eid=OXIxc2JjdGFvNDJoc2x1dmpnajlqNXQyNzQgYXJ0dGVtYTlAbQ
+[2025-03-27 21:40:08] Appointment added to Google Calendar successfully
+[2025-03-27 21:40:08] Found 2 push subscriptions
+[2025-03-27 21:40:08] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0413\u0440\u044a\u0431 - \u043a\u043e\u043b\u0430 \u043c\u0430\u0441\u043a\u0430 \u0437\u0430 13.04.2025 \u0432 14:30"}
+[2025-03-27 21:40:09] Connection closed
