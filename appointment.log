@@ -9378,3 +9378,58 @@ push subscription has unsubscribed or expired.
 [2025-03-28 14:45:09] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435, \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0437\u0430 31.03.2025 \u0432 16:30"}
 [2025-03-28 14:45:09] Subscription expired, removing: https://fcm.googleapis.com/fcm/send/fEYFp6fbN1o:APA91bHHknBSNMiztOrp7Op0bbverXvd6dr5LxWDukJaWhmhCMxRJkg48iu0nySfAZKQa0CLcb06IRIbLjt-XcC5SYDkkXcd0KLMw3HKzY7c3BUJxukkGDBatG4qCi7D0HAinmT0wk6F
 [2025-03-28 14:45:10] Connection closed
+[2025-03-28 14:55:27] Received POST request
+[2025-03-28 14:55:27] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Оформяне на врат, Оформяне на врат
+    [appointment_date] => 2025-03-30
+    [appointment_time] => 12:00
+)
+
+[2025-03-28 14:55:27] Database connection successful
+[2025-03-28 14:55:27] Processed form data:
+[2025-03-28 14:55:27] Name: Artem
+[2025-03-28 14:55:27] Phone: 0871234567
+[2025-03-28 14:55:27] Email: arttema9@gmail.com
+[2025-03-28 14:55:27] Service: Оформяне на врат, Оформяне на врат
+[2025-03-28 14:55:27] Date: 2025-03-30
+[2025-03-28 14:55:27] Time: 12:00
+[2025-03-28 14:55:27] Comment: 
+[2025-03-28 14:55:27] Appointment saved successfully for Artem
+[2025-03-28 14:55:28] Event created in Google Calendar: https://www.google.com/calendar/event?eid=dnR0OTJiYTNvNzEzcmc2b3Jtc3NhbWM3Y3MgYXJ0dGVtYTlAbQ
+[2025-03-28 14:55:28] Appointment added to Google Calendar successfully
+[2025-03-28 14:55:28] Found 3 push subscriptions
+[2025-03-28 14:55:28] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u041e\u0444\u043e\u0440\u043c\u044f\u043d\u0435 \u043d\u0430 \u0432\u0440\u0430\u0442, \u041e\u0444\u043e\u0440\u043c\u044f\u043d\u0435 \u043d\u0430 \u0432\u0440\u0430\u0442 \u0437\u0430 30.03.2025 \u0432 12:00"}
+[2025-03-28 14:55:29] Subscription expired, removing: https://fcm.googleapis.com/fcm/send/fc_lPP7YuzM:APA91bE3isCuP6SfC_Cfq7bS7Yx04kHj8PLhKwdZTauUGQXPZoFr7qFRU7qlmsxJQtNWJtvnDN6H4VBB0bdLxHE0Xx7HnIuC3mvrQu8kjWnjkH8zWjm0PrYRO6Wm038ZodHkK_iYOyCf
+[2025-03-28 14:55:30] Connection closed
+[2025-03-28 15:01:42] Received POST request
+[2025-03-28 15:01:42] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Измиване на коса + маска, Измиване на коса + маска
+    [appointment_date] => 2025-03-30
+    [appointment_time] => 10:00
+)
+
+[2025-03-28 15:01:42] Database connection successful
+[2025-03-28 15:01:42] Processed form data:
+[2025-03-28 15:01:42] Name: Artem
+[2025-03-28 15:01:42] Phone: 0871234567
+[2025-03-28 15:01:42] Email: arttema9@gmail.com
+[2025-03-28 15:01:42] Service: Измиване на коса + маска, Измиване на коса + маска
+[2025-03-28 15:01:42] Date: 2025-03-30
+[2025-03-28 15:01:42] Time: 10:00
+[2025-03-28 15:01:42] Comment: 
+[2025-03-28 15:01:42] Appointment saved successfully for Artem
+[2025-03-28 15:01:43] Event created in Google Calendar: https://www.google.com/calendar/event?eid=MWIyYzFuYTNsOGFtbG0zbWVpNmdlc25zdjggYXJ0dGVtYTlAbQ
+[2025-03-28 15:01:43] Appointment added to Google Calendar successfully
+[2025-03-28 15:01:43] Found 2 push subscriptions
+[2025-03-28 15:01:43] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0418\u0437\u043c\u0438\u0432\u0430\u043d\u0435 \u043d\u0430 \u043a\u043e\u0441\u0430 + \u043c\u0430\u0441\u043a\u0430, \u0418\u0437\u043c\u0438\u0432\u0430\u043d\u0435 \u043d\u0430 \u043a\u043e\u0441\u0430 + \u043c\u0430\u0441\u043a\u0430 \u0437\u0430 30.03.2025 \u0432 10:00"}
+[2025-03-28 15:01:46] Connection closed

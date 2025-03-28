@@ -4,10 +4,26 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $notes = '') {
+function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appointmentId, $notes = '') {
     $mail = new PHPMailer(true);
 
     try {
+        // Create a unique cancellation token
+        $cancellationToken = md5($appointmentId . $to . time());
+        
+        // Save the token to the database
+        $conn = new mysqli('localhost', 'root', '', 'salon_raya');
+        if ($conn->connect_error) {
+            error_log("Connection failed: " . $conn->connect_error);
+            return false;
+        }
+        
+        $stmt = $conn->prepare("UPDATE appointments SET cancellation_token = ? WHERE id = ?");
+        $stmt->bind_param("si", $cancellationToken, $appointmentId);
+        $stmt->execute();
+        $stmt->close();
+        $conn->close();
+
         // Server settings
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
@@ -26,6 +42,10 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $notes
         $mail->isHTML(true);
         $mail->Subject = 'Потвърждение на резервация - Salon Raya';
         
+        // Create the cancellation URL - use HTTP for local development
+        $serverProtocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+        $cancelUrl = $serverProtocol . $_SERVER['HTTP_HOST'] . "/cancel-reservation.php?token=" . $cancellationToken;
+        
         // Email body in Bulgarian
         $message = "
         <html>
@@ -36,6 +56,7 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $notes
                 .header { text-align: center; margin-bottom: 30px; }
                 .details { background: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0; }
                 .footer { text-align: center; margin-top: 30px; font-size: 0.9em; color: #666; }
+                .cancel-btn { display: block; width: 200px; margin: 20px auto; padding: 10px 15px; background-color: #e74c3c; color: white; text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; }
             </style>
         </head>
         <body>
@@ -61,6 +82,9 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $notes
                 </div>
                 
                 <p>Ако искате да направите промени по вашата резервация, моля свържете се с нас.</p>
+                <p>Ако искате да отмените резервацията, можете да използвате бутона по-долу:</p>
+                
+                <a href='{$cancelUrl}' class='cancel-btn'>Отмени резервацията</a>
                 
                 <div class='footer'>
                     <p>С най-добри пожелания,<br>Екипът на Salon Raya</p>
@@ -70,7 +94,7 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $notes
         </html>";
 
         $mail->Body = $message;
-        $mail->AltBody = strip_tags($message);
+        $mail->AltBody = strip_tags($message) . "\n\nЗа отмяна на резервацията: {$cancelUrl}";
 
         $mail->send();
         return true;

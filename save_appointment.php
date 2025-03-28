@@ -82,6 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->execute()) {
         logMessage("Appointment saved successfully for $client_name");
         
+        // Get the appointment ID
+        $appointmentId = $conn->insert_id;
+        
         // Add to Google Calendar
         $calendar_result = addToGoogleCalendar($client_name, $service, $appointment_date, $appointment_time, $comment);
         if ($calendar_result) {
@@ -152,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['service'],
             $_POST['appointment_date'],
             $_POST['appointment_time'],
+            $appointmentId,
             $_POST['comment'] ?? ''
         );
 
