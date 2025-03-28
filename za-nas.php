@@ -626,7 +626,7 @@
         <div class="featured-brand">
             <div class="brand-image">
                 <img src="images/products/wella.png" alt="Wella Professional Logo" class="brand-logo">
-                <img src="images/products/wella2.png" alt="Wella Professional" onerror="this.src='https://via.placeholder.com/200x100/a484e8/ffffff?text=Wella+Professional'; this.onerror=null;">
+                <img src="images/products/wella2.png" alt="Wella Professional">
             </div>
             <div class="brand-description">
                 <h3>WELLA PROFESSIONAL</h3>
@@ -639,7 +639,7 @@
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/biomagic-logo.png" alt="BioMagic Logo" class="brand-logo">
-                    <img src="images/products/biomagic.png" alt="BioMagic" onerror="this.src='https://via.placeholder.com/200x100/a484e8/ffffff?text=BioMagic'; this.onerror=null;">
+                    <img src="images/products/biomagic.png" alt="BioMagic">
                 </div>
                 <div class="brand-info">
                     <h3>BIOMAGIC</h3>
@@ -649,7 +649,7 @@
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/kinactif-logo.png" alt="Kinactif Logo" class="brand-logo">
-                    <img src="images/products/kinactif.png" alt="Kinactif" onerror="this.src='https://via.placeholder.com/200x100/a484e8/ffffff?text=Kinactif'; this.onerror=null;">
+                    <img src="images/products/kinactif.png" alt="Kinactif">
                 </div>
                 <div class="brand-info">
                     <h3>KINACTIF</h3>
@@ -659,7 +659,7 @@
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/spa-master-logo.png" alt="Spa Master Logo" class="brand-logo">
-                    <img src="images/products/spa-master.png" alt="Spa Master" onerror="this.src='https://via.placeholder.com/200x100/a484e8/ffffff?text=Spa+Master'; this.onerror=null;">
+                    <img src="images/products/spa-master.png" alt="Spa Master">
                 </div>
                 <div class="brand-info">
                     <h3>SPA MASTER</h3>
@@ -669,7 +669,7 @@
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/starlet-logo.png" alt="Starlet Professional Logo" class="brand-logo">
-                    <img src="images/products/starlet.png" alt="Starlet Professional" class="smaller-image" onerror="this.src='https://via.placeholder.com/200x100/a484e8/ffffff?text=Starlet+Professional'; this.onerror=null;">
+                    <img src="images/products/starlet.png" alt="Starlet Professional" class="smaller-image">
                 </div>
                 <div class="brand-info">
                     <h3>STARLET PROFESSIONAL</h3>
@@ -679,7 +679,7 @@
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/kerastase/kerastase.png" alt="Kerastase Logo" class="brand-logo">
-                    <img src="images/products/kerastase/kerastase 1.png" alt="Kerastase" onerror="this.src='https://via.placeholder.com/200x100/a484e8/ffffff?text=Kerastase'; this.onerror=null;">
+                    <img src="images/products/kerastase/kerastase 1.png" alt="Kerastase">
                 </div>
                 <div class="brand-info">
                     <h3>KERASTASE</h3>

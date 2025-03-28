@@ -300,17 +300,25 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json(); // Change back to json()
+        })
         .then(data => {
             if (data.success) {
+                // Restore original redirect
                 window.location.href = 'booking-confirmation.php';
             } else {
                 console.error('Booking failed:', data.message);
+                alert('Booking failed: ' + data.message);
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            window.location.href = 'booking-confirmation.php';
+            // Don't redirect on error
+            alert('Error submitting form: ' + error.message);
         });
     });
 

@@ -1,0 +1,28 @@
+# Dependencies
+/vendor/
+
+# Credentials and sensitive information
+/credentials/
+
+# Logs
+*.log
+
+# Mac OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# PHP runtime files
+.phpunit.result.cache
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo 

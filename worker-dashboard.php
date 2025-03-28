@@ -34,10 +34,16 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 <body class="dashboard-body">
     <div class="dashboard-container">
         <div class="dashboard-header">
-            <a href="sign-in.php?logout=true" class="exit-button">
-                <i class="fas fa-sign-out-alt"></i>
-                Изход
-            </a>
+            <div class="header-actions">
+                <a href="google-auth.php" class="google-cal-button">
+                    <i class="fas fa-calendar-plus"></i>
+                    Google Календар
+                </a>
+                <a href="sign-in.php?logout=true" class="exit-button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Изход
+                </a>
+            </div>
             <div class="salon-info">
                 <img src="images/logo.svg" alt="SALON RAYA LOGO" class="dashboard-logo">
                 <div class="salon-details">
@@ -60,17 +66,22 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="appointments-list">
                             <?php if (count($appointments) > 0): ?>
                                 <?php foreach ($appointments as $appointment): ?>
-                                    <div class="appointment-card">
-                                        <div class="appointment-time">
-                                            <?php echo date('H:i', strtotime($appointment['appointment_time'])); ?>
+                                    <div class="appointment-card <?php echo isset($appointment['status']) && $appointment['status'] === 'cancelled' ? 'cancelled' : ''; ?>">
+                                        <div class="appointment-header">
+                                            <span class="appointment-time"><?php echo date('H:i', strtotime($appointment['appointment_time'])); ?></span>
+                                            <?php if (isset($appointment['status']) && $appointment['status'] === 'cancelled'): ?>
+                                                <span class="status-badge cancelled">Отменена</span>
+                                            <?php endif; ?>
                                         </div>
                                         <div class="appointment-details">
-                                            <h3><?php echo htmlspecialchars($appointment['client_name']); ?></h3>
-                                            <p><i class="fas fa-phone"></i> <?php echo htmlspecialchars($appointment['phone']); ?></p>
-                                            <p><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($appointment['email']); ?></p>
-                                            <p><i class="fas fa-cut"></i> <?php echo htmlspecialchars($appointment['service']); ?></p>
+                                            <h3 class="client-name"><?php echo htmlspecialchars($appointment['client_name']); ?></h3>
+                                            <p class="service"><?php echo htmlspecialchars($appointment['service']); ?></p>
+                                            <p class="contact">
+                                                <i class="fas fa-phone"></i> <?php echo htmlspecialchars($appointment['phone']); ?><br>
+                                                <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($appointment['email']); ?>
+                                            </p>
                                             <?php if (!empty($appointment['comment'])): ?>
-                                                <p class="comment"><i class="fas fa-comment"></i> <?php echo htmlspecialchars($appointment['comment']); ?></p>
+                                                <p class="notes"><i class="fas fa-sticky-note"></i> <?php echo htmlspecialchars($appointment['comment']); ?></p>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -121,6 +132,27 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 
     .exit-button:hover {
         background-color: #fff0f0;
+    }
+    
+    .google-cal-button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        color: #4285F4;
+        padding: 6px 12px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        font-weight: 500;
+    }
+    
+    .google-cal-button:hover {
+        background-color: #e8f0fe;
+    }
+    
+    .header-actions {
+        display: flex;
+        gap: 10px;
     }
 
     .dashboard-header {
@@ -359,9 +391,35 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
     .notification-popup.hidden {
         display: none;
     }
+
+    .appointment-card.cancelled {
+        background-color: #ffebee;
+        border-left: 4px solid #e74c3c;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 0.8em;
+        margin-left: 10px;
+        color: white;
+    }
+    
+    .status-badge.cancelled {
+        background-color: #e74c3c;
+    }
+    
+    .status-badge.pending {
+        background-color: #f39c12;
+    }
+    
+    .status-badge.confirmed {
+        background-color: #2ecc71;
+    }
     </style>
 
-    <div id="notificationPopup" class="notification-popup">
+    <div id="notificationPopup" class="notification-popup hidden">
         <h3>Разрешете Известията</h3>
         <p>Натиснете бутона по-долу, за да разрешите известия за нови резервации.</p>
         <button id="enableNotifications">Разреши известия</button>
@@ -373,16 +431,72 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         let audioElement;
         let serviceWorkerRegistration = null;
         let pushSubscription = null;
+        let userHasInteracted = false;
 
-        // Check if notifications are already enabled
-        if ('Notification' in window) {
-            if (Notification.permission === 'granted') {
-                document.getElementById('notificationPopup').classList.add('hidden');
+        // Check if user has notification permission (only consider 'granted' as valid)
+        const hasNotificationPermission = 'Notification' in window && Notification.permission === 'granted';
+
+        // Clear interaction memory if notifications are denied
+        if (Notification.permission === 'denied') {
+            sessionStorage.removeItem('userInteracted');
+        }
+
+        // Function to show notification popup if needed
+        function showNotificationPopupIfNeeded() {
+            if (!hasNotificationPermission) {
+                document.getElementById('notificationPopup').classList.remove('hidden');
+            } else if (Notification.permission === 'granted') {
+                // If permission already granted, initialize notifications without showing popup
                 initializePushNotifications();
-            } else if (Notification.permission === 'denied') {
-                document.getElementById('notificationPopup').classList.add('hidden');
             }
         }
+
+        // Check for existing interaction in session storage - only valid if notifications are granted
+        if (sessionStorage.getItem('userInteracted') === 'true' && hasNotificationPermission) {
+            userHasInteracted = true;
+            
+            if (Notification.permission === 'granted') {
+                initializePushNotifications();
+            }
+        } else {
+            // Show popup after a short delay (to let the page load)
+            setTimeout(showNotificationPopupIfNeeded, 500);
+        }
+
+        // Detect any user interaction with the page
+        function markUserInteraction(event) {
+            // Don't count clicks on the document as interaction if the notification popup is visible
+            // This ensures users must explicitly interact with the permission button
+            const notificationPopup = document.getElementById('notificationPopup');
+            if (!notificationPopup.classList.contains('hidden') && 
+                !notificationPopup.contains(event.target)) {
+                // If clicked outside the popup while it's visible, don't count as interaction
+                return;
+            }
+            
+            if (!userHasInteracted) {
+                userHasInteracted = true;
+                
+                // Only remember interaction if notifications are granted
+                if (Notification.permission === 'granted') {
+                    sessionStorage.setItem('userInteracted', 'true');
+                }
+                
+                // Only hide popup if notifications are granted
+                // Otherwise it should stay visible until they explicitly interact with the permission button
+                if (Notification.permission === 'granted') {
+                    document.getElementById('notificationPopup').classList.add('hidden');
+                }
+                
+                // Initialize audio on first interaction
+                initializeAudio();
+            }
+        }
+
+        // Add interaction event listeners - only for deliberate actions
+        ['click', 'touchstart', 'keydown'].forEach(eventType => {
+            document.addEventListener(eventType, markUserInteraction, { once: true });
+        });
 
         // Handle notification permission button click
         document.getElementById('enableNotifications').addEventListener('click', function() {
@@ -391,8 +505,12 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                     if (permission === 'granted') {
                         console.log('Notification permission granted');
                         document.getElementById('notificationPopup').classList.add('hidden');
+                        sessionStorage.setItem('userInteracted', 'true');
                         initializeAudio();
                         initializePushNotifications();
+                    } else if (permission === 'denied') {
+                        // Clear interaction if user explicitly denies
+                        sessionStorage.removeItem('userInteracted');
                     }
                 });
             }
