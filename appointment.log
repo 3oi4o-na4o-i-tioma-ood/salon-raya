@@ -9460,3 +9460,33 @@ push subscription has unsubscribed or expired.
 [2025-03-28 15:12:33] Found 2 push subscriptions
 [2025-03-28 15:12:33] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u041c\u044a\u0436\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0441 \u043c\u0430\u0448\u0438\u043d\u043a\u0430, \u041c\u044a\u0436\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0441 \u043c\u0430\u0448\u0438\u043d\u043a\u0430 \u0437\u0430 28.03.2025 \u0432 13:00"}
 [2025-03-28 15:12:35] Connection closed
+[2025-03-28 15:26:58] Received POST request
+[2025-03-28 15:26:58] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Дамско подстригване на бретон, Дамско подстригване на бретон
+    [appointment_date] => 2025-04-03
+    [appointment_time] => 15:00
+)
+
+[2025-03-28 15:26:58] Database connection successful
+[2025-03-28 15:26:58] Processed form data:
+[2025-03-28 15:26:58] Name: Artem
+[2025-03-28 15:26:58] Phone: 0871234567
+[2025-03-28 15:26:58] Email: arttema9@gmail.com
+[2025-03-28 15:26:58] Service: Дамско подстригване на бретон, Дамско подстригване на бретон
+[2025-03-28 15:26:58] Date: 2025-04-03
+[2025-03-28 15:26:58] Time: 15:00
+[2025-03-28 15:26:58] Comment: 
+[2025-03-28 15:26:58] Appointment saved successfully for Artem
+[2025-03-28 15:26:59] Event created in Google Calendar: https://www.google.com/calendar/event?eid=ZGJpdmMwMzQwbWk1b3Q3b211dWJrMGZwb2cgYXJ0dGVtYTlAbQ
+[2025-03-28 15:26:59] Appointment added to Google Calendar successfully
+[2025-03-28 15:26:59] Found 5 push subscriptions
+[2025-03-28 15:26:59] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u043d\u0430 \u0431\u0440\u0435\u0442\u043e\u043d, \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u043d\u0430 \u0431\u0440\u0435\u0442\u043e\u043d \u0437\u0430 03.04.2025 \u0432 15:00"}
+[2025-03-28 15:27:00] Subscription expired, removing: https://fcm.googleapis.com/fcm/send/cYf80qQ-KVI:APA91bFMLo90nLGbbv-Po1Fwc2R0fuXHHFzOqmtqLymkWR9_MPd88qHnXU6xrJywgBX6BlG1V12WwRbaXB0ZSK-iG_41a6jkSLunGkScbDdUTcUQ23hKjiYx8o3v97eT4CJOh9m7Krld
+[2025-03-28 15:27:00] Subscription expired, removing: https://fcm.googleapis.com/fcm/send/cDcXcLMDIpQ:APA91bED3AtOjl8EQX0KFFhHEagk-oYCYHMyK9Qt0zvlc_nRoH6gm7Zh-vAORuJpjfgYfGNhm52npIc2gWc2Crmu2CY-IBy0ZFCGjzFfzY7u9fAeVXbEk09n2_CjVeL7oPIIlLM6jqgn
+[2025-03-28 15:27:00] Subscription expired, removing: https://fcm.googleapis.com/fcm/send/fr6jO1pIBrc:APA91bHRzWW-EzujoACGh-cPUhor-s_-sUGRlSs_Hj_CuJyXfXJDnOn3uUOGuZgTtAektrFiA2h4yI18BE13lPI-CpPCmkBPUpyBiuNBb3AW4gypP_4NyEBmhgZuBJn_mqJk8Rjp2gJ-
+[2025-03-28 15:27:01] Connection closed

@@ -419,7 +419,7 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
     }
     </style>
 
-    <div id="notificationPopup" class="notification-popup">
+    <div id="notificationPopup" class="notification-popup hidden">
         <h3>Разрешете Известията</h3>
         <p>Натиснете бутона по-долу, за да разрешите известия за нови резервации.</p>
         <button id="enableNotifications">Разреши известия</button>
@@ -431,13 +431,72 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         let audioElement;
         let serviceWorkerRegistration = null;
         let pushSubscription = null;
+        let userHasInteracted = false;
 
-        // Always show the notification popup regardless of permission status
-        // This ensures user interaction with the page
-        if ('Notification' in window && Notification.permission === 'granted') {
-            // If permission is already granted, just initialize push notifications
-            initializePushNotifications();
+        // Check if user has notification permission (only consider 'granted' as valid)
+        const hasNotificationPermission = 'Notification' in window && Notification.permission === 'granted';
+
+        // Clear interaction memory if notifications are denied
+        if (Notification.permission === 'denied') {
+            sessionStorage.removeItem('userInteracted');
         }
+
+        // Function to show notification popup if needed
+        function showNotificationPopupIfNeeded() {
+            if (!hasNotificationPermission) {
+                document.getElementById('notificationPopup').classList.remove('hidden');
+            } else if (Notification.permission === 'granted') {
+                // If permission already granted, initialize notifications without showing popup
+                initializePushNotifications();
+            }
+        }
+
+        // Check for existing interaction in session storage - only valid if notifications are granted
+        if (sessionStorage.getItem('userInteracted') === 'true' && hasNotificationPermission) {
+            userHasInteracted = true;
+            
+            if (Notification.permission === 'granted') {
+                initializePushNotifications();
+            }
+        } else {
+            // Show popup after a short delay (to let the page load)
+            setTimeout(showNotificationPopupIfNeeded, 500);
+        }
+
+        // Detect any user interaction with the page
+        function markUserInteraction(event) {
+            // Don't count clicks on the document as interaction if the notification popup is visible
+            // This ensures users must explicitly interact with the permission button
+            const notificationPopup = document.getElementById('notificationPopup');
+            if (!notificationPopup.classList.contains('hidden') && 
+                !notificationPopup.contains(event.target)) {
+                // If clicked outside the popup while it's visible, don't count as interaction
+                return;
+            }
+            
+            if (!userHasInteracted) {
+                userHasInteracted = true;
+                
+                // Only remember interaction if notifications are granted
+                if (Notification.permission === 'granted') {
+                    sessionStorage.setItem('userInteracted', 'true');
+                }
+                
+                // Only hide popup if notifications are granted
+                // Otherwise it should stay visible until they explicitly interact with the permission button
+                if (Notification.permission === 'granted') {
+                    document.getElementById('notificationPopup').classList.add('hidden');
+                }
+                
+                // Initialize audio on first interaction
+                initializeAudio();
+            }
+        }
+
+        // Add interaction event listeners - only for deliberate actions
+        ['click', 'touchstart', 'keydown'].forEach(eventType => {
+            document.addEventListener(eventType, markUserInteraction, { once: true });
+        });
 
         // Handle notification permission button click
         document.getElementById('enableNotifications').addEventListener('click', function() {
@@ -446,8 +505,12 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                     if (permission === 'granted') {
                         console.log('Notification permission granted');
                         document.getElementById('notificationPopup').classList.add('hidden');
+                        sessionStorage.setItem('userInteracted', 'true');
                         initializeAudio();
                         initializePushNotifications();
+                    } else if (permission === 'denied') {
+                        // Clear interaction if user explicitly denies
+                        sessionStorage.removeItem('userInteracted');
                     }
                 });
             }
