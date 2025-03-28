@@ -216,7 +216,7 @@ session_start();
             z-index: 1100;
             width: 95%;
             max-width: 500px;
-            max-height: 90vh;
+            max-height: 95vh;
             overflow: hidden;
             display: none;
         }
@@ -237,7 +237,7 @@ session_start();
             overflow: hidden;
             background: white;
             position: relative;
-            max-height: 300px;
+            max-height: 450px;
             overflow-y: auto;
         }
 
@@ -572,7 +572,7 @@ session_start();
         }
 
         .time-slots {
-            max-height: 200px;
+            max-height: 300px;
             overflow-y: auto;
             padding-right: 10px;
             display: grid;
@@ -716,7 +716,7 @@ session_start();
         .calendar-section .section-nav {
             margin-top: 20px;
             margin-right: -10px;
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         .time-slot.disabled {
