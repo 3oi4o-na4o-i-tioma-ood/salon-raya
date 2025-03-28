@@ -9245,3 +9245,29 @@ push subscription has unsubscribed or expired.
 [2025-03-26 22:16:05] Found 2 push subscriptions
 [2025-03-26 22:16:05] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0437\u0430 30.03.2025 \u0432 16:30"}
 [2025-03-26 22:16:05] Connection closed
+[2025-03-27 19:07:19] Received POST request
+[2025-03-27 19:07:19] POST data: Array
+(
+    [client_name] => aer
+    [phone] => 01093384314
+    [email] => 2@2.2
+    [comment] => jesus
+    [service] => Подмишници - кола маска
+    [appointment_date] => 2025-03-29
+    [appointment_time] => 14:00
+)
+
+[2025-03-27 19:07:19] Database connection successful
+[2025-03-27 19:07:19] Processed form data:
+[2025-03-27 19:07:19] Name: aer
+[2025-03-27 19:07:19] Phone: 01093384314
+[2025-03-27 19:07:19] Email: 2@2.2
+[2025-03-27 19:07:19] Service: Подмишници - кола маска
+[2025-03-27 19:07:19] Date: 2025-03-29
+[2025-03-27 19:07:19] Time: 14:00
+[2025-03-27 19:07:19] Comment: jesus
+[2025-03-27 19:07:19] Appointment saved successfully for aer
+[2025-03-27 19:07:19] Error sending push notification: Table 'salon_raya.push_subscriptions' doesn't exist
+[2025-03-27 19:07:19] Stack trace: #0 C:\xampp\htdocs\salon-raya\save_appointment.php(84): mysqli->prepare('SELECT endpoint...')
+#1 {main}
+[2025-03-27 19:07:19] Connection closed

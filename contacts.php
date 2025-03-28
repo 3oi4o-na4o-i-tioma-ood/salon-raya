@@ -31,6 +31,15 @@
             padding: 30px;
             background: rgba(164, 132, 232, 0.1);
             border-radius: 10px;
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
         }
 
         .contact-section {
@@ -76,6 +85,8 @@
             height: 400px;
             border-radius: 10px;
             overflow: hidden;
+            width: 100%;
+            margin: 0 auto;
         }
 
         .map-container iframe {
@@ -140,39 +151,41 @@
         <h1 style="text-align: center; font-family: 'Montserrat', sans-serif;">Контакти</h1>
         <div class="contacts-grid">
             <div class="contact-info">
-                <div class="contact-section">
-                    <h3>Адрес</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> ул. "Хайдушка гора" 120, София</p>
-                </div>
+                <div class="contact-details">
+                    <div class="contact-section">
+                        <h3>Адрес</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> ул. "Хайдушка гора" 120, София</p>
+                    </div>
 
-                <div class="contact-section">
-                    <h3>Работно време</h3>
-                    <div class="working-hours">
-                        <span>Понеделник - петък:</span>
-                        <span>10:00 - 20:00</span>
-                        <span>Събота и неделя:</span>
-                        <span>12:00 - 17:00</span>
+                    <div class="contact-section">
+                        <h3>Работно време</h3>
+                        <div class="working-hours">
+                            <span>Понеделник - петък:</span>
+                            <span>10:00 - 20:00</span>
+                            <span>Събота и неделя:</span>
+                            <span>12:00 - 17:00</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-section">
+                        <h3>Контакти</h3>
+                        <p><i class="fas fa-phone"></i> +359 88 888 8888</p>
+                        <p><i class="fas fa-envelope"></i> info@salonraya.bg</p>
+                    </div>
+
+                    <div class="contact-section">
+                        <h3>Социални мрежи</h3>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/profile.php?id=100063576123123" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/salon.raya/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="contact-section">
-                    <h3>Контакти</h3>
-                    <p><i class="fas fa-phone"></i> +359 88 888 8888</p>
-                    <p><i class="fas fa-envelope"></i> info@salonraya.bg</p>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.8876942608745!2d23.2843845!3d42.6894775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cb15c87077%3A0x7b3f87df06f73250!2sul.%20%22Haydushka%20Gora%22%20120%2C%201680%20Sofia!5e0!3m2!1sen!2sbg!4v1709932008090!5m2!1sen!2sbg" 
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-
-                <div class="contact-section">
-                    <h3>Социални мрежи</h3>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=100063576123123" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/salon.raya/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.8876942608745!2d23.2843845!3d42.6894775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cb15c87077%3A0x7b3f87df06f73250!2sul.%20%22Haydushka%20Gora%22%20120%2C%201680%20Sofia!5e0!3m2!1sen!2sbg!4v1709932008090!5m2!1sen!2sbg" 
-                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>
