@@ -237,6 +237,8 @@ session_start();
             overflow: hidden;
             background: white;
             position: relative;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         /* Add a white background that covers any potential content bleeding through */
@@ -570,7 +572,7 @@ session_start();
         }
 
         .time-slots {
-            max-height: 400px;
+            max-height: 200px;
             overflow-y: auto;
             padding-right: 10px;
             display: grid;
