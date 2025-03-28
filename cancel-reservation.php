@@ -1,5 +1,107 @@
 <?php
 session_start();
+require_once 'vendor/autoload.php';
+
+// Log function
+function logCancel($message) {
+    $log_file = __DIR__ . '/cancellation.log';
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($log_file, "[$timestamp] $message\n", FILE_APPEND);
+}
+
+/**
+ * Delete appointment from Google Calendar
+ * 
+ * @param int $appointmentId   Appointment ID to find matching event
+ * @return bool                Success or failure
+ */
+function deleteFromGoogleCalendar($appointmentId) {
+    // Path to your Google API credentials JSON file
+    $credentialsPath = __DIR__ . '/credentials/google-credentials.json';
+    $tokenPath = __DIR__ . '/credentials/google-token.json';
+    
+    // Skip if credentials file doesn't exist
+    if (!file_exists($credentialsPath)) {
+        logCancel("Google Calendar credentials file not found: $credentialsPath");
+        return false;
+    }
+    
+    // Skip if token file doesn't exist
+    if (!file_exists($tokenPath)) {
+        logCancel("Google Calendar token file not found: $tokenPath");
+        return false;
+    }
+    
+    try {
+        // Create Google API client
+        $client = new Google_Client();
+        $client->setApplicationName('Salon Raya Appointments');
+        $client->setScopes(Google_Service_Calendar::CALENDAR);
+        $client->setAuthConfig($credentialsPath);
+        $client->setAccessType('offline');
+        
+        // Load token
+        $accessToken = json_decode(file_get_contents($tokenPath), true);
+        $client->setAccessToken($accessToken);
+        
+        // Check token validity
+        if ($client->isAccessTokenExpired()) {
+            if ($client->getRefreshToken()) {
+                $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+                file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+            } else {
+                logCancel("No refresh token available");
+                return false;
+            }
+        }
+        
+        // Create Calendar service
+        $calendarService = new Google_Service_Calendar($client);
+        
+        // Get primary calendar
+        $calendarList = $calendarService->calendarList->listCalendarList();
+        $primaryCalendarId = 'primary';
+        
+        foreach ($calendarList->getItems() as $calendarListEntry) {
+            if ($calendarListEntry->getPrimary()) {
+                $primaryCalendarId = $calendarListEntry->getId();
+                break;
+            }
+        }
+        
+        // Search for events with our appointment ID in extendedProperties
+        $optParams = [
+            'privateExtendedProperty' => "appointmentId=$appointmentId",
+            'orderBy' => 'startTime',
+            'singleEvents' => true,
+        ];
+        
+        $events = $calendarService->events->listEvents($primaryCalendarId, $optParams);
+        
+        // Check if we found any events
+        if (count($events->getItems()) > 0) {
+            foreach ($events->getItems() as $event) {
+                // Double check it's our event with the correct property
+                $extendedProperties = $event->getExtendedProperties();
+                if ($extendedProperties) {
+                    $privateProps = $extendedProperties->getPrivate();
+                    if (isset($privateProps['appointmentId']) && $privateProps['appointmentId'] == $appointmentId) {
+                        // Delete the event
+                        $calendarService->events->delete($primaryCalendarId, $event->getId());
+                        logCancel("Deleted Google Calendar event: " . $event->getId() . " for appointment #$appointmentId");
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        logCancel("No matching Google Calendar event found for appointment #$appointmentId");
+        return false;
+    } catch (Exception $e) {
+        logCancel("Google Calendar Error: " . $e->getMessage());
+        return false;
+    }
+}
 
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'salon_raya');
@@ -44,6 +146,14 @@ if (!empty($_GET['token'])) {
                 
                 // Update the details array to reflect the new status
                 $details['status'] = 'cancelled';
+                
+                // Delete from Google Calendar
+                $calendarResult = deleteFromGoogleCalendar($appointment['id']);
+                if ($calendarResult) {
+                    logCancel("Successfully deleted Google Calendar event for appointment #" . $appointment['id']);
+                } else {
+                    logCancel("Failed to delete Google Calendar event for appointment #" . $appointment['id']);
+                }
             } else {
                 $status = "Възникна грешка при отмяната на резервацията. Моля, опитайте отново.";
                 $statusClass = "error";

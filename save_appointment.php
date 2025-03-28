@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $appointmentId = $conn->insert_id;
         
         // Add to Google Calendar
-        $calendar_result = addToGoogleCalendar($client_name, $service, $appointment_date, $appointment_time, $comment);
+        $calendar_result = addToGoogleCalendar($client_name, $service, $appointment_date, $appointment_time, $comment, $appointmentId);
         if ($calendar_result) {
             logMessage("Appointment added to Google Calendar successfully");
         }
@@ -186,8 +186,9 @@ logMessage("Connection closed");
  * @param string $date         Appointment date (YYYY-MM-DD)
  * @param string $time         Appointment time (HH:MM)
  * @param string $comment      Additional comments (optional)
+ * @param int $appointmentId   Appointment ID
  */
-function addToGoogleCalendar($client_name, $service, $date, $time, $comment = '') {
+function addToGoogleCalendar($client_name, $service, $date, $time, $comment = '', $appointmentId = null) {
     // Path to your Google API credentials JSON file
     $credentialsPath = __DIR__ . '/credentials/google-credentials.json';
     $tokenPath = __DIR__ . '/credentials/google-token.json';
@@ -255,8 +256,8 @@ function addToGoogleCalendar($client_name, $service, $date, $time, $comment = ''
         
         // Create event
         $event = new Google_Service_Calendar_Event([
-            'summary' => "$service - $client_name",
-            'description' => "Client: $client_name\nService: $service" . ($comment ? "\nComments: $comment" : ""),
+            'summary' => "[Salon Raya] $service - $client_name",
+            'description' => "Client: $client_name\nService: $service" . ($comment ? "\nComments: $comment" : "") . "\n\nBooking created via Salon Raya booking system.",
             'start' => [
                 'dateTime' => $startDateTime->format('c'),
                 'timeZone' => 'Europe/Sofia',
@@ -265,12 +266,20 @@ function addToGoogleCalendar($client_name, $service, $date, $time, $comment = ''
                 'dateTime' => $endDateTime->format('c'),
                 'timeZone' => 'Europe/Sofia',
             ],
+            'colorId' => '11', // A distinct color (11 is red in Google Calendar)
             'reminders' => [
                 'useDefault' => false,
                 'overrides' => [
                     ['method' => 'popup', 'minutes' => 30],
                 ],
             ],
+            'extendedProperties' => [
+                'private' => [
+                    'createdBy' => 'salon_raya_booking_system',
+                    'appointmentId' => $appointmentId ?? '',
+                    'serviceType' => $service
+                ]
+            ]
         ]);
         
         // Restore original timezone
