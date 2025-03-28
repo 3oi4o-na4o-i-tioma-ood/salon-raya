@@ -11,9 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalPriceElement = document.querySelector('.total-price span');
     const bookingSummary = document.querySelector('.booking-summary');
     const totalPriceButton = document.querySelector('.total-price');
+    const selectedServicesList = document.querySelector('.selected-services-list');
+    const selectedServicesContainer = document.querySelector('.selected-services-container');
     let selectedServices = [];
     let totalPrice = 0;
     let totalDuration = 0;
+    // Track selected service names to prevent duplicates
+    let selectedServiceNames = new Set();
 
     // Reset button text on page load
     totalPriceButton.innerHTML = 'Избери час <span>0 лв.</span>';
@@ -27,19 +31,199 @@ document.addEventListener('DOMContentLoaded', function() {
         totalPriceButton.innerHTML = selectedServices.length > 0 ? 
             `Продължи <span>${totalPrice.toFixed(0)} лв.</span>` : 
             'Избери час <span>0 лв.</span>';
+            
+        // Update selected services list
+        updateSelectedServicesList();
+    }
+    
+    // Function to update the selected services list
+    function updateSelectedServicesList() {
+        selectedServicesContainer.innerHTML = '';
+        
+        if (selectedServices.length > 0) {
+            selectedServicesList.classList.add('active');
+            
+            selectedServices.forEach((service, index) => {
+                const serviceItem = document.createElement('div');
+                serviceItem.className = 'selected-service-item';
+                serviceItem.innerHTML = `
+                    <div class="selected-service-name">${service.name}</div>
+                    <div class="selected-service-price">${service.price.toFixed(0)} лв.</div>
+                    <button class="remove-service-btn" data-index="${index}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                selectedServicesContainer.appendChild(serviceItem);
+            });
+            
+            // Add event listeners for remove buttons
+            document.querySelectorAll('.remove-service-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeService(index);
+                });
+            });
+        } else {
+            selectedServicesList.classList.remove('active');
+        }
     }
 
     // Function to add selected service
     function addSelectedService(serviceName, servicePrice, serviceDuration) {
+        // Check if service is already selected
+        if (selectedServiceNames.has(serviceName)) {
+            // Service already selected, show message
+            alert('Тази услуга вече е избрана. Можете да изберете всяка услуга само веднъж.');
+            return;
+        }
+
+        // Get base service name (without options)
+        const baseServiceName = serviceName.split(' (')[0];
+        
+        // Check if another option of the same service is already selected
+        let alreadySelected = false;
+        selectedServiceNames.forEach(name => {
+            if (name.startsWith(baseServiceName + ' (') || name === baseServiceName) {
+                alreadySelected = true;
+            }
+        });
+        
+        if (alreadySelected) {
+            alert('Друга опция на тази услуга вече е избрана. Може да изберете само една опция на услуга.');
+            return;
+        }
+
+        // Add to selected services
         selectedServices.push({
             name: serviceName,
             price: parseFloat(servicePrice),
             duration: serviceDuration
         });
+        selectedServiceNames.add(serviceName);
         totalPrice += parseFloat(servicePrice);
         totalDuration += parseInt(serviceDuration) || 0;
         updateSummary();
         bookingSummary.style.display = 'block';
+        
+        // Disable all buttons for this service
+        disableServiceButtons(serviceName);
+
+        // Refresh the current view to reflect changes
+        const activeSubcategory = document.querySelector('.subcategory.active');
+        if (activeSubcategory) {
+            activeSubcategory.click();
+        }
+    }
+    
+    // Function to disable all buttons for a specific service
+    function disableServiceButtons(serviceName) {
+        // Get the base service name (remove any option text in parentheses)
+        const baseServiceName = serviceName.split(' (')[0];
+        
+        // Disable all buttons that match this service
+        document.querySelectorAll('.select-btn').forEach(btn => {
+            const btnServiceName = btn.getAttribute('data-name');
+            
+            // Check if this button is for the same base service
+            if (btnServiceName === baseServiceName || 
+                btnServiceName.startsWith(baseServiceName + ' (') || 
+                btnServiceName === serviceName) {
+                
+                btn.disabled = true;
+                btn.textContent = 'избрано';
+                btn.classList.add('selected');
+                
+                // Also disable the parent service item if it has options
+                const serviceItem = btn.closest('.service-item');
+                if (serviceItem) {
+                    // Mark the service item as selected
+                    serviceItem.classList.add('service-selected');
+                    
+                    // If this service has options, disable the options button too
+                    const optionsBtn = serviceItem.querySelector('.options-btn');
+                    if (optionsBtn) {
+                        optionsBtn.disabled = true;
+                        optionsBtn.style.opacity = '0.5';
+                    }
+                }
+            }
+        });
+    }
+    
+    // Function to remove a service
+    function removeService(index) {
+        const removedService = selectedServices[index];
+        
+        // Get the base service name and remove both the exact service and any related services
+        const baseServiceName = removedService.name.split(' (')[0];
+        
+        // Remove from the Set and fix all buttons
+        selectedServiceNames.delete(removedService.name);
+        
+        // Remove from array
+        totalPrice -= removedService.price;
+        totalDuration -= parseInt(removedService.duration) || 0;
+        selectedServices.splice(index, 1);
+        
+        // Update the UI
+        updateSummary();
+        
+        // If no services left, hide the summary
+        if (selectedServices.length === 0) {
+            bookingSummary.style.display = 'none';
+        }
+        
+        // Re-enable the buttons for this service by resetting all services
+        document.querySelectorAll('.service-item').forEach(item => {
+            item.classList.remove('service-selected');
+        });
+        
+        document.querySelectorAll('.select-btn').forEach(btn => {
+            const btnServiceName = btn.getAttribute('data-name');
+            const btnBaseName = btnServiceName.split(' (')[0];
+            
+            // If this button is for the removed service or a variation of it
+            if (btnBaseName === baseServiceName) {
+                btn.disabled = false;
+                btn.textContent = 'избери';
+                btn.classList.remove('selected');
+            }
+        });
+        
+        document.querySelectorAll('.options-btn').forEach(btn => {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        });
+        
+        // Refresh the current view by clicking the active subcategory
+        const activeSubcategory = document.querySelector('.subcategory.active');
+        if (activeSubcategory) {
+            activeSubcategory.click();
+        }
+    }
+    
+    // Function to re-enable buttons for a service
+    function enableServiceButtons(serviceName) {
+        // Get the base service name (remove any option text in parentheses)
+        const baseServiceName = serviceName.split(' (')[0];
+        
+        // Re-enable all buttons that match this service
+        document.querySelectorAll('.select-btn').forEach(btn => {
+            const btnServiceName = btn.getAttribute('data-name');
+            
+            // Check if this button is for the same base service
+            if (btnServiceName === baseServiceName || 
+                btnServiceName.startsWith(baseServiceName + ' (') || 
+                btnServiceName === serviceName) {
+                
+                btn.disabled = false;
+                btn.textContent = 'избери';
+                btn.classList.remove('selected');
+                
+                // Re-enable the parent service item
+                const serviceItem = btn.closest('.service-item');
+            }
+        });
     }
 
     // Handle hero section clicks
@@ -77,7 +261,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (service.options) {
                         optionsHtml = `
                             <div class="service-options">
-                                ${service.options.map(option => `
+                                ${service.options.map(option => {
+                                    const fullServiceName = `${service.name} (${option.name})`;
+                                    const isSelected = selectedServiceNames.has(fullServiceName);
+                                    return `
                                     <div class="service-option">
                                         <div class="option-info">
                                             <span class="option-name">${option.name}</span>
@@ -85,18 +272,24 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </div>
                                         <div class="option-price">
                                             <span class="price">${option.price} лв.</span>
-                                            <button class="select-btn" 
-                                                data-name="${service.name} (${option.name})" 
+                                            <button class="select-btn ${isSelected ? 'selected' : ''}" 
+                                                data-name="${fullServiceName}" 
                                                 data-price="${option.price}" 
-                                                data-duration="${option.duration}">
-                                                избери
+                                                data-duration="${option.duration}"
+                                                ${isSelected ? 'disabled' : ''}>
+                                                ${isSelected ? 'избрано' : 'избери'}
                                             </button>
                                         </div>
                                     </div>
-                                `).join('')}
+                                `}).join('')}
                             </div>
                         `;
                     }
+                    
+                    const isBaseServiceSelected = selectedServiceNames.has(service.name);
+                    const hasSelectedOption = service.options && service.options.some(option => 
+                        selectedServiceNames.has(`${service.name} (${option.name})`));
+                    const isDisabled = isBaseServiceSelected || hasSelectedOption;
                     
                     return `
                         <div class="service-item">
@@ -112,11 +305,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                             `<button class="options-btn">опции ▼</button>` :
                                             `<div class="service-price">
                                                 <span class="price">${service.price} лв.</span>
-                                                <button class="select-btn" 
+                                                <button class="select-btn ${isDisabled ? 'selected' : ''}" 
                                                     data-name="${service.name}" 
                                                     data-price="${service.price}" 
-                                                    data-duration="${service.duration}">
-                                                    избери
+                                                    data-duration="${service.duration}"
+                                                    ${isDisabled ? 'disabled' : ''}>
+                                                    ${isDisabled ? 'избрано' : 'избери'}
                                                 </button>
                                             </div>`
                                         }
@@ -131,10 +325,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add click handlers for select buttons
                 document.querySelectorAll('.select-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
-                        const serviceName = btn.getAttribute('data-name');
-                        const servicePrice = btn.getAttribute('data-price');
-                        const serviceDuration = btn.getAttribute('data-duration');
-                        addSelectedService(serviceName, servicePrice, serviceDuration);
+                        if (!btn.disabled) {
+                            const serviceName = btn.getAttribute('data-name');
+                            const servicePrice = btn.getAttribute('data-price');
+                            const serviceDuration = btn.getAttribute('data-duration');
+                            addSelectedService(serviceName, servicePrice, serviceDuration);
+                        }
                     });
                 });
 

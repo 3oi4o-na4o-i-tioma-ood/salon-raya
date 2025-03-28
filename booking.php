@@ -49,7 +49,7 @@ session_start();
             </div>
         </div>
 
-        <div class="service-list">
+        <div class="service-list date-selection-container">
             <!-- Hair Services -->
             <div class="subcategories-list" data-category="hair">
                 <div class="subcategory" data-services='[
@@ -246,6 +246,13 @@ session_start();
                 </div>
                 <div class="summary-right">
                     <div class="total-price">Избери час <span>0 лв.</span></div>
+                </div>
+            </div>
+            
+            <div class="selected-services-list">
+                <h3>Избрани услуги:</h3>
+                <div class="selected-services-container">
+                    <!-- Selected services will be added here dynamically -->
                 </div>
             </div>
         </div>

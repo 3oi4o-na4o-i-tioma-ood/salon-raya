@@ -147,18 +147,30 @@
 }
 
 .select-btn {
-    background: #6B3FA0;
-    color: white;
     border: none;
-    padding: 8px 20px;
-    border-radius: 20px;
-    cursor: pointer;
+    border-radius: 4px;
+    padding: 6px 12px;
+    background-color: #a484e8;
+    color: white;
     font-size: 14px;
-    transition: background-color 0.2s;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .select-btn:hover {
-    background: #5a3585;
+    background-color: #8b6ad4;
+}
+
+.select-btn.selected {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.select-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .booking-summary {
@@ -345,4 +357,72 @@
 
 .options-btn:hover {
     opacity: 0.8;
+}
+
+/* Add styles for selected services list */
+.selected-services-list {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    display: none;
+}
+
+.selected-services-list.active {
+    display: block;
+}
+
+.selected-services-list h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.selected-service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f9f9f9;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.selected-service-name {
+    flex: 1;
+    font-size: 14px;
+}
+
+.selected-service-price {
+    margin: 0 10px;
+    color: #666;
+    font-size: 14px;
+}
+
+.remove-service-btn {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0 5px;
+}
+
+.remove-service-btn:hover {
+    color: #cc0000;
+}
+
+/* Style for selected service items */
+.service-item.service-selected {
+    background-color: #f9f9f9;
+    border-left: 3px solid #a484e8;
+    opacity: 0.8;
+}
+
+.service-item.service-selected .service-info h3 {
+    color: #a484e8;
+}
+
+/* Ensure options are visible when a service is selected */
+.service-item.service-selected .service-options.show {
+    display: block;
 }

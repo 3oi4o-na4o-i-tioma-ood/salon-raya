@@ -786,6 +786,13 @@
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="testimonial-content">
+                    <div class="stars">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                    </div>
                     <p>Страхотно отношение и невероятен резултат. Услуга на такова ниво не съм получавала в популярните
                         салони. С две ръце препоръчвам Диди.</p>
                     <h3>safie</h3>
@@ -795,6 +802,13 @@
 
             <div class="testimonial-card">
                 <div class="testimonial-content">
+                    <div class="stars">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                    </div>
                     <p>Exceptional work and professional attitude! Highly recommend!</p>
                     <h3>aleksandar</h3>
                     <span class="client-type">Клиент</span>
@@ -803,6 +817,13 @@
 
             <div class="testimonial-card">
                 <div class="testimonial-content">
+                    <div class="stars">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                        <img src="images/icons/star.png" alt="star">
+                    </div>
                     <p>Wonderful service and professionalism. We'll definitely visit Didi again with my daughter. ❤️💫🙏
                     </p>
                     <h3>desislava</h3>
