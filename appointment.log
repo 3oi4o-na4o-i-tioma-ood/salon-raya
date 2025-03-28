@@ -9433,3 +9433,30 @@ push subscription has unsubscribed or expired.
 [2025-03-28 15:01:43] Found 2 push subscriptions
 [2025-03-28 15:01:43] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0418\u0437\u043c\u0438\u0432\u0430\u043d\u0435 \u043d\u0430 \u043a\u043e\u0441\u0430 + \u043c\u0430\u0441\u043a\u0430, \u0418\u0437\u043c\u0438\u0432\u0430\u043d\u0435 \u043d\u0430 \u043a\u043e\u0441\u0430 + \u043c\u0430\u0441\u043a\u0430 \u0437\u0430 30.03.2025 \u0432 10:00"}
 [2025-03-28 15:01:46] Connection closed
+[2025-03-28 15:12:32] Received POST request
+[2025-03-28 15:12:32] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => arttema9@gmail.com
+    [comment] => 
+    [service] => Мъжко подстригване с машинка, Мъжко подстригване с машинка
+    [appointment_date] => 2025-03-28
+    [appointment_time] => 13:00
+)
+
+[2025-03-28 15:12:32] Database connection successful
+[2025-03-28 15:12:32] Processed form data:
+[2025-03-28 15:12:32] Name: Artem
+[2025-03-28 15:12:32] Phone: 0871234567
+[2025-03-28 15:12:32] Email: arttema9@gmail.com
+[2025-03-28 15:12:32] Service: Мъжко подстригване с машинка, Мъжко подстригване с машинка
+[2025-03-28 15:12:32] Date: 2025-03-28
+[2025-03-28 15:12:32] Time: 13:00
+[2025-03-28 15:12:32] Comment: 
+[2025-03-28 15:12:32] Appointment saved successfully for Artem
+[2025-03-28 15:12:33] Event created in Google Calendar: https://www.google.com/calendar/event?eid=dm1kamJ0MnU2dWFxZ242ZTZmYjZlMzhvaDQgYXJ0dGVtYTlAbQ
+[2025-03-28 15:12:33] Appointment added to Google Calendar successfully
+[2025-03-28 15:12:33] Found 2 push subscriptions
+[2025-03-28 15:12:33] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u041c\u044a\u0436\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0441 \u043c\u0430\u0448\u0438\u043d\u043a\u0430, \u041c\u044a\u0436\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0441 \u043c\u0430\u0448\u0438\u043d\u043a\u0430 \u0437\u0430 28.03.2025 \u0432 13:00"}
+[2025-03-28 15:12:35] Connection closed

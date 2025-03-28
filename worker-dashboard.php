@@ -66,17 +66,22 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="appointments-list">
                             <?php if (count($appointments) > 0): ?>
                                 <?php foreach ($appointments as $appointment): ?>
-                                    <div class="appointment-card">
-                                        <div class="appointment-time">
-                                            <?php echo date('H:i', strtotime($appointment['appointment_time'])); ?>
+                                    <div class="appointment-card <?php echo isset($appointment['status']) && $appointment['status'] === 'cancelled' ? 'cancelled' : ''; ?>">
+                                        <div class="appointment-header">
+                                            <span class="appointment-time"><?php echo date('H:i', strtotime($appointment['appointment_time'])); ?></span>
+                                            <?php if (isset($appointment['status']) && $appointment['status'] === 'cancelled'): ?>
+                                                <span class="status-badge cancelled">Отменена</span>
+                                            <?php endif; ?>
                                         </div>
                                         <div class="appointment-details">
-                                            <h3><?php echo htmlspecialchars($appointment['client_name']); ?></h3>
-                                            <p><i class="fas fa-phone"></i> <?php echo htmlspecialchars($appointment['phone']); ?></p>
-                                            <p><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($appointment['email']); ?></p>
-                                            <p><i class="fas fa-cut"></i> <?php echo htmlspecialchars($appointment['service']); ?></p>
+                                            <h3 class="client-name"><?php echo htmlspecialchars($appointment['client_name']); ?></h3>
+                                            <p class="service"><?php echo htmlspecialchars($appointment['service']); ?></p>
+                                            <p class="contact">
+                                                <i class="fas fa-phone"></i> <?php echo htmlspecialchars($appointment['phone']); ?><br>
+                                                <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($appointment['email']); ?>
+                                            </p>
                                             <?php if (!empty($appointment['comment'])): ?>
-                                                <p class="comment"><i class="fas fa-comment"></i> <?php echo htmlspecialchars($appointment['comment']); ?></p>
+                                                <p class="notes"><i class="fas fa-sticky-note"></i> <?php echo htmlspecialchars($appointment['comment']); ?></p>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -385,6 +390,32 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 
     .notification-popup.hidden {
         display: none;
+    }
+
+    .appointment-card.cancelled {
+        background-color: #ffebee;
+        border-left: 4px solid #e74c3c;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 0.8em;
+        margin-left: 10px;
+        color: white;
+    }
+    
+    .status-badge.cancelled {
+        background-color: #e74c3c;
+    }
+    
+    .status-badge.pending {
+        background-color: #f39c12;
+    }
+    
+    .status-badge.confirmed {
+        background-color: #2ecc71;
     }
     </style>
 

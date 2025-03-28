@@ -27,16 +27,23 @@ if (!empty($_GET['token'])) {
         $appointment = $result->fetch_assoc();
         $details = $appointment;
         
+        // Check if the appointment is already cancelled
+        if ($appointment['status'] === 'cancelled') {
+            $status = "Тази резервация вече е отменена.";
+            $statusClass = "info";
+        }
         // Check if cancellation is confirmed
-        if (isset($_POST['confirm_cancel'])) {
-            // Delete the appointment
-            $cancelStmt = $conn->prepare("DELETE FROM appointments WHERE id = ?");
+        else if (isset($_POST['confirm_cancel'])) {
+            // Update the appointment status to cancelled
+            $cancelStmt = $conn->prepare("UPDATE appointments SET status = 'cancelled' WHERE id = ?");
             $cancelStmt->bind_param("i", $appointment['id']);
             
             if ($cancelStmt->execute()) {
                 $status = "Вашата резервация беше успешно отменена.";
                 $statusClass = "success";
-                $details = []; // Clear details after cancellation
+                
+                // Update the details array to reflect the new status
+                $details['status'] = 'cancelled';
             } else {
                 $status = "Възникна грешка при отмяната на резервацията. Моля, опитайте отново.";
                 $statusClass = "error";
@@ -102,6 +109,11 @@ $conn->close();
             color: #721c24;
             border-left: 4px solid #dc3545;
         }
+        .info {
+            background-color: #cce5ff;
+            color: #004085;
+            border-left: 4px solid #0d6efd;
+        }
         .details {
             background-color: #f8f9fa;
             padding: 20px;
@@ -151,6 +163,15 @@ $conn->close();
             height: 80px;
             width: auto;
         }
+        .cancelled-badge {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -164,7 +185,7 @@ $conn->close();
             </div>
         <?php endif; ?>
         
-        <?php if (!empty($details) && empty($_POST['confirm_cancel'])): ?>
+        <?php if (!empty($details)): ?>
             <div class="details">
                 <div class="detail-row">
                     <span class="detail-label">Име:</span>
@@ -188,8 +209,16 @@ $conn->close();
                     <span><?php echo htmlspecialchars($details['comment']); ?></span>
                 </div>
                 <?php endif; ?>
+                
+                <?php if (isset($details['status']) && $details['status'] === 'cancelled'): ?>
+                <div class="detail-row">
+                    <span class="detail-label">Статус:</span>
+                    <span><span class="cancelled-badge">Отменена</span></span>
+                </div>
+                <?php endif; ?>
             </div>
             
+            <?php if (!isset($_POST['confirm_cancel']) && (!isset($details['status']) || $details['status'] !== 'cancelled')): ?>
             <p>Сигурни ли сте, че искате да отмените тази резервация?</p>
             
             <form method="post">
@@ -198,6 +227,11 @@ $conn->close();
                     <button type="submit" name="confirm_cancel" class="btn btn-cancel">Потвърди отмяната</button>
                 </div>
             </form>
+            <?php else: ?>
+            <div class="actions">
+                <a href="index.php" class="btn btn-back">Начална страница</a>
+            </div>
+            <?php endif; ?>
         <?php else: ?>
             <div class="actions">
                 <a href="index.php" class="btn btn-back">Начална страница</a>
