@@ -28,7 +28,7 @@ use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
 
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'salon_raya');
+$conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
 if ($conn->connect_error) {
     logMessage("Connection failed: " . $conn->connect_error);
     die(json_encode(['success' => false, 'message' => 'Database connection failed: ' . $conn->connect_error]));

@@ -12,7 +12,7 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
         $cancellationToken = md5($appointmentId . $to . time());
         
         // Save the token to the database
-        $conn = new mysqli('localhost', 'root', '', 'salon_raya');
+        $conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
         if ($conn->connect_error) {
             error_log("Connection failed: " . $conn->connect_error);
             return false;

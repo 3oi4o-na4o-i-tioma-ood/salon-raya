@@ -2,7 +2,7 @@
 // Database configuration
 $host = 'localhost';
 $username = 'root';
-$password = '';
+$password = '1111';
 $dbname = 'salon_raya';
 
 // Create database connection

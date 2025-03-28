@@ -10,7 +10,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 }
 
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'salon_raya');
+$conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
