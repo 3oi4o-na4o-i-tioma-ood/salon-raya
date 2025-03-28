@@ -22,6 +22,7 @@ logMessage("POST data: " . print_r($_POST, true));
 
 session_start();
 require_once 'vendor/autoload.php';
+require_once 'includes/email.php';
 
 use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
@@ -142,6 +143,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             logMessage("Error sending push notification: " . $e->getMessage());
             logMessage("Stack trace: " . $e->getTraceAsString());
+        }
+
+        // Send confirmation email
+        $emailSent = sendBookingConfirmationEmail(
+            $_POST['email'],
+            $_POST['client_name'],
+            $_POST['service'],
+            $_POST['appointment_date'],
+            $_POST['appointment_time'],
+            $_POST['comment'] ?? ''
+        );
+
+        if (!$emailSent) {
+            logMessage("Failed to send confirmation email to: " . $_POST['email']);
         }
 
         echo json_encode(['success' => true, 'message' => 'Appointment saved successfully']);
