@@ -9296,3 +9296,85 @@ push subscription has unsubscribed or expired.
 [2025-03-28 14:18:38] Found 2 push subscriptions
 [2025-03-28 14:18:38] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0411\u043e\u044f\u0434\u0438\u0441\u0432\u0430\u043d\u0435 \u0441 wella + \u0441\u0435\u0448\u043e\u0430\u0440 \u0437\u0430 03.04.2025 \u0432 11:30"}
 [2025-03-28 14:18:40] Connection closed
+[2025-03-28 14:34:59] Received POST request
+[2025-03-28 14:34:59] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => artem.zankovskiy@infinno.eu
+    [comment] => 
+    [service] => Дамско подстригване, Дамско подстригване
+    [appointment_date] => 2025-04-06
+    [appointment_time] => 13:00
+)
+
+[2025-03-28 14:34:59] Database connection successful
+[2025-03-28 14:34:59] Processed form data:
+[2025-03-28 14:34:59] Name: Artem
+[2025-03-28 14:34:59] Phone: 0871234567
+[2025-03-28 14:34:59] Email: artem.zankovskiy@infinno.eu
+[2025-03-28 14:34:59] Service: Дамско подстригване, Дамско подстригване
+[2025-03-28 14:34:59] Date: 2025-04-06
+[2025-03-28 14:34:59] Time: 13:00
+[2025-03-28 14:34:59] Comment: 
+[2025-03-28 14:34:59] Appointment saved successfully for Artem
+[2025-03-28 14:35:01] Event created in Google Calendar: https://www.google.com/calendar/event?eid=b3M2YTE5dW5mbDB2YXFuZzhydGo3cDNvOWsgYXJ0dGVtYTlAbQ
+[2025-03-28 14:35:01] Appointment added to Google Calendar successfully
+[2025-03-28 14:35:01] Found 2 push subscriptions
+[2025-03-28 14:35:01] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435, \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0437\u0430 06.04.2025 \u0432 13:00"}
+[2025-03-28 14:35:03] Connection closed
+[2025-03-28 14:42:39] Received POST request
+[2025-03-28 14:42:39] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => artem.zankovskiy@infinno.eu
+    [comment] => 
+    [service] => Дамско подстригване, Дамско подстригване
+    [appointment_date] => 2025-03-31
+    [appointment_time] => 10:00
+)
+
+[2025-03-28 14:42:39] Database connection successful
+[2025-03-28 14:42:39] Processed form data:
+[2025-03-28 14:42:39] Name: Artem
+[2025-03-28 14:42:39] Phone: 0871234567
+[2025-03-28 14:42:39] Email: artem.zankovskiy@infinno.eu
+[2025-03-28 14:42:39] Service: Дамско подстригване, Дамско подстригване
+[2025-03-28 14:42:39] Date: 2025-03-31
+[2025-03-28 14:42:39] Time: 10:00
+[2025-03-28 14:42:39] Comment: 
+[2025-03-28 14:42:39] Appointment saved successfully for Artem
+[2025-03-28 14:42:40] Event created in Google Calendar: https://www.google.com/calendar/event?eid=NTh2cmI0bjBrcDV0NmppZXY4OWZzdjhzbnMgYXJ0dGVtYTlAbQ
+[2025-03-28 14:42:40] Appointment added to Google Calendar successfully
+[2025-03-28 14:42:40] Found 2 push subscriptions
+[2025-03-28 14:42:40] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435, \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0437\u0430 31.03.2025 \u0432 10:00"}
+[2025-03-28 14:42:42] Connection closed
+[2025-03-28 14:45:07] Received POST request
+[2025-03-28 14:45:07] POST data: Array
+(
+    [client_name] => Artem
+    [phone] => 0871234567
+    [email] => artem.zankovskiy@infinno.eu
+    [comment] => 
+    [service] => Дамско подстригване, Дамско подстригване
+    [appointment_date] => 2025-03-31
+    [appointment_time] => 16:30
+)
+
+[2025-03-28 14:45:07] Database connection successful
+[2025-03-28 14:45:07] Processed form data:
+[2025-03-28 14:45:07] Name: Artem
+[2025-03-28 14:45:07] Phone: 0871234567
+[2025-03-28 14:45:07] Email: artem.zankovskiy@infinno.eu
+[2025-03-28 14:45:07] Service: Дамско подстригване, Дамско подстригване
+[2025-03-28 14:45:07] Date: 2025-03-31
+[2025-03-28 14:45:07] Time: 16:30
+[2025-03-28 14:45:07] Comment: 
+[2025-03-28 14:45:07] Appointment saved successfully for Artem
+[2025-03-28 14:45:09] Event created in Google Calendar: https://www.google.com/calendar/event?eid=bXRxaGhodHY1c2Q3MjQxZGxjMnVnNzBzNGsgYXJ0dGVtYTlAbQ
+[2025-03-28 14:45:09] Appointment added to Google Calendar successfully
+[2025-03-28 14:45:09] Found 3 push subscriptions
+[2025-03-28 14:45:09] Sending push notification with message: {"message":"Artem \u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u0430 \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435, \u0414\u0430\u043c\u0441\u043a\u043e \u043f\u043e\u0434\u0441\u0442\u0440\u0438\u0433\u0432\u0430\u043d\u0435 \u0437\u0430 31.03.2025 \u0432 16:30"}
+[2025-03-28 14:45:09] Subscription expired, removing: https://fcm.googleapis.com/fcm/send/fEYFp6fbN1o:APA91bHHknBSNMiztOrp7Op0bbverXvd6dr5LxWDukJaWhmhCMxRJkg48iu0nySfAZKQa0CLcb06IRIbLjt-XcC5SYDkkXcd0KLMw3HKzY7c3BUJxukkGDBatG4qCi7D0HAinmT0wk6F
+[2025-03-28 14:45:10] Connection closed

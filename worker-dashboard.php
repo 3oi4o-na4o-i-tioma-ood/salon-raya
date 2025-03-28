@@ -401,14 +401,11 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         let serviceWorkerRegistration = null;
         let pushSubscription = null;
 
-        // Check if notifications are already enabled
-        if ('Notification' in window) {
-            if (Notification.permission === 'granted') {
-                document.getElementById('notificationPopup').classList.add('hidden');
-                initializePushNotifications();
-            } else if (Notification.permission === 'denied') {
-                document.getElementById('notificationPopup').classList.add('hidden');
-            }
+        // Always show the notification popup regardless of permission status
+        // This ensures user interaction with the page
+        if ('Notification' in window && Notification.permission === 'granted') {
+            // If permission is already granted, just initialize push notifications
+            initializePushNotifications();
         }
 
         // Handle notification permission button click
