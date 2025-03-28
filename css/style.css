@@ -530,7 +530,6 @@ body {
     flex-direction: column;
     gap: 0.5rem;
     margin-top: 0;
-    max-width: 300px;
     overflow: hidden;
 }
 
@@ -544,6 +543,17 @@ body {
     margin-bottom: 0.5rem;
     transition: all 0.3s ease;
     border: 1px solid transparent;
+}
+
+@media (max-width: 1000px) {
+    .service-category-item {
+        width: 100%;
+        padding: 0.25em 0.5em;
+    }
+
+    .service-list {
+        padding: 0;
+    }
 }
 
 .select-service-btn {
@@ -580,6 +590,9 @@ body {
     .service-categories-list {
         overflow: hidden;
         max-height: none;
+        border-bottom: 3px solid #eee;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
     }
 
     .service-list {
@@ -623,10 +636,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.15rem;
+    padding: 0.5rem;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.5rem;
     transition: all 0.3s ease;
     border: 1px solid transparent;
     max-width: 800px;

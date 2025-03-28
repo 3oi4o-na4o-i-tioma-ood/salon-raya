@@ -21,7 +21,7 @@
     <style>
         footer {
             padding: 5px 0;
-            margin-top: 0;
+            margin-top: auto;
         }
         
         .footer-content { 

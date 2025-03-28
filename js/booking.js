@@ -571,27 +571,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listener for service item clicks
     document.querySelectorAll('.service-item').forEach(item => {
         item.addEventListener('click', () => {
-            // Click the button to select the service
-            const targetButton = item.querySelector('.select-btn');
-            if (targetButton) {
-                // Expand options if needed
-                const serviceItem = targetButton.closest('.service-item');
-                const optionsBtn = serviceItem?.querySelector('.options-btn');
-                if (optionsBtn && !serviceItem.querySelector('.service-options.show')) {
+            // Check if this service has options
+            const optionsBtn = item.querySelector('.options-btn');
+            
+            if (optionsBtn) {
+                // If it has options, just expand the options menu
+                const serviceItem = optionsBtn.closest('.service-item');
+                if (!serviceItem.querySelector('.service-options.show')) {
                     optionsBtn.click();
                 }
                 
                 // Scroll to the service
-                targetButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                optionsBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
-                // Highlight the button
-                targetButton.style.background = '#8b6ad4';
+                // Highlight the options button
+                optionsBtn.style.background = '#f0f0f0';
                 setTimeout(() => {
-                    targetButton.style.background = '';
+                    optionsBtn.style.background = '';
                 }, 1500);
-                
-                // Automatically select the service
-                targetButton.click();
+            } else {
+                // If it doesn't have options, select the service directly
+                const targetButton = item.querySelector('.select-btn');
+                if (targetButton && !targetButton.disabled) {
+                    // Scroll to the service
+                    targetButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Highlight the button
+                    targetButton.style.background = '#8b6ad4';
+                    setTimeout(() => {
+                        targetButton.style.background = '';
+                    }, 1500);
+                    
+                    // Select the service
+                    targetButton.click();
+                }
             }
         });
     });

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,11 @@
     <style>
         .about-container {
             padding: 8rem 10% 4rem;
-            background-color: #f5f5f5;
+            background-color: #111111;
             text-align: center;
             max-width: 100%;
             margin: 0 auto;
-            color: #111111;
+            color: #f5f5f5;
         }
 
         .about-header {
@@ -42,7 +43,7 @@
         .about-container h1 {
             font-size: 2.5rem;
             margin-bottom: 4rem;
-            color: #111111;
+            color: #ffffff;
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
             letter-spacing: 0.05em;
@@ -58,13 +59,13 @@
 
         .about-content {
             padding: 2rem;
-            background: white;
+            background: #222222;
             border-radius: 10px;
             grid-column: 1 / -1;
             display: flex;
             flex-direction: column;
             gap: 40px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             margin-bottom: 2rem;
             max-width: 1200px;
             margin-left: auto;
@@ -109,7 +110,7 @@
         .about-section p {
             margin: 10px 0;
             font-size: 1.1rem;
-            color: #666;
+            color: #cccccc;
             padding-left: 0;
             line-height: 1.6;
             font-family: 'Montserrat', sans-serif;
@@ -123,7 +124,7 @@
 
         .brands-section li {
             font-size: 1.1rem;
-            color: #666;
+            color: #cccccc;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -171,11 +172,11 @@
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+
             .about-container {
                 padding: 4rem 5%;
             }
-            
+
             .about-container h1 {
                 font-size: 2rem;
                 margin-bottom: 2rem;
@@ -193,11 +194,11 @@
         }
 
         .brand-card {
-            background: white;
+            background: #222222;
             padding: 1rem;
             text-align: center;
             transition: transform 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
         }
 
@@ -209,6 +210,7 @@
             position: relative;
             margin-bottom: 1rem;
             overflow: hidden;
+            background-color: white;
         }
 
         .brand-image img {
@@ -228,7 +230,7 @@
 
         .brand-info h3 {
             font-size: 1rem;
-            color: #111111;
+            color: #ffffff;
             margin-bottom: 0.5rem;
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
@@ -250,7 +252,7 @@
             min-height: 400px;
             overflow: hidden;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .bottom-row .about-image img {
@@ -274,12 +276,12 @@
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             margin-bottom: 3rem;
-            background: white;
+            background: #222222;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
+
         .featured-brand .brand-logo {
             position: absolute !important;
             top: 30px;
@@ -289,7 +291,7 @@
             z-index: 1;
             opacity: 0.9;
         }
-        
+
         .featured-brand .brand-image {
             height: 100%;
             display: flex;
@@ -298,23 +300,23 @@
             margin-bottom: 0;
             position: relative;
         }
-        
+
         .featured-brand .brand-description {
             text-align: left;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-        
+
         .featured-brand .brand-description h3 {
             font-size: 1.5rem;
             color: #a484e8;
             margin-bottom: 1rem;
         }
-        
+
         .featured-brand .brand-description p {
             font-size: 1rem;
-            color: #666;
+            color: #cccccc;
             line-height: 1.6;
             margin-bottom: 1rem;
         }
@@ -323,20 +325,20 @@
             padding: 5px 0 !important;
             margin-top: 0 !important;
         }
-        
+
         .footer-content {
             padding: 5px 10px !important;
         }
-        
+
         .social-links {
             margin-bottom: 0.2rem !important;
         }
-        
+
         .social-links a {
             font-size: 18px !important;
             margin: 0 5px !important;
         }
-        
+
         .footer-nav {
             margin: 2px 0 !important;
             background-color: #a484e8 !important;
@@ -344,18 +346,18 @@
             border-radius: 4px !important;
             display: inline-block !important;
         }
-        
+
         .footer-nav a {
             margin: 0 3px !important;
             font-size: 0.8rem !important;
             color: white !important;
         }
-        
+
         .copyright {
             font-size: 0.55em !important;
             margin: 0 !important;
         }
-        
+
         .sign-in-icon {
             width: 24px !important;
             height: 24px !important;
@@ -366,9 +368,9 @@
         /* Why Choose Us Section Styles */
         .why-choose-us {
             padding: 4rem 0;
-            background-color: #f5f5f5;
+            background-color: #111111;
             text-align: center;
-            color: #111111;
+            color: #f5f5f5;
         }
 
         .why-choose-us .section-title {
@@ -396,7 +398,7 @@
         .why-choose-us .main-title {
             font-size: 2.5rem;
             margin-bottom: 4rem;
-            color: #111111;
+            color: #ffffff;
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
             letter-spacing: 0.05em;
@@ -413,10 +415,10 @@
 
         .feature-item {
             text-align: center;
-            background: white;
+            background: #222222;
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
 
@@ -432,7 +434,7 @@
 
         .feature-item h3 {
             font-size: 1.2rem;
-            color: #111111;
+            color: #ffffff;
             margin-bottom: 1rem;
             font-weight: 300;
             line-height: 1.4;
@@ -442,7 +444,7 @@
 
         .feature-item p {
             font-size: 1rem;
-            color: #666;
+            color: #cccccc;
             line-height: 1.6;
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
@@ -470,8 +472,9 @@
 
         @media (max-width: 768px) {
             .features-grid {
-                grid-template-columns: repeat(2, 1fr);
                 padding: 0 1rem;
+                display: flex;
+                flex-direction: column;
             }
         }
 
@@ -485,7 +488,7 @@
             margin-top: 20px;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .hairstyle-image img {
@@ -498,8 +501,14 @@
         .hairstyle-image:hover img {
             transform: scale(1.03);
         }
+
+        body {
+            background-color: #111111;
+            color: #f5f5f5;
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo">Райа</div>
@@ -541,14 +550,17 @@
             <div class="line"></div>
         </div>
         <h1>Салон за Красота Райа</h1>
-        
+
         <div class="about-content">
             <div class="top-row">
                 <div class="about-text">
                     <div class="about-section">
                         <h2>Нашата История</h2>
-                        <p>Салон за красота "Райа" е създаден с любов и страст към красотата. Нашата мисия е да предоставяме висококачествени услуги и да създаваме уникални преживявания за всеки наш клиент.</p>
-                        <p>С над 10 години опит в индустрията, нашият екип от професионалисти се стреми да надмине очакванията на всеки клиент, предлагайки персонализирани решения и внимателно отношение.</p>
+                        <p>Салон за красота "Райа" е създаден с любов и страст към красотата. Нашата мисия е да
+                            предоставяме висококачествени услуги и да създаваме уникални преживявания за всеки наш
+                            клиент.</p>
+                        <p>С над 10 години опит в индустрията, нашият екип от професионалисти се стреми да надмине
+                            очакванията на всеки клиент, предлагайки персонализирани решения и внимателно отношение.</p>
                     </div>
                 </div>
 
@@ -556,7 +568,7 @@
                     <img src="images/salon/interior.jpg.webp" alt="Salon Interior">
                 </div>
             </div>
-            
+
             <div class="bottom-row">
                 <div class="about-image">
                     <img src="images/salon/hairstyle.jpg" alt="Our Services">
@@ -564,13 +576,15 @@
                 <div class="about-text">
                     <div class="about-section">
                         <h2>Нашите Ценности</h2>
-                        <p>Вярваме в качеството, професионализма и иновацията. Използваме само най-добрите продукти и технологии, за да гарантираме отличен резултат за всеки наш клиент.</p>
-                        <p>Нашият подход е базиран на внимателно слушане и разбиране на нуждите на клиента, след което предлагаме персонализирано решение, което отразява неговата уникална красота.</p>
+                        <p>Вярваме в качеството, професионализма и иновацията. Използваме само най-добрите продукти и
+                            технологии, за да гарантираме отличен резултат за всеки наш клиент.</p>
+                        <p>Нашият подход е базиран на внимателно слушане и разбиране на нуждите на клиента, след което
+                            предлагаме персонализирано решение, което отразява неговата уникална красота.</p>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <!-- Why Choose Us Section -->
         <div class="why-choose-us">
             <div class="section-title">
@@ -579,7 +593,7 @@
                 <div class="line"></div>
             </div>
             <h2 class="main-title">Защо да изберете нашия салон?</h2>
-            
+
             <div class="features-grid">
                 <div class="feature-item">
                     <div class="feature-image">
@@ -615,14 +629,14 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="about-header">
             <div class="line"></div>
             <h3>Работим само с най-доброто</h3>
             <div class="line"></div>
         </div>
         <h1>Марките, с които работим</h1>
-        
+
         <div class="featured-brand">
             <div class="brand-image">
                 <img src="images/products/wella.png" alt="Wella Professional Logo" class="brand-logo">
@@ -630,11 +644,15 @@
             </div>
             <div class="brand-description">
                 <h3>WELLA PROFESSIONAL</h3>
-                <p>Wella Professionals е марка с дългогодишна история, която предлага иновативни продукти за коса с професионално качество. Продуктите на Wella са създадени, за да вдъхновяват и подкрепят фризьорите по целия свят, като им предоставят инструментите, необходими за постигане на изключителни резултати.</p>
-                <p>В нашия салон използваме продуктите на Wella, за да ви предложим най-високо качество и да постигнем перфектния резултат за вашата коса.</p>
+                <p>Wella Professionals е марка с дългогодишна история, която предлага иновативни продукти за коса с
+                    професионално качество. Продуктите на Wella са създадени, за да вдъхновяват и подкрепят фризьорите
+                    по целия свят, като им предоставят инструментите, необходими за постигане на изключителни резултати.
+                </p>
+                <p>В нашия салон използваме продуктите на Wella, за да ви предложим най-високо качество и да постигнем
+                    перфектния резултат за вашата коса.</p>
             </div>
         </div>
-        
+
         <div class="brands-grid">
             <div class="brand-card">
                 <div class="brand-image">
@@ -645,7 +663,7 @@
                     <h3>BIOMAGIC</h3>
                 </div>
             </div>
-            
+
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/kinactif-logo.png" alt="Kinactif Logo" class="brand-logo">
@@ -655,7 +673,7 @@
                     <h3>KINACTIF</h3>
                 </div>
             </div>
-            
+
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/spa-master-logo.png" alt="Spa Master Logo" class="brand-logo">
@@ -665,7 +683,7 @@
                     <h3>SPA MASTER</h3>
                 </div>
             </div>
-            
+
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/starlet-logo.png" alt="Starlet Professional Logo" class="brand-logo">
@@ -675,7 +693,7 @@
                     <h3>STARLET PROFESSIONAL</h3>
                 </div>
             </div>
-            
+
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/kerastase/kerastase.png" alt="Kerastase Logo" class="brand-logo">
@@ -691,4 +709,5 @@
     <?php include 'footer.php'; ?>
     <script src="js/main.js"></script>
 </body>
+
 </html>

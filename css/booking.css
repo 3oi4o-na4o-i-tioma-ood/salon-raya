@@ -73,6 +73,14 @@
     border-radius: 4px;
 }
 
+@media (max-width: 1000px) {
+    .subcategory {
+        padding: 5px 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
 .subcategory:hover {
     background: #a484e8;
 }
@@ -104,6 +112,12 @@
     border-radius: 8px;
     margin-bottom: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1000px) {
+    .service-item {
+        padding: 10px;
+    }
 }
 
 .service-info {
@@ -263,8 +277,9 @@
         min-width: 100%;
         border-right: none;
         padding-right: 0;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 1rem;
+        border-bottom: 3px solid #eee;
+        padding-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     .summary-content {
@@ -339,7 +354,6 @@
 .service-info {
     flex: 1;
     padding-top: 8px;
-    padding-right: 200px;
 }
 
 .options-btn {
