@@ -1,5 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
+require_once 'includes/db_config.php';
 
 use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
@@ -10,10 +11,10 @@ $vapidKeys = [
     'privateKey' => 'YOUR_PRIVATE_KEY' // You'll need to provide your private key here
 ];
 
-// Database connection
-$conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Get database connection
+$conn = getDbConnection();
+if (!$conn) {
+    die("Connection failed");
 }
 $conn->set_charset("utf8mb4");
 

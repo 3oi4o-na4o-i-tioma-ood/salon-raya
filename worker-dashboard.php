@@ -1,14 +1,17 @@
 <?php
 session_start();
+require_once 'includes/db_config.php';
+
+// Check if user is authenticated
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     header('Location: sign-in.php');
     exit();
 }
 
-// Database connection
-$conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Get database connection
+$conn = getDbConnection();
+if (!$conn) {
+    die("Connection failed");
 }
 $conn->set_charset("utf8mb4");
 

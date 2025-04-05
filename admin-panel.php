@@ -1,18 +1,19 @@
 <?php
 session_start();
+require_once 'includes/db_config.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Check if user is logged in
+// Check if admin is logged in
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header('Location: sign-in.php');
-    exit;
+    exit();
 }
 
-// Database connection
-$conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Get database connection
+$conn = getDbConnection();
+if (!$conn) {
+    die("Connection failed");
 }
 $conn->set_charset("utf8mb4");
 

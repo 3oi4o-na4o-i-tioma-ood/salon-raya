@@ -1,8 +1,9 @@
 <?php
+require_once 'db_config.php';
+require 'vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php';
 
 function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appointmentId, $notes = '') {
     $mail = new PHPMailer(true);
@@ -12,15 +13,33 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
         $cancellationToken = md5($appointmentId . $to . time());
         
         // Save the token to the database
-        $conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
-        if ($conn->connect_error) {
-            error_log("Connection failed: " . $conn->connect_error);
+        $conn = getDbConnection();
+        if (!$conn) {
             return false;
         }
         
+        // Check if cancellation_token column exists, if not add it
+        $columnCheckResult = $conn->query("SHOW COLUMNS FROM appointments LIKE 'cancellation_token'");
+        if ($columnCheckResult->num_rows === 0) {
+            // Column doesn't exist, add it
+            $conn->query("ALTER TABLE appointments ADD COLUMN cancellation_token VARCHAR(255) NULL");
+            error_log("Added cancellation_token column to appointments table");
+        }
+        
+        // Now update the record with the token
         $stmt = $conn->prepare("UPDATE appointments SET cancellation_token = ? WHERE id = ?");
+        if ($stmt === false) {
+            error_log("Prepare statement failed: " . $conn->error);
+            return false;
+        }
+        
         $stmt->bind_param("si", $cancellationToken, $appointmentId);
-        $stmt->execute();
+        $execResult = $stmt->execute();
+        
+        if (!$execResult) {
+            error_log("Execute failed: " . $stmt->error);
+        }
+        
         $stmt->close();
         $conn->close();
 

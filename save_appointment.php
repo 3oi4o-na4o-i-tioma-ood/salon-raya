@@ -22,14 +22,16 @@ logMessage("POST data: " . print_r($_POST, true));
 
 session_start();
 require_once 'vendor/autoload.php';
+require_once 'includes/db_config.php';
 require_once 'includes/email.php';
+require_once 'includes/google_calendar.php';
 
 use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
 
 // Database connection
-$conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
-if ($conn->connect_error) {
+$conn = getDbConnection();
+if (!$conn) {
     logMessage("Connection failed: " . $conn->connect_error);
     die(json_encode(['success' => false, 'message' => 'Database connection failed: ' . $conn->connect_error]));
 }

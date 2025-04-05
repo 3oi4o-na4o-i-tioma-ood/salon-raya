@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'vendor/autoload.php';
+require_once 'includes/db_config.php';
 
 // Log function
 function logCancel($message) {
@@ -103,12 +104,11 @@ function deleteFromGoogleCalendar($appointmentId) {
     }
 }
 
-// Database connection
-$conn = new mysqli('localhost', 'root', '1111', 'salon_raya');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Get database connection
+$conn = getDbConnection();
+if (!$conn) {
+    die("Connection failed");
 }
-$conn->set_charset("utf8mb4");
 
 // Initialize status message
 $status = '';
