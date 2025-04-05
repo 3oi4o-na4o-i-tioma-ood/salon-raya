@@ -6,9 +6,9 @@
         </div>
         
         <div class="footer-nav">
-            <a href="index.php#hero">Начало</a>
-            <a href="index.php#services">Услуги</a>
-            <a href="za-nas.php">За Нас</a>
+            <a href="/#hero">Начало</a>
+            <a href="/#services">Услуги</a>
+            <a href="za-nas.php">За нас</a>
             <a href="contacts.php">Контакти</a>
         </div>
         

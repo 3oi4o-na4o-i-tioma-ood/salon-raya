@@ -286,7 +286,9 @@ $conn->close();
 </head>
 <body>
     <div class="container">
-        <img src="images/logo.svg" alt="Salon Raya Logo" class="logo">
+        <a href="/">
+            <img src="images/logo.svg" alt="Salon Raya Logo" class="logo">
+        </a>
         <h1>Отмяна на резервация</h1>
         
         <?php if (!empty($status)): ?>
@@ -333,18 +335,18 @@ $conn->close();
             
             <form method="post">
                 <div class="actions">
-                    <a href="index.php" class="btn btn-back">Назад</a>
+                    <a href="/" class="btn btn-back">Назад</a>
                     <button type="submit" name="confirm_cancel" class="btn btn-cancel">Потвърди отмяната</button>
                 </div>
             </form>
             <?php else: ?>
             <div class="actions">
-                <a href="index.php" class="btn btn-back">Начална страница</a>
+                <a href="/" class="btn btn-back">Начална страница</a>
             </div>
             <?php endif; ?>
         <?php else: ?>
             <div class="actions">
-                <a href="index.php" class="btn btn-back">Начална страница</a>
+                <a href="/" class="btn btn-back">Начална страница</a>
             </div>
         <?php endif; ?>
     </div>

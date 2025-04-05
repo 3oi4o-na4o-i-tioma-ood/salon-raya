@@ -621,12 +621,7 @@ session_start();
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar-left">
-            <button class="navbar-back" onclick="history.back()">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <div class="logo">Райа</div>
-        </div>
+        <a href="/" class="logo">Райа</a>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -649,8 +644,8 @@ session_start();
     </nav>
 
     <div class="nav-menu">
-        <a href="index.php#hero">Начало</a>
-        <a href="index.php#services">Услуги</a>
+        <a href="/#hero">Начало</a>
+        <a href="/#services">Услуги</a>
         <a href="za-nas.php">За Нас</a>
         <a href="contacts.php">Контакти</a>
     </div>
@@ -1054,6 +1049,7 @@ session_start();
         });
     </script>
 
-    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
+    <!-- Keep any other scripts that might be used on this page -->
 </body>
 </html>

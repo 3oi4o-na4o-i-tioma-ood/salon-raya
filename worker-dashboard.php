@@ -37,23 +37,11 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 <body class="dashboard-body">
     <div class="dashboard-container">
         <div class="dashboard-header">
-            <div class="header-actions">
-                <a href="google-auth.php" class="google-cal-button">
-                    <i class="fas fa-calendar-plus"></i>
-                    Google Календар
-                </a>
-                <a href="sign-in.php?logout=true" class="exit-button">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Изход
-                </a>
-            </div>
-            <div class="salon-info">
+            <a href="/">
                 <img src="images/logo.svg" alt="SALON RAYA LOGO" class="dashboard-logo">
-                <div class="salon-details">
-                    <h1>Салон Рая</h1>
-                    <p>ул. Хайдушка гора 120</p>
-                </div>
-            </div>
+            </a>
+            <div class="dashboard-title">Работен панел</div>
+            <a href="sign-in.php?logout=true" class="logout-btn">Изход</a>
         </div>
 
         <div class="dashboard-content">

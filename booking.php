@@ -13,16 +13,29 @@ session_start();
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">
-            Райа
-        </div>
-        <div class="nav-menu">
-            <a href="index.php#hero">Начало</a>
-            <a href="index.php#services">Услуги</a>
-            <a href="za-nas.php">За Нас</a>
-            <a href="contacts.php">Контакти</a>
+        <a href="/" class="logo">Райа</a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </nav>
+
+    <nav class="navbar-scrolled">
+        <div class="logo">Райа</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="nav-menu">
+        <a href="/#hero">Начало</a>
+        <a href="/#services">Услуги</a>
+        <a href="/za-nas">За Нас</a>
+        <a href="/contacts">Контакти</a>
+    </div>
 
     <div class="booking-container">
         <h1 class="title">Резервация на час</h1>
@@ -259,6 +272,7 @@ session_start();
     </div>
 
     <?php include 'footer.php'; ?>
+    <script src="js/menu.js"></script>
     <script src="js/booking.js"></script>
 </body>
 </html> 

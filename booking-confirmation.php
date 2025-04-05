@@ -64,7 +64,7 @@ session_start();
             <br><br>
             Очакваме ви!
         </p>
-        <a href="index.php" class="home-button">Обратно към началната страница</a>
+        <a href="/" class="home-button">Обратно към началната страница</a>
     </div>
 </body>
 </html>

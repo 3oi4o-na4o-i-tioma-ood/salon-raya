@@ -162,7 +162,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">Райа</div>
+        <a href="/" class="logo">Райа</a>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -180,15 +180,15 @@
     </nav>
 
     <div class="nav-menu">
-        <a href="index.php#hero">Начало</a>
-        <a href="index.php#services">Услуги</a>
+        <a href="/#hero">Начало</a>
+        <a href="/#services">Услуги</a>
         <a href="za-nas.php">За Нас</a>
         <a href="contacts.php">Контакти</a>
     </div>
 
     <div class="booking-button-container">
         <div class="booking-circle"></div>
-        <a href="booking.php" class="booking-button">
+        <a href="/booking" class="booking-button">
             <span>Online</span>
             <span>booking</span>
         </a>
@@ -238,7 +238,6 @@
     </div>
 
     <?php include 'footer.php'; ?>
-    
-    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 </html>
