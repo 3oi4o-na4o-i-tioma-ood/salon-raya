@@ -116,6 +116,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // --- Helper: Time String to Minutes ---
+    function timeToMinutes(timeString) {
+        const [hours, minutes] = timeString.split(':').map(Number);
+        return hours * 60 + minutes;
+    }
+
+    // --- Helper: Minutes to Time String ---
+    function minutesToTime(totalMinutes) {
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    }
+
     // --- Fetch Booked Times --- 
     async function fetchBookedTimes(date) {
         const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
@@ -133,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- Generate and Update Time Slots (Modified) ---
+    // --- Generate and Update Time Slots (Modified for Duration Check) ---
     function generateTimeSlots() {
         const slots = [];
         
@@ -151,33 +164,88 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateTimeSlots() {
-        const slots = generateTimeSlots(); // Get base slots
+        const slots = generateTimeSlots();
         const container = document.getElementById('timeSlots');
-        container.innerHTML = ''; // Clear previous slots
+        container.innerHTML = '';
         
-        console.log("Updating time slots. Booked:", bookedTimesForSelectedDate);
+        // Calculate total duration from selected services
+        const currentSelectedServices = JSON.parse(sessionStorage.getItem('selectedServices') || '[]');
+        const totalDurationMinutes = currentSelectedServices.reduce((sum, s) => sum + (parseInt(s.duration) || 0), 0);
+        
+        // Convert booked times to minutes for easier comparison
+        const bookedMinutesSet = new Set(bookedTimesForSelectedDate.map(timeToMinutes));
+        const salonClosingTimeMinutes = 20 * 60; // 8:00 PM
+
+        console.log("Updating time slots. Duration:", totalDurationMinutes, "Booked Minutes:", Array.from(bookedMinutesSet));
 
         slots.forEach(slot => {
-            const timeSlot = document.createElement('div');
-            timeSlot.className = 'time-slot';
-            
-            // Check if this slot is booked
-            const isBooked = bookedTimesForSelectedDate.includes(slot.time);
-            slot.disabled = isBooked; // Update the slot's disabled status
+            const timeSlotElement = document.createElement('div');
+            timeSlotElement.className = 'time-slot';
+            const slotStartMinutes = timeToMinutes(slot.time);
+            const slotEndMinutes = slotStartMinutes + totalDurationMinutes;
+            let isDisabled = false;
+            let disableReason = '';
 
-            if (selectedTime === slot.time) {
-                timeSlot.classList.add('selected');
+            // Check 1: Is the start time itself already booked?
+            if (bookedMinutesSet.has(slotStartMinutes)) {
+                isDisabled = true;
+                disableReason = ' (заето)';
             }
+
+            // Check 2: Does the appointment exceed closing time?
+            if (!isDisabled && slotEndMinutes > salonClosingTimeMinutes) {
+                isDisabled = true;
+                disableReason = ' (няма време)'; // Not enough time before closing
+            }
+
+            // Check 3: Does the duration overlap with any *other* booked slot?
+            if (!isDisabled) {
+                for (let checkMin = slotStartMinutes; checkMin < slotEndMinutes; checkMin += 30) {
+                    if (bookedMinutesSet.has(checkMin)) {
+                         if (checkMin !== slotStartMinutes) { 
+                            isDisabled = true;
+                            timeSlotElement.classList.add('conflict');
+                            break; 
+                         }
+                    }
+                }
+            }
+            
+            slot.disabled = isDisabled;
+
+            if (selectedTime === slot.time && !isDisabled) { // Can only select if not disabled
+                timeSlotElement.classList.add('selected');
+            } else if (selectedTime === slot.time && isDisabled) {
+                 // If the previously selected time becomes disabled, deselect it
+                 selectedTime = null; 
+                 confirmDateTimeBtn.disabled = true; 
+            }
+
             if (slot.disabled) {
-                timeSlot.classList.add('disabled');
-                timeSlot.textContent = `${slot.time} (заето)`;
+                timeSlotElement.classList.add('disabled');
+                timeSlotElement.textContent = `${slot.time}${timeSlotElement.classList.contains('conflict') ? '' : disableReason}`;
             } else {
-                 timeSlot.textContent = slot.time;
-                 timeSlot.addEventListener('click', () => selectTime(slot.time));
+                 timeSlotElement.textContent = slot.time;
+                 timeSlotElement.addEventListener('click', () => selectTime(slot.time));
             }
            
-            container.appendChild(timeSlot);
+            container.appendChild(timeSlotElement);
         });
+        
+        // Re-check if the currently selected time is still valid after update
+        if (selectedTime) {
+             const selectedSlotElement = Array.from(container.children).find(el => !el.classList.contains('disabled') && el.textContent === selectedTime);
+             if (!selectedSlotElement) {
+                 // The selected time is no longer valid/available
+                 selectedTime = null;
+                 confirmDateTimeBtn.disabled = true;
+                 // Optionally inform the user
+                 // alert("Избраният час вече не е наличен.");
+             } else {
+                  selectedSlotElement.classList.add('selected'); // Ensure it stays visually selected
+                  confirmDateTimeBtn.disabled = false; 
+             }
+        }
     }
 
     // --- Select Date (Modified) ---
@@ -198,13 +266,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- Select Time (Remains the same) ---
+    // --- Select Time (Modified to check if disabled) ---
     function selectTime(time) {
-        selectedTime = time;
-        document.querySelectorAll('.time-slot').forEach(slot => {
-            slot.classList.toggle('selected', slot.textContent === time);
-        });
-        confirmDateTimeBtn.disabled = false;
+        // Find the clicked element to ensure it's not disabled before selecting
+        const clickedSlotElement = Array.from(document.getElementById('timeSlots').children).find(el => el.textContent === time);
+        
+        if (clickedSlotElement && !clickedSlotElement.classList.contains('disabled')) {
+            selectedTime = time;
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.toggle('selected', !slot.classList.contains('disabled') && slot.textContent === time);
+            });
+            confirmDateTimeBtn.disabled = false;
+        } else {
+            console.warn("Attempted to select a disabled time slot:", time);
+            // Optionally provide feedback to user
+        }
     }
 
     function formatDate(date) {
