@@ -241,134 +241,167 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle service category clicks
-    serviceCategories.forEach(category => {
-        category.addEventListener('click', function() {
-            // Remove active class from all categories
-            serviceCategories.forEach(c => c.classList.remove('active'));
-            // Add active class to the clicked category
-            this.classList.add('active');
+    // ---- Function to Render Services for a Subcategory ----
+    function renderServices(servicesData) {
+        servicesList.innerHTML = servicesData.map(service => {
+            let optionsHtml = '';
+            if (service.options) {
+                optionsHtml = `
+                    <div class="service-options">
+                        ${service.options.map(option => {
+                            const fullServiceName = `${service.name} (${option.name})`;
+                            const isSelected = selectedServiceNames.has(fullServiceName);
+                            return `
+                            <div class="service-option">
+                                <div class="option-info">
+                                    <span class="option-name">${option.name}</span>
+                                    <span class="option-duration">${option.duration} мин.</span>
+                                </div>
+                                <div class="option-price">
+                                    <span class="price">${option.price} лв.</span>
+                                    <button class="select-btn ${isSelected ? 'selected' : ''}" 
+                                        data-name="${fullServiceName}" 
+                                        data-price="${option.price}" 
+                                        data-duration="${option.duration}"
+                                        ${isSelected ? 'disabled' : ''}>
+                                        ${isSelected ? 'избрано' : 'избери'}
+                                    </button>
+                                </div>
+                            </div>
+                        `}).join('')}
+                    </div>
+                `;
+            }
+            
+            const isBaseServiceSelected = selectedServiceNames.has(service.name);
+            const hasSelectedOption = service.options && service.options.some(option => 
+                selectedServiceNames.has(`${service.name} (${option.name})`));
+            const isDisabled = isBaseServiceSelected || hasSelectedOption;
+            
+            return `
+                <div class="service-item">
+                    <div class="service-item-content">
+                        <div class="service-main-content">
+                            <div class="service-info">
+                                <h3>${service.name}</h3>
+                                <p>${service.description || ''}</p>
+                                <span class="service-duration">${service.duration || ''} мин.</span>
+                            </div>
+                            <div class="service-price-container">
+                                ${service.options ? 
+                                    `<button class="options-btn">опции ▼</button>` :
+                                    `<div class="service-price">
+                                        <span class="price">${service.price} лв.</span>
+                                        <button class="select-btn ${isDisabled ? 'selected' : ''}" 
+                                            data-name="${service.name}" 
+                                            data-price="${service.price}" 
+                                            data-duration="${service.duration}"
+                                            ${isDisabled ? 'disabled' : ''}>
+                                            ${isDisabled ? 'избрано' : 'избери'}
+                                        </button>
+                                    </div>`
+                                }
+                            </div>
+                        </div>
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+        }).join('');
 
-            const categoryType = this.getAttribute('data-category');
-            subcategoriesLists.forEach(list => {
-                if (list.getAttribute('data-category') === categoryType) {
-                    list.style.display = 'flex';
-                    const firstSubcategory = list.querySelector('.subcategory');
-                    if (firstSubcategory) {
-                        firstSubcategory.click();
-                    }
-                } else {
-                    list.style.display = 'none';
+        // Re-add click handlers after rendering
+        addServiceButtonListeners();
+    }
+
+    // ---- Function to Add Event Listeners to Service Buttons ----
+    function addServiceButtonListeners() {
+        // Add click handlers for select buttons
+        servicesList.querySelectorAll('.select-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!btn.disabled) {
+                    const serviceName = btn.getAttribute('data-name');
+                    const servicePrice = btn.getAttribute('data-price');
+                    const serviceDuration = btn.getAttribute('data-duration');
+                    addSelectedService(serviceName, servicePrice, serviceDuration);
                 }
             });
         });
-    });
-    
-    // Automatically select the first category on page load
-    if (serviceCategories.length > 0) {
-        serviceCategories[0].click();
+
+        // Add click handlers for options buttons
+        servicesList.querySelectorAll('.options-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const optionsDiv = btn.closest('.service-item').querySelector('.service-options');
+                if (optionsDiv) {
+                    optionsDiv.classList.toggle('show');
+                    btn.textContent = optionsDiv.classList.contains('show') ? 'опции ▲' : 'опции ▼';
+                }
+            });
+        });
     }
 
-    // Handle subcategory clicks
-    document.querySelectorAll('.subcategory').forEach(subcategory => {
-        subcategory.addEventListener('click', () => {
-            document.querySelectorAll('.subcategory').forEach(s => s.classList.remove('active'));
-            subcategory.classList.add('active');
+    // ---- Function to Activate Category and Subcategory ----
+    function activateAndRenderSubcategory(mainCategoryElement, subCategoryElement) {
+        if (!mainCategoryElement || !subCategoryElement) return;
 
-            const services = subcategory.getAttribute('data-services');
-            if (services) {
-                const servicesData = JSON.parse(services);
-                servicesList.innerHTML = servicesData.map(service => {
-                    let optionsHtml = '';
-                    if (service.options) {
-                        optionsHtml = `
-                            <div class="service-options">
-                                ${service.options.map(option => {
-                                    const fullServiceName = `${service.name} (${option.name})`;
-                                    const isSelected = selectedServiceNames.has(fullServiceName);
-                                    return `
-                                    <div class="service-option">
-                                        <div class="option-info">
-                                            <span class="option-name">${option.name}</span>
-                                            <span class="option-duration">${option.duration} мин.</span>
-                                        </div>
-                                        <div class="option-price">
-                                            <span class="price">${option.price} лв.</span>
-                                            <button class="select-btn ${isSelected ? 'selected' : ''}" 
-                                                data-name="${fullServiceName}" 
-                                                data-price="${option.price}" 
-                                                data-duration="${option.duration}"
-                                                ${isSelected ? 'disabled' : ''}>
-                                                ${isSelected ? 'избрано' : 'избери'}
-                                            </button>
-                                        </div>
-                                    </div>
-                                `}).join('')}
-                            </div>
-                        `;
-                    }
-                    
-                    const isBaseServiceSelected = selectedServiceNames.has(service.name);
-                    const hasSelectedOption = service.options && service.options.some(option => 
-                        selectedServiceNames.has(`${service.name} (${option.name})`));
-                    const isDisabled = isBaseServiceSelected || hasSelectedOption;
-                    
-                    return `
-                        <div class="service-item">
-                            <div class="service-item-content">
-                                <div class="service-main-content">
-                                    <div class="service-info">
-                                        <h3>${service.name}</h3>
-                                        <p>${service.description || ''}</p>
-                                        <span class="service-duration">${service.duration || ''} мин.</span>
-                                    </div>
-                                    <div class="service-price-container">
-                                        ${service.options ? 
-                                            `<button class="options-btn">опции ▼</button>` :
-                                            `<div class="service-price">
-                                                <span class="price">${service.price} лв.</span>
-                                                <button class="select-btn ${isDisabled ? 'selected' : ''}" 
-                                                    data-name="${service.name}" 
-                                                    data-price="${service.price}" 
-                                                    data-duration="${service.duration}"
-                                                    ${isDisabled ? 'disabled' : ''}>
-                                                    ${isDisabled ? 'избрано' : 'избери'}
-                                                </button>
-                                            </div>`
-                                        }
-                                    </div>
-                                </div>
-                                ${optionsHtml}
-                            </div>
-                        </div>
-                    `;
-                }).join('');
+        // 1. Activate Main Category
+        serviceCategories.forEach(c => c.classList.remove('active'));
+        mainCategoryElement.classList.add('active');
 
-                // Add click handlers for select buttons
-                document.querySelectorAll('.select-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        if (!btn.disabled) {
-                            const serviceName = btn.getAttribute('data-name');
-                            const servicePrice = btn.getAttribute('data-price');
-                            const serviceDuration = btn.getAttribute('data-duration');
-                            addSelectedService(serviceName, servicePrice, serviceDuration);
-                        }
-                    });
-                });
+        // 2. Show Correct Subcategory List
+        const categoryType = mainCategoryElement.getAttribute('data-category');
+        subcategoriesLists.forEach(list => {
+            list.style.display = list.getAttribute('data-category') === categoryType ? 'flex' : 'none';
+        });
 
-                // Add click handlers for options buttons
-                document.querySelectorAll('.options-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const optionsDiv = btn.closest('.service-item').querySelector('.service-options');
-                        if (optionsDiv) {
-                            optionsDiv.classList.toggle('show');
-                            btn.textContent = optionsDiv.classList.contains('show') ? 'опции ▲' : 'опции ▼';
-                        }
-                    });
-                });
-            }
+        // 3. Activate Subcategory
+        document.querySelectorAll('.subcategory').forEach(s => s.classList.remove('active'));
+        subCategoryElement.classList.add('active');
+
+        // 4. Render Services
+        const services = subCategoryElement.getAttribute('data-services');
+        if (services) {
+            const servicesData = JSON.parse(services);
+            renderServices(servicesData);
+        } else {
+            servicesList.innerHTML = '<p>Няма налични услуги в тази подкатегория.</p>';
+        }
+    }
+
+    // ---- Event Listeners ----
+
+    // Handle service category clicks
+    serviceCategories.forEach(category => {
+        category.addEventListener('click', function() {
+            const categoryType = this.getAttribute('data-category');
+            const subcategoryList = document.querySelector(`.subcategories-list[data-category="${categoryType}"]`);
+            const firstSubcategoryElement = subcategoryList ? subcategoryList.querySelector('.subcategory') : null;
+            
+            // Activate and render the first subcategory of the clicked main category
+            activateAndRenderSubcategory(this, firstSubcategoryElement);
         });
     });
+    
+    // Handle subcategory clicks (now just needs to render)
+    document.querySelectorAll('.subcategory').forEach(subcategory => {
+        subcategory.addEventListener('click', function() {
+            // Find parent main category to keep it active
+            const parentList = this.closest('.subcategories-list');
+            const mainCategoryType = parentList.getAttribute('data-category');
+            const mainCategoryElement = document.querySelector(`.service-category[data-category="${mainCategoryType}"]`);
+            
+            // Activate and render this specific subcategory
+            activateAndRenderSubcategory(mainCategoryElement, this);
+        });
+    });
+
+    // Automatically select the first category and its first subcategory on page load
+    if (serviceCategories.length > 0) {
+        const firstMainCategory = serviceCategories[0];
+        const firstSubcategoryList = document.querySelector(`.subcategories-list[data-category="${firstMainCategory.getAttribute('data-category')}"]`);
+        const firstSubcategoryElement = firstSubcategoryList ? firstSubcategoryList.querySelector('.subcategory') : null;
+        
+        activateAndRenderSubcategory(firstMainCategory, firstSubcategoryElement);
+    }
 
     // Handle continue booking click
     document.querySelector('.total-price').addEventListener('click', () => {
