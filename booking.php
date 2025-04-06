@@ -22,7 +22,7 @@ session_start();
     </nav>
 
     <nav class="navbar-scrolled">
-        <div class="logo">Райа</div>
+    <a href="/" class="logo">Райа</a>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -42,24 +42,25 @@ session_start();
         <p class="subtitle">Изберете услугите, които желаете</p>
 
         <div class="service-categories">
-            <div class="service-category hero-section" data-category="hair">
+            <button class="service-category" data-category="hair">
                 <img src="images/icons/comb (2).png" alt="Коса" class="service-icon">
                 <h2 class="category-title">Коса</h2>
-            </div>
-            <div class="service-category hero-section" data-category="face">
+            </button>
+
+            <button class="service-category" data-category="face">
                 <img src="images/icons/face (2).png" alt="Лице" class="service-icon">
                 <h2 class="category-title">Лице</h2>
-            </div>
+            </button>
             
-            <div class="service-category hero-section" data-category="epilation">
+            <button class="service-category" data-category="epilation">
                 <img src="images/icons/epilaciq (2).png" alt="Епилация" class="service-icon">
                 <h2 class="category-title">Епилация</h2>
-            </div>
+            </button>
 
-            <div class="service-category hero-section" data-category="massage">
+            <button class="service-category" data-category="massage">
                 <img src="images/icons/massage (2).png" alt="Масаж" class="service-icon">
                 <h2 class="category-title">Масаж</h2>
-            </div>
+            </button>
         </div>
 
         <div class="service-list date-selection-container">

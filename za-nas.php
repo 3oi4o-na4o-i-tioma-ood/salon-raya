@@ -520,7 +520,7 @@
     </nav>
 
     <nav class="navbar-scrolled">
-        <div class="logo">Райа</div>
+        <a href="/" class="logo">Райа</a>
         <div class="hamburger">
             <span></span>
             <span></span>

@@ -1,5 +1,6 @@
 .booking-container {
     padding-top: 80px;
+    margin-bottom: 100px;
 }
 
 .booking-container .title,
@@ -57,8 +58,14 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 300px;
-    border-right: 1px solid #eee;
-    padding-right: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .subcategories-list {
+        border-bottom: 3px solid #eee;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
 }
 
 .subcategories-list.active {
@@ -67,56 +74,71 @@
 
 .subcategory {
     padding: 1rem;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ccc;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 4px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    margin-bottom: 5px;
 }
 
 @media (max-width: 1000px) {
     .subcategory {
-        padding: 5px 10px;
+        padding: 10px 15px;
         display: flex;
         justify-content: space-between;
     }
 }
 
 .subcategory:hover {
-    background: #a484e8;
+    background: rgba(255, 255, 255, 0.1);;
 }
 
 .subcategory.active {
-    background: #a484e8;
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
 }
 
 .subcategory h3 {
-    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
     margin: 0 0 0.25rem 0;
-    color: #111111;
+    color: #eee;
     font-weight: 400;
 }
 
 .subcategory .price {
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.9rem;
-    color: #666;
+    color: #a484e8;
 }
 
 .services-list {
     flex: 1;
-    padding: 0;
 }
 
 .service-item {
-    background: #fff;
+    background: #2a2a2a;
+    color: #ccc;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @media (max-width: 1000px) {
     .service-item {
-        padding: 10px;
+        padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .service-price-container {
+       width: 100%;
+       margin-top: 10px;
     }
 }
 
@@ -127,64 +149,67 @@
 .service-price-container {
     min-width: 180px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
 }
 
 .service-price {
     display: flex;
-    align-items: center;
-    gap: 20px;
-    min-height: 40px;
-    justify-content: flex-end;
-    width: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    min-height: auto;
+    justify-content: space-between;
+    width: auto;
 }
 
 .service-info h3 {
     font-size: 16px;
-    color: #333;
+    color: #eee;
     margin: 0 0 5px 0;
     font-weight: 500;
 }
 
-.service-info p {
+.service-info p,
+.service-info .service-duration {
     font-size: 14px;
-    color: #666;
+    color: #aaa;
     margin: 0;
     line-height: 1.4;
 }
 
 .service-price .price {
     font-size: 16px;
-    color: #333;
+    color: #eee;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .select-btn {
     border: none;
     border-radius: 4px;
-    padding: 6px 12px;
+    padding: 8px 16px;
     background-color: #a484e8;
     color: white;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    white-space: nowrap;
 }
 
 .select-btn:hover {
     background-color: #8b6ad4;
 }
 
-.select-btn.selected {
-    background-color: #cccccc;
-    color: #666666;
-    cursor: not-allowed;
-}
-
+.select-btn.selected,
 .select-btn:disabled {
-    opacity: 0.7;
+    background-color: #555;
+    color: #aaa;
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .booking-summary {
@@ -292,8 +317,10 @@
 
 .service-options {
     display: none;
-    padding-top: 0.5rem;
-    margin-top: 0.5rem;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px dashed #444;
+    width: 100%;
 }
 
 .service-options.show {
@@ -304,27 +331,28 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    padding: 0.5rem 0;
 }
 
 .option-info {
-    border: 1px solid #a484e8;
-    border-radius: 6px;
-    padding: 0.75rem 1rem;
-    background: #fff;
-    width: 250px;
-    margin-left: 1rem;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    width: auto;
+    margin-left: 0;
 }
 
 .option-name {
-    color: #333;
+    color: #ccc;
     font-size: 0.9rem;
     font-weight: 500;
     display: block;
 }
 
 .option-duration {
-    color: #666;
+    color: #aaa;
     font-size: 0.85rem;
     display: block;
     margin-top: 0.25rem;
@@ -335,42 +363,45 @@
     align-items: center;
     gap: 1rem;
     justify-content: flex-end;
-    min-width: 180px;
+    min-width: auto;
     padding-right: 0;
+}
+
+.option-price .price {
+     color: #eee;
+     font-size: 0.9rem;
 }
 
 .service-item-content {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .service-main-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     padding-right: 0;
-}
-
-.service-info {
-    flex: 1;
-    padding-top: 8px;
+    width: 100%;
 }
 
 .options-btn {
     background: none;
-    border: none;
+    border: 1px solid #a484e8;
     color: #a484e8;
     cursor: pointer;
     font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    margin-right: 0;
-    transition: opacity 0.2s;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
     min-width: 80px;
     text-align: center;
 }
 
 .options-btn:hover {
-    opacity: 0.8;
+    background: #a484e8;
+    color: white;
 }
 
 /* Add styles for selected services list */
@@ -439,4 +470,75 @@
 /* Ensure options are visible when a service is selected */
 .service-item.service-selected .service-options.show {
     display: block;
+}
+
+/* Service categories styling to match homepage */
+.service-categories {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.service-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background-color: transparent;
+    mix-blend-mode: normal;
+    filter: brightness(0.85) opacity(0.85);
+    transition: filter 0.3s ease;
+}
+
+.category-title {
+    color: #a484e8;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+    margin: 0;
+    text-align: center;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+}
+
+.service-category:hover,
+.service-category.active {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.service-category:hover .service-icon,
+.service-category.active .service-icon {
+    filter: brightness(1.2) opacity(1);
+}
+
+.service-category:hover .category-title,
+.service-category.active .category-title {
+    color: #b89df0;
+    opacity: 1;
+}
+
+@media screen and (max-width: 600px) {
+    .service-categories {
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .service-category {
+        width: 50%;
+    }
 }

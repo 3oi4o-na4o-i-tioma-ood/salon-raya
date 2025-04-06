@@ -20,7 +20,7 @@
     </nav>
 
     <nav class="navbar-scrolled">
-        <div class="logo">Райа</div>
+        <a href="/" class="logo">Райа</a>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -211,7 +211,8 @@
                             <p>20 мин.</p>
                         </div>
                         <div class="service-price">35 лв.</div>
-                        <a href="/booking?category=hair&service=haircuts&detail=damsko-podstrigvane" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=hair&service=haircuts&detail=damsko-podstrigvane"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -321,7 +322,8 @@
                             <p>1 ч.20 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="/booking?category=hair&service=coloring&detail=boyadisvane-wella" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=hair&service=coloring&detail=boyadisvane-wella"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -377,7 +379,8 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">от 25 лв.</div>
-                        <a href="/booking?category=hair&service=curling&detail=izpravyane-pres" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=hair&service=curling&detail=izpravyane-pres"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -397,7 +400,8 @@
                             <p>10 мин. - 50 мин.</p>
                         </div>
                         <div class="service-price">от 10 лв.</div>
-                        <a href="/booking?category=hair&service=extensions&detail=udalyavane-kosa" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=hair&service=extensions&detail=udalyavane-kosa"
+                            class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -408,7 +412,8 @@
                             <p>40 мин.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
-                        <a href="/booking?category=hair&service=treatments&detail=keratinova-terapiya" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=hair&service=treatments&detail=keratinova-terapiya"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -455,7 +460,8 @@
                             <p>15 мин.</p>
                         </div>
                         <div class="service-price">20 лв.</div>
-                        <a href="/booking?category=hair&service=beard&detail=oformyane-brada" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=hair&service=beard&detail=oformyane-brada"
+                            class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -466,7 +472,8 @@
                             <p>10 мин.</p>
                         </div>
                         <div class="service-price">25 лв.</div>
-                        <a href="/booking?category=hair&service=other&detail=probivane-ushi" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=hair&service=other&detail=probivane-ushi"
+                            class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -477,7 +484,8 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
-                        <a href="/booking?category=face&service=makeup&detail=profesionalen-grim" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=face&service=makeup&detail=profesionalen-grim"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -486,7 +494,8 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
-                        <a href="/booking?category=face&service=makeup&detail=vecheren-grim" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=face&service=makeup&detail=vecheren-grim"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -495,7 +504,8 @@
                             <p>1 ч.30 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="/booking?category=face&service=makeup&detail=svatben-grim" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=face&service=makeup&detail=svatben-grim"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -504,7 +514,8 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
-                        <a href="/booking?category=face&service=makeup&detail=oficialen-grim" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=face&service=makeup&detail=oficialen-grim"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -513,7 +524,8 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">70 лв.</div>
-                        <a href="/booking?category=face&service=makeup&detail=ezhedneven-grim" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=face&service=makeup&detail=ezhedneven-grim"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -522,7 +534,8 @@
                             <p>1 ч.30 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="/booking?category=face&service=makeup&detail=abiturientski-grim" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=face&service=makeup&detail=abiturientski-grim"
+                            class="select-service-btn">Избери</a>
                     </div>
 
                     <div class="service-detail-item">
@@ -531,7 +544,8 @@
                             <p>1 ч.30 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="/booking?category=face&service=makeup&detail=foto-grim" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=face&service=makeup&detail=foto-grim"
+                            class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -542,7 +556,8 @@
                             <p>2 ч.</p>
                         </div>
                         <div class="service-price">450 лв.</div>
-                        <a href="/booking?category=face&service=permanent&detail=permanenten-grim" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=face&service=permanent&detail=permanenten-grim"
+                            class="select-service-btn">Избери</a>
                     </div>
                 </div>
 
@@ -553,7 +568,8 @@
                             <p>15 мин.</p>
                         </div>
                         <div class="service-price">30 лв.</div>
-                        <a href="/booking?category=epilation&service=women&detail=podmishnitsi-kola" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=epilation&service=women&detail=podmishnitsi-kola"
+                            class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -628,7 +644,8 @@
                             <p>10 мин.</p>
                         </div>
                         <div class="service-price">15 лв.</div>
-                        <a href="/booking?category=epilation&service=men&detail=podmishnitsi-kola" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=epilation&service=men&detail=podmishnitsi-kola"
+                            class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -719,7 +736,8 @@
                             <p>1 ч.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="/booking?category=massage&service=classic&detail=relaksirasht-masaj" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=massage&service=classic&detail=relaksirasht-masaj"
+                            class="select-service-btn">Избери</a>
                     </div>
                     <div class="service-detail-item">
                         <div class="service-info">
@@ -738,7 +756,8 @@
                             <p>50 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
-                        <a href="/booking?category=massage&service=sport&detail=sporten-masaj" class="select-service-btn">Избери</a>
+                        <a href="/booking?category=massage&service=sport&detail=sporten-masaj"
+                            class="select-service-btn">Избери</a>
                     </div>
                 </div>
             </div>
@@ -784,7 +803,7 @@
         <h2>Отзиви</h2>
 
         <div class="testimonials-grid">
-            <div class="testimonial-card">
+            <a class="testimonial-card" href="https://studio24.bg/salon-za-krasota-raia-s1292#ratingReviews">
                 <div class="testimonial-content">
                     <div class="stars">
                         <img src="images/icons/star.png" alt="star">
@@ -798,9 +817,9 @@
                     <h3>safie</h3>
                     <span class="client-type">Клиент</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="testimonial-card">
+            <a class="testimonial-card" href="https://studio24.bg/salon-za-krasota-raia-s1292#ratingReviews">
                 <div class="testimonial-content">
                     <div class="stars">
                         <img src="images/icons/star.png" alt="star">
@@ -813,9 +832,9 @@
                     <h3>aleksandar</h3>
                     <span class="client-type">Клиент</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="testimonial-card">
+            <a class="testimonial-card" href="https://studio24.bg/salon-za-krasota-raia-s1292#ratingReviews">
                 <div class="testimonial-content">
                     <div class="stars">
                         <img src="images/icons/star.png" alt="star">
@@ -829,7 +848,7 @@
                     <h3>desislava</h3>
                     <span class="client-type">Клиент</span>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -838,7 +857,7 @@
     <script src="js/main.js"></script>
     <script>
         // Add this script to fix service links without parameters
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Map of Cyrillic service names to Latin slugs
             const serviceNameMap = {
                 // Haircuts
@@ -852,7 +871,7 @@
                 'Прическа с кок': 'pricheska-s-kok',
                 'Оформяне на врат': 'oformyane-vrat',
                 'Измиване на коса + маска': 'izmivane-maska',
-                
+
                 // Coloring
                 'Боядисване с wella + сешоар': 'boyadisvane-wella',
                 'Боядисване с Wella': 'boyadisvane-wella-base',
@@ -860,28 +879,28 @@
                 'Обезцветяване': 'obezcvetyavane',
                 'Кичури': 'kichuri',
                 'Матиране': 'matirane',
-                
+
                 // Straightening
                 'Изправяне с преса': 'izpravyane-presa',
                 'Измиване подстригване + Изправяне с сешоар': 'izmivane-podstrigvane-izpravyane',
-                
+
                 // Extensions
                 'Удължаване на коса с щипки': 'udalyavane-kosa',
-                
+
                 // Treatments
                 'Кератинова терапия за коса': 'keratinova-terapiya',
                 'Терапия за бързо възстановяване на суха и изтощена коса с Wella': 'terapiya-vazstanovyavane',
                 'Арганова терапия за коса': 'arganova-terapiya',
                 'Ампула за коса против косопад': 'ampula-kostopad',
                 'Маска за копринена коса': 'maska-koprinena',
-                
+
                 // Beard
                 'Оформяне на брада': 'oformyane-brada',
                 'Тониране на сиви коси': 'tonirane-kosi',
-                
+
                 // Other
                 'Пробиване на уши': 'probirane-ushi',
-                
+
                 // Makeup
                 'Професионален грим': 'profesionalen-grim',
                 'Вечерен грим': 'vecheren-grim',
@@ -890,10 +909,10 @@
                 'Ежедневен грим': 'ezhedneven-grim',
                 'Абитуриентски грим': 'abiturientski-grim',
                 'Фото грим': 'foto-grim',
-                
+
                 // Permanent
                 'Перманентен грим на вежди': 'permanenten-vejdi',
-                
+
                 // Women's Epilation
                 'Подмишници - кола маска': 'podmishnitsi-kola',
                 'Цели крака - кола маска': 'celi-kraka-kola',
@@ -904,7 +923,7 @@
                 'Горна устна - кола маска': 'gorna-ustna-kola',
                 'Бакенбарди - кола маска': 'bakenbardi-kola',
                 'Скули - кола маска': 'skuli-kola',
-                
+
                 // Men's Epilation
                 'Гръб - кола маска': 'grab-kola',
                 'Гърди + корем - кола маска': 'gradi-korem-kola',
@@ -912,34 +931,34 @@
                 'Корем - кола маска': 'korem-kola',
                 'Кръст - кола маска': 'krast-kola',
                 'Врат - кола маска': 'vrat-kola',
-                
+
                 // Massage
                 'Релаксиращ масаж': 'relaksirasht-masaj',
                 'Класически масаж при Вики': 'klasicheski-masaj',
                 'Спортен масаж': 'sporten-masaj'
             };
-            
+
             // Process all service links
             document.querySelectorAll('.select-service-btn').forEach(link => {
                 // Skip links that already have parameters
                 if (link.href.includes('?')) return;
-                
+
                 // Get service name from the parent element
                 const serviceItem = link.closest('.service-detail-item');
                 if (!serviceItem) return;
-                
+
                 const serviceNameEl = serviceItem.querySelector('.service-info h3');
                 if (!serviceNameEl) return;
-                
+
                 const serviceName = serviceNameEl.textContent.trim();
-                
+
                 // Get category and subcategory from parent elements
                 const categoryEl = link.closest('[data-category]');
                 if (!categoryEl) return;
-                
+
                 const subcategory = categoryEl.getAttribute('data-category');
                 let mainCategory = '';
-                
+
                 // Determine main category from the class of the parent
                 if (categoryEl.classList.contains('hair-details')) {
                     mainCategory = 'hair';
@@ -950,17 +969,17 @@
                 } else if (categoryEl.classList.contains('massage-details')) {
                     mainCategory = 'massage';
                 }
-                
+
                 if (!mainCategory || !subcategory) return;
-                
+
                 // Get a Latin slug from the mapping or generate a fallback
                 let detailSlug = serviceNameMap[serviceName];
-                
+
                 // If no mapping found, use a simple fallback (just the subcategory)
                 if (!detailSlug) {
                     detailSlug = subcategory + '-service';
                 }
-                
+
                 // Update link href with parameters
                 link.href = `/booking?category=${mainCategory}&service=${subcategory}&detail=${detailSlug}`;
             });

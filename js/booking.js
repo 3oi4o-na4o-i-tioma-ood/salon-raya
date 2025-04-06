@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     sessionStorage.clear();
     localStorage.clear();
     
-    const heroSections = document.querySelectorAll('.hero-section');
+    const serviceCategories = document.querySelectorAll('.service-category');
     const subcategoriesLists = document.querySelectorAll('.subcategories-list');
     const servicesList = document.querySelector('.services-list');
     const selectedCountElement = document.querySelector('.selected-count span');
@@ -226,26 +226,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle hero section clicks
-    heroSections.forEach(section => {
-        section.addEventListener('click', () => {
-            heroSections.forEach(s => s.classList.remove('active'));
-            section.classList.add('active');
+    // Handle service category clicks
+    serviceCategories.forEach(category => {
+        category.addEventListener('click', function() {
+            // Remove active class from all categories
+            serviceCategories.forEach(c => c.classList.remove('active'));
+            // Add active class to the clicked category
+            this.classList.add('active');
 
-            const category = section.getAttribute('data-category');
+            const categoryType = this.getAttribute('data-category');
             subcategoriesLists.forEach(list => {
-                if (list.getAttribute('data-category') === category) {
-                    list.classList.add('active');
+                if (list.getAttribute('data-category') === categoryType) {
+                    list.style.display = 'flex';
                     const firstSubcategory = list.querySelector('.subcategory');
                     if (firstSubcategory) {
                         firstSubcategory.click();
                     }
                 } else {
-                    list.classList.remove('active');
+                    list.style.display = 'none';
                 }
             });
         });
     });
+    
+    // Automatically select the first category on page load
+    if (serviceCategories.length > 0) {
+        serviceCategories[0].click();
+    }
 
     // Handle subcategory clicks
     document.querySelectorAll('.subcategory').forEach(subcategory => {
@@ -355,15 +362,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'booking-details.php';
         }
     });
-
-    // Click the first hero section by default
-    if (heroSections.length > 0) {
-        heroSections[0].click();
-        const firstSubcategory = document.querySelector('.subcategories-list[data-category="hair"] .subcategory');
-        if (firstSubcategory) {
-            firstSubcategory.click();
-        }
-    }
 
     // Get URL parameters
     const urlParams = new URLSearchParams(window.location.search);
