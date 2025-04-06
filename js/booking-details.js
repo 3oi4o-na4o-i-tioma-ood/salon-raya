@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentDate = new Date();
     let selectedDate = null;
     let selectedTime = null;
-    let bookedTimesForSelectedDate = []; // Store booked times
+    let bookedIntervalsForSelectedDate = []; // Store booked intervals [ {start: min, end: min} ]
 
     const months = ['Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни', 'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември'];
 
@@ -129,101 +129,126 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     }
 
-    // --- Fetch Booked Times --- 
+    // --- Fetch Booked Times (Modified to store intervals) ---
     async function fetchBookedTimes(date) {
         const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-        bookedTimesForSelectedDate = []; // Reset before fetching
+        bookedIntervalsForSelectedDate = []; // Reset before fetching
         try {
             const response = await fetch(`get_booked_times.php?date=${formattedDate}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok for booked times');
             }
-            bookedTimesForSelectedDate = await response.json();
-            console.log(`Booked times for ${formattedDate}:`, bookedTimesForSelectedDate);
+            bookedIntervalsForSelectedDate = await response.json(); // Expecting [{start: min, end: min}, ...]
         } catch (error) {
-            console.error('Error fetching booked times:', error);
-            // Handle error appropriately, maybe disable all time slots
+            console.error('Error fetching booked intervals:', error);
+            // Handle error appropriately
         }
     }
 
-    // --- Generate and Update Time Slots (Modified for Duration Check) ---
+    // --- Generate and Update Time Slots (Modified for Day-Specific Hours) ---
     function generateTimeSlots() {
         const slots = [];
-        
-        // Generate slots from 10:00 to 16:30 with 30-minute intervals
-        for (let hour = 10; hour <= 16; hour++) {
-            for (let minute of [0, 30]) {
-                const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-                slots.push({
-                    time: timeString,
-                    disabled: false
-                });
+        const interval = 30; // 30 minutes interval
+        let openingTimeMinutes = 10 * 60; // Default 10:00 AM
+        let closingTimeMinutes = 20 * 60; // Default 8:00 PM
+
+        if (selectedDate) { // Check if a date is actually selected
+            const dayOfWeek = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
+            if (dayOfWeek === 0 || dayOfWeek === 6) { // Weekend
+                openingTimeMinutes = 12 * 60; // 12:00 PM
+                closingTimeMinutes = 17 * 60; // 5:00 PM
             }
+        }
+        // Else, use default weekday hours if no date selected (though UI should prevent this)
+
+        // Calculate last possible start time based on dynamic closing time
+        const lastSlotStartMinutes = closingTimeMinutes - interval;
+
+        for (let minutes = openingTimeMinutes; minutes <= lastSlotStartMinutes; minutes += interval) {
+            const timeString = minutesToTime(minutes);
+            slots.push({
+                time: timeString,
+                disabled: false
+            });
         }
         return slots;
     }
 
+    // --- Update Time Slots (Modified for Day-Specific Hours) ---
     function updateTimeSlots() {
-        const slots = generateTimeSlots();
+        const slots = generateTimeSlots(); // Generation now depends on selectedDate
         const container = document.getElementById('timeSlots');
         container.innerHTML = '';
         
-        // Calculate total duration from selected services
         const currentSelectedServices = JSON.parse(sessionStorage.getItem('selectedServices') || '[]');
-        const totalDurationMinutes = currentSelectedServices.reduce((sum, s) => sum + (parseInt(s.duration) || 0), 0);
         
-        // Convert booked times to minutes for easier comparison
-        const bookedMinutesSet = new Set(bookedTimesForSelectedDate.map(timeToMinutes));
-        const salonClosingTimeMinutes = 20 * 60; // 8:00 PM
+        const totalDurationMinutes = currentSelectedServices.reduce((sum, s) => {
+             // Handle potential duration ranges (e.g., "40-55") - take the max for safety
+             let duration = 0;
+             if (s.duration && typeof s.duration === 'string' && s.duration.includes('-')) {
+                 const parts = s.duration.split('-').map(Number);
+                 duration = Math.max(...parts);
+             } else {
+                 duration = parseInt(s.duration) || 0; // Default to 0 if not parseable
+             }
+             return sum + duration;
+        }, 0);
+        
+        // Use a default duration only if calculated is zero
+        const finalDuration = totalDurationMinutes > 0 ? totalDurationMinutes : 60; 
 
-        console.log("Updating time slots. Duration:", totalDurationMinutes, "Booked Minutes:", Array.from(bookedMinutesSet));
+        // Determine closing time based on selected date
+        let salonClosingTimeMinutes = 20 * 60; // Default 8:00 PM
+        if (selectedDate) {
+            const dayOfWeek = selectedDate.getDay();
+            if (dayOfWeek === 0 || dayOfWeek === 6) { // Weekend
+                salonClosingTimeMinutes = 17 * 60; // 5:00 PM
+            }
+        }
 
         slots.forEach(slot => {
             const timeSlotElement = document.createElement('div');
             timeSlotElement.className = 'time-slot';
             const slotStartMinutes = timeToMinutes(slot.time);
-            const slotEndMinutes = slotStartMinutes + totalDurationMinutes;
+            const slotEndMinutes = slotStartMinutes + finalDuration;
             let isDisabled = false;
             let disableReason = '';
+            timeSlotElement.classList.remove('conflict');
 
-            // Check 1: Is the start time itself already booked?
-            if (bookedMinutesSet.has(slotStartMinutes)) {
+            // Check 1: Exceeds closing time
+            if (slotEndMinutes > salonClosingTimeMinutes) {
                 isDisabled = true;
-                disableReason = ' (заето)';
+                disableReason = ' (няма време)';
             }
 
-            // Check 2: Does the appointment exceed closing time?
-            if (!isDisabled && slotEndMinutes > salonClosingTimeMinutes) {
-                isDisabled = true;
-                disableReason = ' (няма време)'; // Not enough time before closing
-            }
-
-            // Check 3: Does the duration overlap with any *other* booked slot?
+            // Check 2: Overlap check (uses bookedIntervalsForSelectedDate)
             if (!isDisabled) {
-                for (let checkMin = slotStartMinutes; checkMin < slotEndMinutes; checkMin += 30) {
-                    if (bookedMinutesSet.has(checkMin)) {
-                         if (checkMin !== slotStartMinutes) { 
-                            isDisabled = true;
+                for (const bookedInterval of bookedIntervalsForSelectedDate) {
+                    if (bookedInterval.start < slotEndMinutes && bookedInterval.end > slotStartMinutes) {
+                        isDisabled = true;
+                        if (bookedInterval.start === slotStartMinutes) {
+                             disableReason = ' (заето)';
+                        } else {
                             timeSlotElement.classList.add('conflict');
-                            break; 
-                         }
+                        }
+                        break; 
                     }
                 }
             }
             
             slot.disabled = isDisabled;
 
-            if (selectedTime === slot.time && !isDisabled) { // Can only select if not disabled
+            // --- Styling and Selection Logic (minor adjustments) ---
+            if (selectedTime === slot.time && !isDisabled) { 
                 timeSlotElement.classList.add('selected');
             } else if (selectedTime === slot.time && isDisabled) {
-                 // If the previously selected time becomes disabled, deselect it
                  selectedTime = null; 
                  confirmDateTimeBtn.disabled = true; 
             }
 
             if (slot.disabled) {
                 timeSlotElement.classList.add('disabled');
-                timeSlotElement.textContent = `${slot.time}${timeSlotElement.classList.contains('conflict') ? '' : disableReason}`;
+                timeSlotElement.textContent = `${slot.time}${disableReason}`;
             } else {
                  timeSlotElement.textContent = slot.time;
                  timeSlotElement.addEventListener('click', () => selectTime(slot.time));
@@ -239,8 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
                  // The selected time is no longer valid/available
                  selectedTime = null;
                  confirmDateTimeBtn.disabled = true;
-                 // Optionally inform the user
-                 // alert("Избраният час вече не е наличен.");
              } else {
                   selectedSlotElement.classList.add('selected'); // Ensure it stays visually selected
                   confirmDateTimeBtn.disabled = false; 
@@ -277,9 +300,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 slot.classList.toggle('selected', !slot.classList.contains('disabled') && slot.textContent === time);
             });
             confirmDateTimeBtn.disabled = false;
-        } else {
-            console.warn("Attempted to select a disabled time slot:", time);
-            // Optionally provide feedback to user
         }
     }
 
@@ -403,35 +423,41 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('input', validateForm);
     });
 
-    // Handle form submission
-    form.addEventListener('submit', function(e) {
+    // Form submission
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Записване...';
+
         const formData = new FormData(form);
-        fetch('save_appointment.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json(); // Change back to json()
-        })
-        .then(data => {
-            if (data.success) {
-                // Restore original redirect
+        
+        // Add selected services in a format PHP can easily parse
+        formData.append('service_details', JSON.stringify(selectedServices));
+
+        try {
+            const response = await fetch('save_appointment.php', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                sessionStorage.removeItem('selectedServices');
                 window.location.href = 'booking-confirmation.php';
             } else {
-                console.error('Booking failed:', data.message);
-                alert('Booking failed: ' + data.message);
+                alert(`Грешка: ${result.message}`);
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Don't redirect on error
-            alert('Error submitting form: ' + error.message);
-        });
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('Възникна грешка при изпращане на резервацията. Моля, опитайте отново.');
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
     });
 
     // Event Listeners

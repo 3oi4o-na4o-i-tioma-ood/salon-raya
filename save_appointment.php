@@ -27,12 +27,6 @@ require_once 'includes/email.php';
 
 use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
-use Google_Client;
-use Google_Service_Calendar;
-use Google_Service_Calendar_Event;
-use DateTime;
-use DateInterval;
-use Exception;
 
 // Database connection
 $conn = getDbConnection();
@@ -60,6 +54,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $appointment_date = $_POST['appointment_date'] ?? '';
     $appointment_time = $_POST['appointment_time'] ?? '';
     $comment = isset($_POST['comment']) ? $_POST['comment'] : '';
+    $service_details_json = $_POST['service_details'] ?? '[]'; // Get selected services JSON
+
+    // Calculate total duration from service_details
+    $service_details = json_decode($service_details_json, true);
+    $total_duration_minutes = 0;
+    if (is_array($service_details)) {
+        foreach ($service_details as $item) {
+            // Handle potential duration ranges (e.g., "40-55") - take the max for safety
+            if (isset($item['duration']) && is_string($item['duration']) && strpos($item['duration'], '-') !== false) {
+                 $parts = explode('-', $item['duration']);
+                 $total_duration_minutes += max(array_map('intval', $parts));
+            } elseif (isset($item['duration'])) {
+                 $total_duration_minutes += intval($item['duration']);
+            }
+        }
+    }
+    // Default to 60 mins if calculation fails or is zero
+    if ($total_duration_minutes <= 0) { 
+        $total_duration_minutes = 60; 
+        logMessage("Warning: Calculated duration was zero or invalid. Defaulting to 60 minutes.");
+    }
 
     // Log the processed data
     logMessage("Processed form data:");
@@ -70,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     logMessage("Date: $appointment_date");
     logMessage("Time: $appointment_time");
     logMessage("Comment: $comment");
+    logMessage("Calculated Duration: $total_duration_minutes minutes");
 
     // Validate required fields
     if (empty($client_name) || empty($phone) || empty($email) || empty($service) || empty($appointment_date) || empty($appointment_time)) {
@@ -77,17 +93,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die(json_encode(['success' => false, 'message' => 'All required fields must be filled']));
     }
 
-    // Prepare and execute SQL statement
-    $stmt = $conn->prepare("INSERT INTO appointments (client_name, phone, email, service, appointment_date, appointment_time, comment) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    // Prepare and execute SQL statement (add duration_minutes)
+    $stmt = $conn->prepare("INSERT INTO appointments (client_name, phone, email, service, appointment_date, appointment_time, comment, duration_minutes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         logMessage("Prepare failed: " . $conn->error);
         die(json_encode(['success' => false, 'message' => 'Database prepare failed']));
     }
 
-    $stmt->bind_param("sssssss", $client_name, $phone, $email, $service, $appointment_date, $appointment_time, $comment);
+    $stmt->bind_param("sssssssi", $client_name, $phone, $email, $service, $appointment_date, $appointment_time, $comment, $total_duration_minutes);
 
     if ($stmt->execute()) {
-        logMessage("Appointment saved successfully for $client_name");
+        logMessage("Appointment saved successfully for $client_name with duration $total_duration_minutes");
         
         // Get the appointment ID
         $appointmentId = $conn->insert_id;

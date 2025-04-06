@@ -93,15 +93,25 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Add to selected services
+        // Add to selected services - INCLUDING DURATION
         selectedServices.push({
             name: serviceName,
             price: parseFloat(servicePrice),
-            duration: serviceDuration
+            duration: serviceDuration // Make sure duration is included here
         });
         selectedServiceNames.add(serviceName);
         totalPrice += parseFloat(servicePrice);
-        totalDuration += parseInt(serviceDuration) || 0;
+        // Make sure to parse duration correctly here too if needed for summary
+        // Handle potential ranges for summary duration display (take max or average? Let's take max for consistency)
+        let durationToAdd = 0;
+        if (typeof serviceDuration === 'string' && serviceDuration.includes('-')) {
+            const parts = serviceDuration.split('-').map(Number);
+            durationToAdd = Math.max(...parts);
+        } else {
+            durationToAdd = parseInt(serviceDuration) || 0; 
+        }
+        totalDuration += durationToAdd; 
+        
         updateSummary();
         bookingSummary.style.display = 'block';
         
@@ -111,8 +121,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Refresh the current view to reflect changes
         const activeSubcategory = document.querySelector('.subcategory.active');
         if (activeSubcategory) {
-            activeSubcategory.click();
+            // Find the services data again to re-render
+            const servicesData = JSON.parse(activeSubcategory.getAttribute('data-services') || '[]');
+            renderServices(servicesData);
         }
+        
+        // Save updated list to session storage
+        sessionStorage.setItem('selectedServices', JSON.stringify(selectedServices));
     }
     
     // Function to disable all buttons for a specific service
