@@ -41,7 +41,14 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                 <img src="images/logo.svg" alt="SALON RAYA LOGO" class="dashboard-logo">
             </a>
             <div class="dashboard-title">Работен панел</div>
-            <a href="sign-in.php?logout=true" class="logout-btn">Изход</a>
+            <div class="header-actions">
+                <a href="google-auth.php" class="google-cal-button">
+                    <i class="fab fa-google"></i> Свързване с Календар
+                </a>
+                <a href="sign-in.php?logout=true" class="exit-button">
+                    <i class="fas fa-sign-out-alt"></i> Изход
+                </a>
+            </div>
         </div>
 
         <div class="dashboard-content">
