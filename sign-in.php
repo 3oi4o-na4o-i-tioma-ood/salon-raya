@@ -63,26 +63,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-    <div class="sign-in-container">
-        <a href="/" class="back-button">
+<div class="sign-in-container">
+        <a href="index.php" class="back-button">
             <i class="fas fa-arrow-left"></i>
         </a>
-        <div class="login-container">
-            <a href="/" class="logo">Фризьорски салон Райа</a>
-            <h1>Вход за служител</h1>
-            
-            <?php if (isset($error)): ?>
-                <div class="error-message"><?php echo $error; ?></div>
-            <?php endif; ?>
-
-            <form method="post" class="login-form">
-                <div class="form-group">
-                    <label for="password">Парола:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit">Вход</button>
-            </form>
-        </div>
+        <div class="logo">Фризьорски салон Райа</div>
+        <h1>Вход за служител</h1>
+        
+        
+        <form class="sign-in-form" method="POST">
+            <div class="password-container">
+                <input type="password" name="password" placeholder="Парола" required="">
+            </div>
+            <button type="submit">Продължи</button>
+        </form>
     </div>
 
     <script src="js/main.js"></script>
