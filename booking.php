@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@ session_start();
     <link rel="stylesheet" href="css/booking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <nav class="navbar">
         <a href="/" class="logo">Райа</a>
@@ -22,7 +24,7 @@ session_start();
     </nav>
 
     <nav class="navbar-scrolled">
-    <a href="/" class="logo">Райа</a>
+        <a href="/" class="logo">Райа</a>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -51,7 +53,7 @@ session_start();
                 <img src="images/icons/face (2).png" alt="Лице" class="service-icon">
                 <h2 class="category-title">Лице</h2>
             </button>
-            
+
             <button class="service-category" data-category="epilation">
                 <img src="images/icons/epilaciq (2).png" alt="Епилация" class="service-icon">
                 <h2 class="category-title">Епилация</h2>
@@ -253,6 +255,12 @@ session_start();
         </div>
 
         <div class="booking-summary" style="display: none;">
+            <div class="selected-services-list">
+                <div class="selected-services-container">
+                    <!-- Selected services will be added here dynamically -->
+                </div>
+            </div>
+
             <div class="summary-content">
                 <div class="summary-left">
                     <div class="selected-count"><span>0</span> услуги</div>
@@ -262,13 +270,6 @@ session_start();
                     <div class="total-price">Избери час <span>0 лв.</span></div>
                 </div>
             </div>
-            
-            <div class="selected-services-list">
-                <h3>Избрани услуги:</h3>
-                <div class="selected-services-container">
-                    <!-- Selected services will be added here dynamically -->
-                </div>
-            </div>
         </div>
     </div>
 
@@ -276,4 +277,5 @@ session_start();
     <script src="js/menu.js"></script>
     <script src="js/booking.js"></script>
 </body>
-</html> 
+
+</html>
