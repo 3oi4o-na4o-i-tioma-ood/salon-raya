@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentDate = new Date();
     let selectedDate = null;
     let selectedTime = null;
+    let bookedTimesForSelectedDate = []; // Store booked times
 
     const months = ['Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни', 'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември'];
 
@@ -115,6 +116,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // --- Fetch Booked Times --- 
+    async function fetchBookedTimes(date) {
+        const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+        bookedTimesForSelectedDate = []; // Reset before fetching
+        try {
+            const response = await fetch(`get_booked_times.php?date=${formattedDate}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok for booked times');
+            }
+            bookedTimesForSelectedDate = await response.json();
+            console.log(`Booked times for ${formattedDate}:`, bookedTimesForSelectedDate);
+        } catch (error) {
+            console.error('Error fetching booked times:', error);
+            // Handle error appropriately, maybe disable all time slots
+        }
+    }
+
+    // --- Generate and Update Time Slots (Modified) ---
     function generateTimeSlots() {
         const slots = [];
         
@@ -132,38 +151,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateTimeSlots() {
-        const slots = generateTimeSlots();
+        const slots = generateTimeSlots(); // Get base slots
         const container = document.getElementById('timeSlots');
-        container.innerHTML = '';
+        container.innerHTML = ''; // Clear previous slots
         
+        console.log("Updating time slots. Booked:", bookedTimesForSelectedDate);
+
         slots.forEach(slot => {
             const timeSlot = document.createElement('div');
             timeSlot.className = 'time-slot';
+            
+            // Check if this slot is booked
+            const isBooked = bookedTimesForSelectedDate.includes(slot.time);
+            slot.disabled = isBooked; // Update the slot's disabled status
+
             if (selectedTime === slot.time) {
                 timeSlot.classList.add('selected');
             }
             if (slot.disabled) {
                 timeSlot.classList.add('disabled');
+                timeSlot.textContent = `${slot.time} (заето)`;
+            } else {
+                 timeSlot.textContent = slot.time;
+                 timeSlot.addEventListener('click', () => selectTime(slot.time));
             }
-            timeSlot.textContent = slot.time;
-            if (!slot.disabled) {
-                timeSlot.addEventListener('click', () => selectTime(slot.time));
-            }
+           
             container.appendChild(timeSlot);
         });
     }
 
-    function selectDate(date) {
+    // --- Select Date (Modified) ---
+    async function selectDate(date) { // Make async to wait for fetch
         selectedDate = date;
-        selectedTime = null;
-        updateCalendar();
-        continueToHoursBtn.disabled = false;
-        document.querySelectorAll('.time-slot').forEach(slot => {
-            slot.classList.remove('selected');
-        });
-        confirmDateTimeBtn.disabled = true;
+        selectedTime = null; 
+        confirmDateTimeBtn.disabled = true; // Disable confirm until time is selected
+        continueToHoursBtn.disabled = false; // Enable button to go to hours
+        updateCalendar(); // Update calendar display
+        
+        // Fetch booked times for the newly selected date
+        await fetchBookedTimes(selectedDate);
+        
+        // Time slots will be updated when user clicks 'Continue to Hours'
+        // or if the view is already showing hours.
+        if (calendarSections.classList.contains('show-hours')) {
+             updateTimeSlots(); // Update immediately if hours are visible
+        }
     }
 
+    // --- Select Time (Remains the same) ---
     function selectTime(time) {
         selectedTime = time;
         document.querySelectorAll('.time-slot').forEach(slot => {
@@ -201,7 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
     continueToHoursBtn.addEventListener('click', () => {
         if (selectedDate) {
             calendarSections.classList.add('show-hours');
-            updateTimeSlots();
+            // Ensure time slots are updated with availability for the selected date
+            updateTimeSlots(); 
         }
     });
 
