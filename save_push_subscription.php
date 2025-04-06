@@ -1,8 +1,18 @@
 <?php
-require_once 'config.php';
+session_start(); // Start session
+require_once 'includes/db_config.php'; // Use db_config
 
 header('Content-Type: application/json');
 
+// Get DB connection
+$conn = getDbConnection();
+if (!$conn) {
+    error_log("Error saving push subscription: Database connection failed");
+    die(json_encode(['success' => false, 'message' => 'Database connection error']));
+}
+$conn->set_charset("utf8mb4"); // Set charset
+
+// Check if user is authenticated
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     die(json_encode(['success' => false, 'message' => 'Unauthorized']));
 }
