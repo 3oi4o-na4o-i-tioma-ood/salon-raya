@@ -24,10 +24,15 @@ session_start();
 require_once 'vendor/autoload.php';
 require_once 'includes/db_config.php';
 require_once 'includes/email.php';
-require_once 'includes/google_calendar.php';
 
 use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
+use Google_Client;
+use Google_Service_Calendar;
+use Google_Service_Calendar_Event;
+use DateTime;
+use DateInterval;
+use Exception;
 
 // Database connection
 $conn = getDbConnection();
@@ -87,84 +92,105 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get the appointment ID
         $appointmentId = $conn->insert_id;
         
-        // Add to Google Calendar
-        $calendar_result = addToGoogleCalendar($client_name, $service, $appointment_date, $appointment_time, $comment, $appointmentId);
-        if ($calendar_result) {
-            logMessage("Appointment added to Google Calendar successfully");
+        // Try to add to Google Calendar, but don't fail if it doesn't work
+        try {
+            $calendar_result = addToGoogleCalendar($client_name, $service, $appointment_date, $appointment_time, $comment, $appointmentId);
+            if ($calendar_result) {
+                logMessage("Appointment added to Google Calendar successfully");
+            } else {
+                logMessage("Warning: Could not add to Google Calendar, but continuing with appointment");
+            }
+        } catch (Exception $e) {
+            logMessage("Error adding to Google Calendar: " . $e->getMessage());
+            // Continue anyway - Google Calendar is optional
         }
         
-        // Send push notification
+        // Try to send push notification, but don't fail if it doesn't work
         try {
             // Get all push subscriptions
             $pushStmt = $conn->prepare("SELECT endpoint, p256dh, auth FROM push_subscriptions");
-            $pushStmt->execute();
-            $pushResult = $pushStmt->get_result();
-            $subscriptions = $pushResult->fetch_all(MYSQLI_ASSOC);
-
-            logMessage("Found " . count($subscriptions) . " push subscriptions");
-
-            if (!empty($subscriptions)) {
-                // Initialize WebPush
-                $webPush = new WebPush([
-                    'VAPID' => $vapidKeys
-                ]);
-
-                // Prepare notification message
-                $message = json_encode([
-                    'message' => "$client_name резервира $service за " . date('d.m.Y', strtotime($appointment_date)) . " в $appointment_time"
-                ]);
-
-                logMessage("Sending push notification with message: " . $message);
-
-                // Send to all subscriptions
-                foreach ($subscriptions as $subscription) {
-                    try {
-                        $report = $webPush->sendOneNotification(
-                            Subscription::create([
-                                'endpoint' => $subscription['endpoint'],
-                                'keys' => [
-                                    'p256dh' => $subscription['p256dh'],
-                                    'auth' => $subscription['auth']
-                                ]
-                            ]),
-                            $message
-                        );
-
-                        // Check if subscription is still valid
-                        if ($report->isSubscriptionExpired()) {
-                            logMessage("Subscription expired, removing: " . $subscription['endpoint']);
-                            // Remove expired subscription
-                            $deleteStmt = $conn->prepare("DELETE FROM push_subscriptions WHERE endpoint = ?");
-                            $deleteStmt->bind_param("s", $subscription['endpoint']);
-                            $deleteStmt->execute();
-                        }
-                    } catch (Exception $e) {
-                        logMessage("Error sending to subscription: " . $e->getMessage());
-                    }
-                }
+            if (!$pushStmt) {
+                logMessage("Warning: Failed to prepare push subscription query: " . $conn->error);
             } else {
-                logMessage("No push subscriptions found in database");
+                $pushStmt->execute();
+                $pushResult = $pushStmt->get_result();
+                $subscriptions = $pushResult->fetch_all(MYSQLI_ASSOC);
+
+                logMessage("Found " . count($subscriptions) . " push subscriptions");
+
+                if (!empty($subscriptions)) {
+                    // Initialize WebPush
+                    $webPush = new WebPush([
+                        'VAPID' => $vapidKeys
+                    ]);
+
+                    // Prepare notification message
+                    $message = json_encode([
+                        'message' => "$client_name резервира $service за " . date('d.m.Y', strtotime($appointment_date)) . " в $appointment_time"
+                    ]);
+
+                    logMessage("Sending push notification with message: " . $message);
+
+                    // Send to all subscriptions
+                    foreach ($subscriptions as $subscription) {
+                        try {
+                            $report = $webPush->sendOneNotification(
+                                Subscription::create([
+                                    'endpoint' => $subscription['endpoint'],
+                                    'keys' => [
+                                        'p256dh' => $subscription['p256dh'],
+                                        'auth' => $subscription['auth']
+                                    ]
+                                ]),
+                                $message
+                            );
+
+                            // Check if subscription is still valid
+                            if ($report->isSubscriptionExpired()) {
+                                logMessage("Subscription expired, removing: " . $subscription['endpoint']);
+                                // Remove expired subscription
+                                $deleteStmt = $conn->prepare("DELETE FROM push_subscriptions WHERE endpoint = ?");
+                                $deleteStmt->bind_param("s", $subscription['endpoint']);
+                                $deleteStmt->execute();
+                            }
+                        } catch (Exception $e) {
+                            logMessage("Error sending to subscription: " . $e->getMessage());
+                            // Continue to next subscription
+                        }
+                    }
+                } else {
+                    logMessage("No push subscriptions found in database");
+                }
             }
         } catch (Exception $e) {
             logMessage("Error sending push notification: " . $e->getMessage());
             logMessage("Stack trace: " . $e->getTraceAsString());
+            // Continue anyway - push notifications are optional
         }
 
-        // Send confirmation email
-        $emailSent = sendBookingConfirmationEmail(
-            $_POST['email'],
-            $_POST['client_name'],
-            $_POST['service'],
-            $_POST['appointment_date'],
-            $_POST['appointment_time'],
-            $appointmentId,
-            $_POST['comment'] ?? ''
-        );
+        // Try to send confirmation email, but don't fail if it doesn't work
+        try {
+            $emailSent = sendBookingConfirmationEmail(
+                $_POST['email'],
+                $_POST['client_name'],
+                $_POST['service'],
+                $_POST['appointment_date'],
+                $_POST['appointment_time'],
+                $appointmentId,
+                $_POST['comment'] ?? ''
+            );
 
-        if (!$emailSent) {
-            logMessage("Failed to send confirmation email to: " . $_POST['email']);
+            if (!$emailSent) {
+                logMessage("Warning: Failed to send confirmation email to: " . $_POST['email']);
+            } else {
+                logMessage("Confirmation email sent to: " . $_POST['email']);
+            }
+        } catch (Exception $e) {
+            logMessage("Error sending confirmation email: " . $e->getMessage());
+            // Continue anyway - email is optional
         }
 
+        // Return success regardless of optional steps
         echo json_encode(['success' => true, 'message' => 'Appointment saved successfully']);
     } else {
         logMessage("Execute failed: " . $stmt->error);

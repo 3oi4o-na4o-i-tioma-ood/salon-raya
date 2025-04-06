@@ -15,14 +15,24 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
         // Save the token to the database
         $conn = getDbConnection();
         if (!$conn) {
+            error_log("Database connection failed in email function");
             return false;
         }
         
         // Check if cancellation_token column exists, if not add it
         $columnCheckResult = $conn->query("SHOW COLUMNS FROM appointments LIKE 'cancellation_token'");
+        if ($columnCheckResult === false) {
+            error_log("Failed to check if cancellation_token column exists: " . $conn->error);
+            return false;
+        }
+        
         if ($columnCheckResult->num_rows === 0) {
             // Column doesn't exist, add it
-            $conn->query("ALTER TABLE appointments ADD COLUMN cancellation_token VARCHAR(255) NULL");
+            $addColumnResult = $conn->query("ALTER TABLE appointments ADD COLUMN cancellation_token VARCHAR(255) NULL");
+            if ($addColumnResult === false) {
+                error_log("Failed to add cancellation_token column: " . $conn->error);
+                return false;
+            }
             error_log("Added cancellation_token column to appointments table");
         }
         
@@ -38,6 +48,9 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
         
         if (!$execResult) {
             error_log("Execute failed: " . $stmt->error);
+            $stmt->close();
+            $conn->close();
+            return false;
         }
         
         $stmt->close();
@@ -45,6 +58,7 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
 
         // Server settings
         $mail->isSMTP();
+        $mail->SMTPDebug = 0; // 0 = off, 1 = client messages, 2 = client and server messages
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'arttema9@gmail.com';
@@ -61,9 +75,10 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
         $mail->isHTML(true);
         $mail->Subject = 'Потвърждение на резервация - Salon Raya';
         
-        // Create the cancellation URL - use HTTP for local development
+        // Create the cancellation URL with proper error handling for missing HTTP_HOST
         $serverProtocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
-        $cancelUrl = $serverProtocol . $_SERVER['HTTP_HOST'] . "/cancel-reservation.php?token=" . $cancellationToken;
+        $serverHost = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
+        $cancelUrl = $serverProtocol . $serverHost . "/cancel-reservation.php?token=" . $cancellationToken;
         
         // Email body in Bulgarian
         $message = "
@@ -116,9 +131,10 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
         $mail->AltBody = strip_tags($message) . "\n\nЗа отмяна на резервацията: {$cancelUrl}";
 
         $mail->send();
+        error_log("Email sent successfully to: {$to}");
         return true;
     } catch (Exception $e) {
-        error_log("Email sending failed: {$mail->ErrorInfo}");
+        error_log("Email sending failed: " . $e->getMessage());
         return false;
     }
 } 
