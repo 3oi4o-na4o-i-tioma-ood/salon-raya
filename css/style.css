@@ -1876,12 +1876,6 @@ footer {
     background: #fff1f1;
 }
 
-.bookings-section {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 .bookings-header {
     display: flex;

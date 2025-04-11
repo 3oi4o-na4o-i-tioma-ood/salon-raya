@@ -82,10 +82,14 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                                             </h3>
                                             <p class="service"><?php echo htmlspecialchars($appointment['service']); ?></p>
                                             <p class="contact">
-                                                <i class="fas fa-phone"></i>
-                                                <?php echo htmlspecialchars($appointment['phone']); ?><br>
-                                                <i class="fas fa-envelope"></i>
-                                                <?php echo htmlspecialchars($appointment['email']); ?>
+                                                <span class="contact-item">
+                                                    <i class="fas fa-phone"></i> <a
+                                                        href="tel:<?php echo htmlspecialchars($appointment['phone']); ?>"><?php echo htmlspecialchars($appointment['phone']); ?></a>
+                                                </span>
+                                                <span class="contact-item">
+                                                    <i class="fas fa-envelope"></i> <a
+                                                        href="mailto:<?php echo htmlspecialchars($appointment['email']); ?>"><?php echo htmlspecialchars($appointment['email']); ?></a>
+                                                </span>
                                             </p>
                                             <?php if (!empty($appointment['comment'])): ?>
                                                 <p class="notes"><i class="fas fa-sticky-note"></i>
@@ -167,9 +171,13 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
-            flex-direction: row;
-            margin-bottom: 10px;
+            padding: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
         }
 
         .salon-info {
@@ -181,6 +189,7 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         .dashboard-logo {
             height: 40px;
             width: auto;
+            margin-bottom: 0;
         }
 
         .salon-details h1 {
@@ -197,6 +206,15 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
             display: flex;
             gap: 20px;
             max-width: 800px;
+        }
+
+        @media (min-width: 600px) {
+            .bookings-section {
+                background: white;
+                border-radius: 12px;
+                padding: 1.5rem;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
         }
 
         @media (max-width: 850px) {
@@ -220,8 +238,6 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                 gap: 1rem;
             }
         }
-
-        .date-picker {}
 
         .appointments-section {
             flex-grow: 1;
@@ -268,6 +284,14 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
             margin: 3px 0;
         }
 
+        @media (max-width: 600px) {
+            .appointment-details .contact {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+            }
+        }
+
         .no-appointments {
             padding: 15px;
             text-align: center;
@@ -287,9 +311,42 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
             color: #666;
         }
 
+        .date-picker {
+            max-width: 307.875px;
+        }
+
+        @media (max-width: 600px) {
+            .date-picker {
+                margin: auto;
+            }
+        }
+
+        .date-picker .dayContainer {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .flatpickr-current-month {
+            display: flex;
+        }
+
         .flatpickr-calendar {
+            width: 100%;
             font-size: 14px;
             margin: 0 auto;
+        }
+
+        .flatpickr-day {
+            height: auto;
+            aspect-ratio: 1;
+            line-height: normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .date-picker .flatpickr-days {
+            width: 100%;
         }
 
         /* Update today's styling */
@@ -443,6 +500,42 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 
         .status-badge.confirmed {
             background-color: #2ecc71;
+        }
+
+        .contact i {
+            margin-right: 6px;
+            color: #666;
+        }
+
+        .contact a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-item {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard-header {
+                justify-content: center;
+                padding: 10px;
+            }
+            .dashboard-title {
+                order: -1;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 
