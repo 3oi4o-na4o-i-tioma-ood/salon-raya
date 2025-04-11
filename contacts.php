@@ -44,6 +44,8 @@
             gap: 40px;
         }
 
+        
+
         .contact-details {
             display: flex;
             flex-direction: column;
@@ -151,13 +153,23 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* Footer styling fixes */
-        .footer {
-            margin-top: auto;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            position: relative;
-            z-index: 1;
+        @media (max-width: 800px) {
+            .contacts-container {
+                margin: 0;    
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .map-container {
+                margin-top: 0;
+            }
+
+            .contact-info {
+                padding: 10px;
+            }
         }
     </style>
 </head>

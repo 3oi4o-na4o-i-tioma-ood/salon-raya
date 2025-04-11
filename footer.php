@@ -158,18 +158,18 @@
         }
 
         /* Footer social icons */
-        .footer .social-links a {
+        footer .social-links a {
             color: #000;
             margin-right: 15px;
             font-size: 20px;
         }
 
-        .footer .social-links a:hover {
+        footer .social-links a:hover {
             color: #a484e8;
         }
 
         /* General social links */
-        .social-links {
+        footer .social-links {
             margin-bottom: 1rem;
             display: flex;
             justify-content: center;
@@ -178,7 +178,7 @@
             text-align: center;
         }
 
-        .social-links a {
+        footer .social-links a {
             color: #333;
             margin: 0 10px;
             font-size: 24px;
@@ -187,7 +187,7 @@
             transition: color 0.3s ease;
         }
 
-        .social-links a:hover {
+        footer .social-links a:hover {
             color: #666;
         }
 
