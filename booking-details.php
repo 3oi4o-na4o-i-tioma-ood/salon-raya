@@ -222,6 +222,13 @@ session_start();
             display: none;
         }
 
+        @media (max-width: 600px) {
+            .calendar-modal {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+
         .calendar-sections {
             display: flex;
             width: 200%;
@@ -234,7 +241,7 @@ session_start();
         .calendar-section {
             width: 47.5%;
             flex-shrink: 0;
-            padding: 15px;
+            padding-top: 35px;
             overflow: hidden;
             background: white;
             position: relative;
@@ -416,7 +423,6 @@ session_start();
         .calendar-days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
         }
 
         .calendar-day {
@@ -535,13 +541,6 @@ session_start();
             font-weight: 500;
             margin-bottom: 15px;
             font-size: 14px;
-        }
-
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            padding: 0 10px;
         }
 
         .calendar-day {
@@ -667,6 +666,12 @@ session_start();
             cursor: pointer;
             color: #666;
         }
+        @media (max-width: 600px) {
+            .close-modal {
+                top: 20px;
+                right: 20px;
+            }
+        }
 
         .close-modal:hover {
             color: #000;
@@ -678,7 +683,6 @@ session_start();
             margin-top: 20px;
             margin-bottom: 20px;
             padding: 0;
-            margin-right: -10px;
             width: 80%;
             margin-left: auto;
         }
@@ -716,7 +720,6 @@ session_start();
 
         .calendar-section .section-nav {
             margin-top: 20px;
-            margin-right: -10px;
             margin-bottom: 0;
         }
 
