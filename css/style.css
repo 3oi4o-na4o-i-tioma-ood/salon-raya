@@ -34,6 +34,7 @@ body {
     background-color: var(--background-color);
     color: var(--secondary-color);
     position: relative;
+    height: 100vh;
 }
 
 /* Navbar Styles */
@@ -523,6 +524,7 @@ body {
     align-items: start;
     padding: 0 2rem;
     overflow: hidden;
+    width: 100%;
 }
 
 .service-categories-list {
@@ -1239,6 +1241,7 @@ footer {
     color: #a484e8;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
+    white-space: nowrap;
 }
 
 @media (max-width: 1200px) {
