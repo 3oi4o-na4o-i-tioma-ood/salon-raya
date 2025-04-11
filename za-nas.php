@@ -175,7 +175,7 @@
             }
 
             .about-container {
-                padding: 4rem 5%;
+                padding: 8rem 1rem 5%;
             }
 
             .about-container h1 {
@@ -265,6 +265,7 @@
             position: relative;
             top: 0;
             transition: transform 0.3s ease;
+            object-fit: cover;
         }
 
         .bottom-row .about-image:hover img {
@@ -282,6 +283,8 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+
+        
 
         .featured-brand .brand-logo {
             position: absolute !important;
@@ -322,48 +325,30 @@
             margin-bottom: 1rem;
         }
 
-        footer {
-            padding: 5px 0 !important;
-            margin-top: 0 !important;
-        }
+        @media (max-width: 800px) {
+            .bottom-row,
+            .top-row,
+            .featured-brand {
+                display: flex;
+                flex-direction: column-reverse;
+            }
 
-        .footer-content {
-            padding: 5px 10px !important;
-        }
+            .top-row{
+                display: flex;
+                flex-direction: column;
+            }
 
-        .social-links {
-            margin-bottom: 0.2rem !important;
-        }
+            .top-row .about-image{
+                margin-top: 0;
+            }
 
-        .social-links a {
-            font-size: 18px !important;
-            margin: 0 5px !important;
-        }
+            .about-section {
+                margin-bottom: 0;
+            }
 
-        .footer-nav {
-            margin: 2px 0 !important;
-            background-color: #a484e8 !important;
-            padding: 4px 10px !important;
-            border-radius: 4px !important;
-            display: inline-block !important;
-        }
-
-        .footer-nav a {
-            margin: 0 3px !important;
-            font-size: 0.8rem !important;
-            color: white !important;
-        }
-
-        .copyright {
-            font-size: 0.55em !important;
-            margin: 0 !important;
-        }
-
-        .sign-in-icon {
-            width: 24px !important;
-            height: 24px !important;
-            bottom: 8px !important;
-            left: 8px !important;
+            .about-header .line {
+                width: 75px;
+            }
         }
 
         /* Why Choose Us Section Styles */

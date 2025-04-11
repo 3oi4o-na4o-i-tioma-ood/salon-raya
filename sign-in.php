@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'includes/db_config.php'; // Include the config file
 
 if (isset($_GET['logout'])) {
     session_destroy();
@@ -10,8 +11,11 @@ if (isset($_GET['logout'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     
-    // Check for the specific password
-    if ($password === 'salon123') {
+    // Hash the submitted password using SHA-256
+    $submitted_hash = hash('sha256', $password);
+    
+    // Compare the submitted hash with the expected hash from config
+    if ($submitted_hash === WORKER_PASSWORD_HASH) { // Use the constant
         $_SESSION['authenticated'] = true;
         header('Location: worker-dashboard.php');
         exit();
