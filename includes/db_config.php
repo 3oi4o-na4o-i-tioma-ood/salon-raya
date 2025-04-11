@@ -1,14 +1,14 @@
 <?php
 // Database configuration
-define('DB_HOST', 'localhost');
-define('DB_USER', 'u603525247_root');
-define('DB_PASS', '#27!VijR');
-define('DB_NAME', 'u603525247_salon_raya');
-
 //define('DB_HOST', 'localhost');
-//define('DB_USER', 'root');
-//define('DB_PASS', '');
-//define('DB_NAME', 'salon_raya');
+//define('DB_USER', 'u603525247_root');
+//define('DB_PASS', '#27!VijR');
+//define('DB_NAME', 'u603525247_salon_raya');
+
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'salon_raya');
 
 // Create database connection
 function getDbConnection() {
