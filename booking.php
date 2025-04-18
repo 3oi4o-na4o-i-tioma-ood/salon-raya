@@ -8,7 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Запазете час онлайн за услугите в салон Райа. Изберете подстригване, прическа, боядисване или друга услуга по ваш избор.">
-    <title>Резервация на час - Фризьорски салон Райа</title>
+    <title>Резервация на час - Салон Райа</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/booking.css">

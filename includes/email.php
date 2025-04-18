@@ -68,12 +68,12 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
         $mail->CharSet = 'UTF-8';
 
         // Recipients
-        $mail->setFrom('arttema9@gmail.com', 'Salon Raya');
+        $mail->setFrom('arttema9@gmail.com', 'Салон Рая');
         $mail->addAddress($to, $name);
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Потвърждение на резервация - Salon Raya';
+        $mail->Subject = 'Потвърждение на резервация - Салон Рая';
         
         // Create the cancellation URL with proper error handling for missing HTTP_HOST
         $serverProtocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
@@ -101,7 +101,7 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
                 
                 <p>Уважаема/м г-жо/г-н {$name},</p>
                 
-                <p>Благодарим ви за вашата резервация в Salon Raya. Ето детайлите на вашата резервация:</p>
+                <p>Благодарим ви за вашата резервация в Салон Рая. Ето детайлите на вашата резервация:</p>
                 
                 <div class='details'>
                     <p><strong>Услуга:</strong> {$service}</p>
@@ -121,7 +121,7 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
                 <a href='{$cancelUrl}' class='cancel-btn'>Отмени резервацията</a>
                 
                 <div class='footer'>
-                    <p>С най-добри пожелания,<br>Екипът на Salon Raya</p>
+                    <p>С най-добри пожелания,<br>Екипът на Салон Рая</p>
                 </div>
             </div>
         </body>

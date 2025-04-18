@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Свържете се с фризьорски салон Райа. Адрес, телефон, работно време и контактна форма.">
-    <title>Контакти - Салон за Красота Райа</title>
+    <title>Контакти - Салон Райа</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

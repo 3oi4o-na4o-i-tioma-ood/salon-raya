@@ -179,7 +179,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Отмяна на резервация в салон Райа. Бързо и лесно отменяне на запазен час.">
-    <title>Отмяна на резервация - Salon Raya</title>
+    <title>Отмяна на резервация - Салон Рая</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
