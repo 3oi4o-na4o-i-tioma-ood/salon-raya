@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: 
+Disallow: /cgi-bin/
+Disallow: /sign-in.php
+Disallow: /worker-dashboard.php
+Sitemap: https://salonraia.eu/sitemap.xml
