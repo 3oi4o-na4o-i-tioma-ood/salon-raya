@@ -10,6 +10,7 @@ session_start();
     <meta name="description" content="Запазете час онлайн за услугите в салон Райа. Изберете подстригване, прическа, боядисване или друга услуга по ваш избор.">
     <title>Резервация на час - Салон Райа</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://salonraia.eu/booking.php">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/booking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

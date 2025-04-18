@@ -32,6 +32,7 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Работен Панел - Салон Рая</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://salonraia.eu/worker-dashboard.php">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">

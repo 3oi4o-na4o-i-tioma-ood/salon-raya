@@ -9,6 +9,7 @@ session_start();
     <meta name="description" content="Детайли за вашата резервация в салон Райа. Информация за избраната услуга, дата и час.">
     <title>Детайли за резервацията - Салон Рая</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://salonraia.eu/booking-details.php">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/booking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

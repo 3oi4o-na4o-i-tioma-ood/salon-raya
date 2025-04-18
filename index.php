@@ -7,6 +7,7 @@
     <meta name="description" content="Фризьорски салон Райа - Професионални фризьорски услуги за жени и мъже. Подстригване, боядисване, прически и грижа за косата.">
     <title>Салон за красота Райа</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://salonraia.eu/">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>

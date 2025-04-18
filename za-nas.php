@@ -7,6 +7,7 @@
     <meta name="description" content="Научете повече за фризьорски салон Райа. Нашата история, екип и мисия да предоставяме качествени услуги.">
     <title>За Нас - Салон Райа</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://salonraia.eu/za-nas.php">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">

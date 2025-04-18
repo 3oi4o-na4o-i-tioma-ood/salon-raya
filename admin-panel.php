@@ -37,6 +37,7 @@ echo "<!-- Number of appointments: " . ($result ? $result->num_rows : 0) . " -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ панел - Салон Райа</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://salonraia.eu/admin-panel.php">
     <link rel="stylesheet" href="css/style.css">
     <style>
         .admin-panel {
