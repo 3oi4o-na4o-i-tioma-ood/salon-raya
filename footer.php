@@ -6,7 +6,7 @@
 
         <div class="center-content">
             <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100042636765868&locale=bg_BG" target="_blank"><i class="fab fa-facebook"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
             <p class="copyright">&copy; 2023 Фризьорски салон Райа. Всички права запазени.</p>

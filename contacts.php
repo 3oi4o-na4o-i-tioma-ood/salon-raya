@@ -238,7 +238,7 @@
                     <div class="contact-section">
                         <h3>Социални мрежи</h3>
                         <div class="social-links contact-social-links" style="padding-left: 0; margin-left: 0;">
-                            <a href="https://www.facebook.com/profile.php?id=100063576123123" target="_blank" style="margin-left: 0; padding-left: 0;"><i class="fab fa-facebook"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=100042636765868&locale=bg_BG" target="_blank" style="margin-left: 0; padding-left: 0;"><i class="fab fa-facebook"></i></a>
                             <a href="https://www.instagram.com/salon.raya/" target="_blank"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
