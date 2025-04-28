@@ -591,7 +591,7 @@
                         <i class="fas fa-cut"></i>
                     </div>
                     <h3>Професионални<br>Инструменти</h3>
-                    <p>Работим с най-доброто оборудване<br>от panasonic и jaguar</p>
+                    <p>Работим с най-доброто оборудване<br>от Panasonic и Jaguar</p>
                 </div>
 
                 <div class="feature-item">

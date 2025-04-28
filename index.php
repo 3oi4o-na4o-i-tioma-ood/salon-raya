@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Фризьорски салон Райа - Професионални фризьорски услуги за жени и мъже. Подстригване, боядисване, прически и грижа за косата.">
+    <meta name="description"
+        content="Фризьорски салон Райа - Професионални фризьорски услуги за жени и мъже. Подстригване, боядисване, прически и грижа за косата.">
     <title>Салон за красота Райа</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
     <link rel="canonical" href="https://salonraia.eu/">
@@ -91,7 +92,7 @@
                     <i class="fas fa-cut"></i>
                 </div>
                 <h3>Професионални<br>Инструменти</h3>
-                <p>Работим с най-доброто оборудване<br>от panasonic и jaguar</p>
+                <p>Работим с най-доброто оборудване<br>от Panasonic и Jaguar</p>
             </div>
             <div class="feature-item">
                 <div class="icon">
@@ -321,7 +322,7 @@
                 <div class="service-details-category hair-details" data-category="coloring">
                     <div class="service-detail-item">
                         <div class="service-info">
-                            <h3>Боядисване с wella + сешоар</h3>
+                            <h3>Боядисване с Wella + сешоар</h3>
                             <p>1 ч.20 мин.</p>
                         </div>
                         <div class="service-price">100 лв.</div>
@@ -806,8 +807,10 @@
         <h2>Отзиви</h2>
 
         <div class="testimonials-grid">
-            <a class="testimonial-card" href="https://studio24.bg/salon-za-krasota-raia-s1292#ratingReviews">
+            <a class="testimonial-card" href="https://g.co/kgs/x9ZqR4w">
                 <div class="testimonial-content">
+                    <div class="user-icon" style="background-color: #689f38;">E</div>
+
                     <div class="stars">
                         <img src="images/icons/star.png" alt="star">
                         <img src="images/icons/star.png" alt="star">
@@ -815,15 +818,18 @@
                         <img src="images/icons/star.png" alt="star">
                         <img src="images/icons/star.png" alt="star">
                     </div>
-                    <p>Страхотно отношение и невероятен резултат. Услуга на такова ниво не съм получавала в популярните
-                        салони. С две ръце препоръчвам Диди.</p>
-                    <h3>safie</h3>
+                    <p>Салон Райа е най - доброто място за разкрасяване и добро настроение. Диди е професионалист с
+                        петнадесет годишен опит в бранша. Тя е много търпелива с клиентите, винаги усмихната. Аз винаги
+                        излизам от там с настроение и със сияйна и блестяща коса! Сърдечно препоръчвам да посетите
+                        салона, защото ще останете изключително доволни от постигнатите резултати!</p>
+                    <h3>Evelina Evtimova</h3>
                     <span class="client-type">Клиент</span>
                 </div>
             </a>
 
-            <a class="testimonial-card" href="https://studio24.bg/salon-za-krasota-raia-s1292#ratingReviews">
+            <a class="testimonial-card" href="https://g.co/kgs/DtSU4et">
                 <div class="testimonial-content">
+                    <div class="user-icon" style="background-color: #f4511e;">C</div>
                     <div class="stars">
                         <img src="images/icons/star.png" alt="star">
                         <img src="images/icons/star.png" alt="star">
@@ -831,14 +837,21 @@
                         <img src="images/icons/star.png" alt="star">
                         <img src="images/icons/star.png" alt="star">
                     </div>
-                    <p>Exceptional work and professional attitude! Highly recommend!</p>
-                    <h3>aleksandar</h3>
+                    <p>Това е единствения салон, който посещавам. Наистина професионално обслужване и това е
+                        единственото място, където знаят как се работи с къдрава коса. Само от този салон, като изляза
+                        не ме е срам от това колко бухнала ми е косата, а се чувствам все едно имам най-красивата коса
+                        на света. Диди е най прекрасната фрзьорка! Просто я обичам!</p>
+                    <h3>Cvetelina Mihova</h3>
                     <span class="client-type">Клиент</span>
                 </div>
             </a>
 
-            <a class="testimonial-card" href="https://studio24.bg/salon-za-krasota-raia-s1292#ratingReviews">
+            <a class="testimonial-card" href="https://g.co/kgs/87FvPtW">
                 <div class="testimonial-content">
+                    <div class="user-icon">
+                        <img src="images/reviews/alexander.png" alt="user">
+                    </div>
+
                     <div class="stars">
                         <img src="images/icons/star.png" alt="star">
                         <img src="images/icons/star.png" alt="star">
@@ -846,9 +859,9 @@
                         <img src="images/icons/star.png" alt="star">
                         <img src="images/icons/star.png" alt="star">
                     </div>
-                    <p>Wonderful service and professionalism. We'll definitely visit Didi again with my daughter. ❤️💫🙏
+                    <p>Страхотен професионалист и топла атмосфера!
                     </p>
-                    <h3>desislava</h3>
+                    <h3>Alexander Penchovski</h3>
                     <span class="client-type">Клиент</span>
                 </div>
             </a>

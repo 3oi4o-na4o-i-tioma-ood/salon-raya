@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'coloring': {
                     index: 1, // The second subcategory (Боядисване и кичури)
                     services: {
-                        'boyadisvane-wella': 'Боядисване с wella + сешоар',
+                        'boyadisvane-wella': 'Боядисване с Wella + сешоар',
                         'boyadisvane-wella-base': 'Боядисване с Wella',
                         'boyadisvane-client': 'Боядисване с боя на клиента',
                         'obezcvetyavane': 'Обезцветяване',

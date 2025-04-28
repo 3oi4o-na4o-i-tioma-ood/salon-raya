@@ -108,7 +108,7 @@ session_start();
                     <div class="price">от 4 лв.</div>
                 </div>
                 <div class="subcategory" data-services='[
-                    {"name": "Боядисване с wella + сешоар", "duration": "80", "price": "100"},
+                    {"name": "Боядисване с Wella + сешоар", "duration": "80", "price": "100"},
                     {"name": "Боядисване с Wella", "duration": "60-120", "price": "80", "options": [
                         {"name": "на корени", "duration": "60", "price": "80"},
                         {"name": "на къса коса", "duration": "60", "price": "85"},
