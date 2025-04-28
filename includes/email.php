@@ -59,16 +59,16 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
         // Server settings
         $mail->isSMTP();
         $mail->SMTPDebug = 0; // 0 = off, 1 = client messages, 2 = client and server messages
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = 'smtp.hostinger.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'arttema9@gmail.com';
-        $mail->Password = 'glbq xzwa rwia lfyb';
+        $mail->Username = 'hello@salonraia.eu';
+        $mail->Password = 'h@tnTgQi6E';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
         $mail->CharSet = 'UTF-8';
 
         // Recipients
-        $mail->setFrom('arttema9@gmail.com', 'Салон Рая');
+        $mail->setFrom('hello@salonraia.eu', 'Салон Рая');
         $mail->addAddress($to, $name);
 
         // Content
@@ -90,7 +90,7 @@ function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appoi
                 .header { text-align: center; margin-bottom: 30px; }
                 .details { background: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0; }
                 .footer { text-align: center; margin-top: 30px; font-size: 0.9em; color: #666; }
-                .cancel-btn { display: block; width: 200px; margin: 20px auto; padding: 10px 15px; background-color: #e74c3c; color: white; text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; }
+                a.cancel-btn { display: block; width: 200px; margin: 20px auto; padding: 10px 15px; background-color: #e74c3c; color: white; text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; }
             </style>
         </head>
         <body>

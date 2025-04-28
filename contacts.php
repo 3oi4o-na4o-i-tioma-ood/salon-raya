@@ -100,7 +100,7 @@
         }
 
         .contact-social-links a {
-            color: #a484e8;
+            color: white;
             font-size: 24px;
             padding-left: 0;
             margin-left: 0;
@@ -231,8 +231,8 @@
 
                     <div class="contact-section">
                         <h3>Контакти</h3>
-                        <p><i class="fas fa-phone"></i> +359 88 888 8888</p>
-                        <p><i class="fas fa-envelope"></i> info@salonraya.bg</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+359887458664" style="color: white">+359 887 458 664</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:hello@salonraia.eu" style="color: white">hello@salonraia.eu</a></p>
                     </div>
 
                     <div class="contact-section">
