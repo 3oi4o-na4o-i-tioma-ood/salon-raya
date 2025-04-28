@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return slots;
     }
 
-    // --- Update Time Slots (Modified for Day-Specific Hours) ---
+    // --- Update Time Slots (Modified for Day-Specific Hours and Past Time Check) ---
     function updateTimeSlots() {
         const slots = generateTimeSlots(); // Generation now depends on selectedDate
         const container = document.getElementById('timeSlots');
@@ -206,6 +206,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // Get current time in minutes to disable past time slots for today
+        const now = new Date();
+        const currentTimeMinutes = now.getHours() * 60 + now.getMinutes();
+        const isToday = selectedDate && selectedDate.toDateString() === now.toDateString();
+        // Add 30 minutes buffer for same-day bookings
+        const currentTimePlusBufferMinutes = currentTimeMinutes + 30;
+
         slots.forEach(slot => {
             const timeSlotElement = document.createElement('div');
             timeSlotElement.className = 'time-slot';
@@ -215,13 +222,19 @@ document.addEventListener('DOMContentLoaded', function() {
             let disableReason = '';
             timeSlotElement.classList.remove('conflict');
 
-            // Check 1: Exceeds closing time
-            if (slotEndMinutes > salonClosingTimeMinutes) {
+            // Check 1: If today, disable past time slots and add 30-min buffer
+            if (isToday && slotStartMinutes <= currentTimePlusBufferMinutes) {
+                isDisabled = true;
+                disableReason = '';
+            }
+
+            // Check 2: Exceeds closing time
+            if (!isDisabled && slotEndMinutes > salonClosingTimeMinutes) {
                 isDisabled = true;
                 disableReason = ' (няма време)';
             }
 
-            // Check 2: Overlap check (uses bookedIntervalsForSelectedDate)
+            // Check 3: Overlap check (uses bookedIntervalsForSelectedDate)
             if (!isDisabled) {
                 for (const bookedInterval of bookedIntervalsForSelectedDate) {
                     if (bookedInterval.start < slotEndMinutes && bookedInterval.end > slotStartMinutes) {
