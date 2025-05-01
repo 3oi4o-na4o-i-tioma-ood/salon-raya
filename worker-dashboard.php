@@ -206,7 +206,6 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         .bookings-content {
             display: flex;
             gap: 20px;
-            max-width: 800px;
         }
 
         @media (min-width: 600px) {
@@ -314,6 +313,7 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 
         .date-picker {
             max-width: 307.875px;
+            flex-shrink: 0;
         }
 
         @media (max-width: 600px) {

@@ -1,17 +1,11 @@
 <footer>
-    <div class="footer-content">
-        <a href="sign-in.php" class="sign-in-icon">
-            <i class="far fa-user"></i>
-        </a>
+    <a href="sign-in.php" class="sign-in-icon">
+        <i class="far fa-user"></i>
+    </a>
 
-        <div class="center-content">
-            <div class="social-links">
-                <a href="https://www.facebook.com/profile.php?id=100042636765868&locale=bg_BG" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <p class="copyright">&copy; 2023 Фризьорски салон Райа. Всички права запазени.</p>
-        </div>
+    <div class="row" style="flex-grow: 1; flex-direction: column;">
 
+        <a href="/" class="logo">Райа</a>
 
         <div class="footer-nav">
             <a href="/#hero">Начало</a>
@@ -20,80 +14,64 @@
             <a href="contacts.php">Контакти</a>
         </div>
 
-
-
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=100042636765868&locale=bg_BG" target="_blank"><i
+                    class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
     </div>
+    <p class="copyright">&copy; 2025 Фризьорски салон Райа. Всички права запазени.</p>
     <style>
         footer {
+            opacity: 0.9;
+            z-index: 10000;
+            min-height: 200px;
             padding: 5px 0;
             margin-top: auto;
             background-color: #fff;
             text-align: center;
-        }
 
-        .footer-content {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             padding: 5px 10px;
             position: relative;
         }
 
-        .center-content {
+
+        footer .row {
             display: flex;
-            flex-direction: column;
-            margin: 0 auto;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
         }
 
-        @media (min-width: 800px) {
-            .center-content {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-        }
-
-        @media (max-width: 800px) {
-            .footer-content {
-                flex-direction: column-reverse;
-            }
-        }
-
-        .social-links {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .social-links a {
+        footer .social-links a {
             margin: 0 5px;
             font-size: 18px;
         }
 
+        footer .logo {
+            /* font-size: 3rem; */
+        }
+
         .footer-nav {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            margin: 0 auto;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 400px;
+            margin: 0;
 
             padding: 4px 10px;
             border-radius: 4px;
         }
 
-        @media (min-width: 800px) {
-            .footer-nav {
-                margin: 0 150px 0 auto;
-            }
-        }
-
         .footer-nav a {
             transition: color 0.3s ease;
-            color: #a484e8;
+            color: black;
             margin: 0 3px;
             font-size: 0.8rem;
+            text-decoration: none;
         }
 
         .footer-nav a:hover {
@@ -109,52 +87,61 @@
         }
 
         .copyright {
-            font-size: 0.55em;
-            color: #a484e8;
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+
+            font-size: 0.7em;
             margin: 0;
-            width: 100%;
             text-align: center;
             margin-top: 5px;
         }
 
         .sign-in-icon {
-            width: 24px;
-            height: 24px;
+            position: absolute;
+            left: 5px;
+            bottom: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 10px;
+
+            color: #a484e8;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            opacity: 0.8;
+            text-decoration: none;
+            background: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
         }
+
 
         .sign-in-icon i {
             color: black;
         }
 
-        @media (max-width: 800px) {
-
-            .footer-nav {
-                order: 2;
-            }
-
+        @media (max-width: 1000px) {
             .social-links {
-                order: 1;
+                margin-bottom: 40px;
             }
-
 
             .copyright {
-                order: 4;
+                left: 50%;
+                width: 100%;
+                transform: translateX(-50%);
+                bottom: 10px;
             }
-        }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            color: #333;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            footer {
+                min-height: 250px;
+            }
+
+            .sign-in-icon {
+                bottom: 30px;
+            }
         }
 
         /* Footer social icons */
@@ -170,11 +157,9 @@
 
         /* General social links */
         footer .social-links {
-            margin-bottom: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
             text-align: center;
         }
 
@@ -191,25 +176,6 @@
             color: #666;
         }
 
-
-
-        .sign-in-icon {
-            color: #a484e8;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-            opacity: 0.8;
-            text-decoration: none;
-            background: #fff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
-        }
 
         @media (max-width: 800px) {
             .sign-in-icon {
