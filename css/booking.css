@@ -226,7 +226,7 @@
     padding-top: 10px;
     background: white;
     border-top: 1px solid #eee;
-    z-index: 1000;
+    z-index: 10001;
 }
 
 .summary-content {

@@ -312,7 +312,7 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         }
 
         .date-picker {
-            max-width: 307.875px;
+            max-width: 308px;
             flex-shrink: 0;
         }
 

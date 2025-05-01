@@ -596,8 +596,31 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         // If we have a detail parameter, select the corresponding service
                         if (detail) {
-                            // Always select the first button for simplicity
-                            buttons[0].click();
+                            const serviceMap = subcategoryData.services || {};
+                            const targetServiceName = serviceMap[detail];
+                            
+                            if (targetServiceName) {
+                                // Find the button that matches this service name
+                                let found = false;
+                                buttons.forEach(button => {
+                                    const btnServiceName = button.getAttribute('data-name');
+                                    if ((btnServiceName === targetServiceName || 
+                                         btnServiceName.startsWith(targetServiceName + ' (')) && 
+                                        !button.disabled) {
+                                        // Select this specific service
+                                        button.click();
+                                        found = true;
+                                    }
+                                });
+                                
+                                // If no exact match, fall back to the first button
+                                if (!found && buttons.length > 0 && !buttons[0].disabled) {
+                                    buttons[0].click();
+                                }
+                            } else if (buttons.length > 0 && !buttons[0].disabled) {
+                                // No mapping found, fall back to the first button
+                                buttons[0].click();
+                            }
                         }
                     }
                 });
