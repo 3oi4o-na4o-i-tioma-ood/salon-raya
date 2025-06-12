@@ -584,36 +584,25 @@
 
             <div class="features-grid">
                 <div class="feature-item">
-                    <div class="feature-image">
-                        <img src="images/salon/tools.jpg" alt="Professional Tools">
-                    </div>
                     <div class="icon">
                         <i class="fas fa-cut"></i>
                     </div>
-                    <h3>Професионални<br>Инструменти</h3>
-                    <p>Работим с най-доброто оборудване<br>от Panasonic и Jaguar</p>
+                    <h3>Безупречно качество</h3>
+                    <p>Работим с водещи продукти и внимание към всеки детайл – защото Вашата коса заслужава най-доброто, най-доброто оборудване от Panasonic и Jaguar</p>
                 </div>
-
                 <div class="feature-item">
-                    <div class="feature-image">
-                        <img src="images/salon/cosmetics.jpg" alt="Quality Cosmetics">
-                    </div>
                     <div class="icon">
-                        <i class="fas fa-flask"></i>
+                        <i class="fas fa-heart"></i>
                     </div>
-                    <h3>Качествена<br>Козметика</h3>
-                    <p>Салон Райа<br>използва най-доброто от<br>Wella и Kerastase</p>
+                    <h3>Персонално отношение</h3>
+                    <p>Слушаме, съветваме и създаваме точно това, което искате – без изненади, само удоволствие</p>
                 </div>
-
                 <div class="feature-item">
-                    <div class="feature-image">
-                        <img src="images/salon/experience.jpg" alt="Experience for Everyone">
-                    </div>
                     <div class="icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-check"></i>
                     </div>
-                    <h3>Изживяване<br>за всеки</h3>
-                    <p>Нашият салон предлага голямо разнообразие от услуги<br>както за жени,<br> така и за мъже</p>
+                    <h3>Резултат, който говори сам</h3>
+                    <p>Нашите клиенти не се нуждаят от филтри – просто красива, здрава коса, която впечатлява.</p>
                 </div>
             </div>
         </div>
@@ -642,6 +631,16 @@
         </div>
 
         <div class="brands-grid">
+            <div class="brand-card">
+                <div class="brand-image">
+                    <img src="images/products/kerastase/kerastase.png" alt="Kerastase Logo" class="brand-logo">
+                    <img src="images/products/kerastase/kerastase 1.png" alt="Kerastase">
+                </div>
+                <div class="brand-info">
+                    <h3>KERASTASE</h3>
+                </div>
+            </div>
+
             <div class="brand-card">
                 <div class="brand-image">
                     <img src="images/products/biomagic-logo.png" alt="BioMagic Logo" class="brand-logo">
@@ -679,16 +678,6 @@
                 </div>
                 <div class="brand-info">
                     <h3>STARLET PROFESSIONAL</h3>
-                </div>
-            </div>
-
-            <div class="brand-card">
-                <div class="brand-image">
-                    <img src="images/products/kerastase/kerastase.png" alt="Kerastase Logo" class="brand-logo">
-                    <img src="images/products/kerastase/kerastase 1.png" alt="Kerastase">
-                </div>
-                <div class="brand-info">
-                    <h3>KERASTASE</h3>
                 </div>
             </div>
         </div>

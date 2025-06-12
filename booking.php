@@ -83,38 +83,32 @@ session_start();
                         {"name": "прав на много дълга коса", "duration": "45", "price": "70"},
                         {"name": "сешоар на букли", "duration": "45", "price": "70"},
                         {"name": "сешоар на четки", "duration": "55", "price": "70"}
-                    ]},
-                    {"name": "Сешоар", "duration": "40-60", "price": "45", "options": [
-                        {"name": "на къса коса", "duration": "40", "price": "45"},
-                        {"name": "на средна коса", "duration": "50", "price": "55"},
-                        {"name": "на дълга коса", "duration": "60", "price": "65"}
-                    ]},
+                                            ]},
                     {"name": "Мъжко подстригване с ножица и машинка + измиване", "duration": "30", "price": "35"},
                     {"name": "Мъжко подстригване с машинка", "duration": "20", "price": "30"},
                     {"name": "Детско подстригване до 12 години", "duration": "30", "price": "25"},
-                    {"name": "Прическа с кок", "duration": "90-120", "price": "70", "options": [
-                        {"name": "лесна", "duration": "90", "price": "70"},
-                        {"name": "сложна", "duration": "120", "price": "90"}
+                    {"name": "Прическа с кок", "duration": "90-120", "price": "90", "options": [
+                        {"name": "лесна", "duration": "90", "price": "90"},
+                        {"name": "сложна", "duration": "120", "price": "100"}
                     ]},
-                    {"name": "Официална прическа", "duration": "90-120", "price": "75", "options": [
-                        {"name": "лесна", "duration": "90", "price": "75"},
+                    {"name": "Официална прическа", "duration": "90-120", "price": "90", "options": [
+                        {"name": "лесна", "duration": "90", "price": "90"},
                         {"name": "сложна", "duration": "120", "price": "100"}
                     ]},
                     {"name": "Дамско подстригване на бретон", "duration": "5", "price": "5"},
                     {"name": "Оформяне на врат", "duration": "5", "price": "4"},
                     {"name": "Измиване на коса + маска", "duration": "15", "price": "22"}
                 ]'>
-                    <h3>Подстригване и прически (12)</h3>
-                    <div class="price">от 4 лв.</div>
+                    <h3>Подстригване и прически (11)</h3>
+                    <div class="price">от 20 лв.</div>
                 </div>
                 <div class="subcategory" data-services='[
-                    {"name": "Боядисване с Wella + сешоар", "duration": "80", "price": "100"},
-                    {"name": "Боядисване с Wella", "duration": "60-120", "price": "80", "options": [
+                                            {"name": "Боядисване с Wella", "duration": "60-120", "price": "80", "options": [
                         {"name": "на корени", "duration": "60", "price": "80"},
                         {"name": "на къса коса", "duration": "60", "price": "85"},
-                        {"name": "на средно дълга коса", "duration": "120", "price": "89"},
-                        {"name": "на дълга коса", "duration": "75", "price": "90"},
-                        {"name": "на цялата коса", "duration": "60", "price": "100"}
+                        {"name": "на средно дълга коса", "duration": "60", "price": "90"},
+                        {"name": "на дълга коса", "duration": "75", "price": "120"},
+                        {"name": "на цялата коса", "duration": "60", "price": "120"}
                     ]},
                     {"name": "Боядисване с боя на клиента", "duration": "90", "price": "50"},
                     {"name": "Обезцветяване", "duration": "30-60", "price": "100", "options": [
@@ -126,57 +120,45 @@ session_start();
                         {"name": "на дълга тънка коса", "duration": "60", "price": "160"},
                         {"name": "на дълга гъста коса", "duration": "60", "price": "200"}
                     ]},
-                    {"name": "Кичури", "duration": "120", "price": "80"},
-                    {"name": "Матиране", "duration": "90", "price": "60"}
+                    {"name": "Кичури", "duration": "120", "price": "150"},
+                    {"name": "Матиране", "duration": "30", "price": "20"},
+                    {"name": "Матиране", "duration": "30", "price": "40"}
                 ]'>
                     <h3>Боядисване и кичури (6)</h3>
-                    <div class="price">от 40 лв.</div>
+                    <div class="price">от 20 лв.</div>
                 </div>
                 <div class="subcategory" data-services='[
-                    {"name": "Изправяне с преса", "duration": "60", "price": "25", "options": [
-                        {"name": "на средно дълга коса", "duration": "60", "price": "25"},
-                        {"name": "на дълга коса", "duration": "60", "price": "30"}
+                    {"name": "Изправяне с преса", "duration": "60", "price": "50", "options": [
+                        {"name": "средна", "duration": "60", "price": "50"},
+                        {"name": "дълга", "duration": "60", "price": "60"}
                     ]},
-                    {"name": "Измиване подстригване + Изправяне с сешоар", "duration": "70", "price": "75"}
-                ]'>
-                    <h3>Къдрене и изправяне (2)</h3>
-                    <div class="price">от 25 лв.</div>
-                </div>
-                <div class="subcategory" data-services='[
-                    {"name": "Удължаване на коса с щипки", "duration": "10-50", "price": "10", "options": [
-                        {"name": "1 ред", "duration": "10", "price": "10"},
-                        {"name": "2 реда", "duration": "20", "price": "20"},
-                        {"name": "3 реда", "duration": "30", "price": "30"},
-                        {"name": "4 реда", "duration": "40", "price": "40"},
-                        {"name": "5 реда", "duration": "50", "price": "50"}
+                    {"name": "Навиване с преса", "duration": "60", "price": "50", "options": [
+                        {"name": "средна", "duration": "60", "price": "50"},
+                        {"name": "дълга", "duration": "60", "price": "60"}
                     ]}
                 ]'>
-                    <h3>Екстеншъни (1)</h3>
-                    <div class="price">от 10 лв.</div>
+                    <h3>Къдрене и изправяне (2)</h3>
+                    <div class="price">от 50 лв.</div>
                 </div>
+
                 <div class="subcategory" data-services='[
-                    {"name": "Кератинова терапия за коса", "duration": "90", "price": "120"},
-                    {"name": "Терапия за бързо възстановяване на суха и изтощена коса", "duration": "60", "price": "80"},
-                    {"name": "Арганова терапия за коса", "duration": "60", "price": "60"},
-                    {"name": "Ампула за коса против косопад", "duration": "30", "price": "30"},
-                    {"name": "Маска за копринена коса", "duration": "30", "price": "25"}
+                    {"name": "Терапия от 4 стъпки на Wella", "duration": "30", "price": "80"},
+                    {"name": "Кератинова терапия за коса", "duration": "40", "price": "70"},
+                    {"name": "Терапия за бързо възстановяване на суха и изтощена коса с Wella", "duration": "30", "price": "40"},
+                    {"name": "Арганова терапия за коса", "duration": "30", "price": "70"},
+                    {"name": "Ампула за коса против косопад", "duration": "30", "price": "22"},
+                    {"name": "Маска за копринена коса", "duration": "40", "price": "35"}
                 ]'>
-                    <h3>Терапии за коса (5)</h3>
-                    <div class="price">от 25 лв.</div>
+                    <h3>Терапии за коса (6)</h3>
+                    <div class="price">от 22 лв.</div>
                 </div>
                 <div class="subcategory" data-services='[
-                    {"name": "Оформяне на брада", "price": "30", "description": "Оформянето на брадата е специална процедура включваща избор на форма и контури на брада пак на база тип лице, личният стил и предпочитание на всеки мъж."},
-                    {"name": "Тониране на сиви коси", "price": "40", "description": "Тониране на сиви коси, които придават естествен и младежки вид. Тонирането се извършва с внимание към типа коса."}
+                    {"name": "Оформяне на брада", "duration": "15", "price": "20"}
                 ]'>
                     <h3>Брада и бръснене (1)</h3>
-                    <div class="price">от 10 лв.</div>
+                    <div class="price">от 20 лв.</div>
                 </div>
-                <div class="subcategory" data-services='[
-                    {"name": "Пробиване на уши", "duration": "15", "price": "30"}
-                ]'>
-                    <h3>Други услуги за коса (1)</h3>
-                    <div class="price">от 30 лв.</div>
-                </div>
+
             </div>
 
             <!-- Face Services -->
@@ -186,18 +168,26 @@ session_start();
                     {"name": "Вечерен грим", "duration": "60", "price": "70"},
                     {"name": "Сватбен грим", "duration": "90", "price": "100"},
                     {"name": "Официален грим", "duration": "60", "price": "70"},
+                    {"name": "Официален грим", "duration": "60", "price": "90"},
                     {"name": "Ежедневен грим", "duration": "60", "price": "70"},
+                    {"name": "Ежедневен грим", "duration": "60", "price": "90"},
                     {"name": "Абитуриентски грим", "duration": "90", "price": "100"},
                     {"name": "Фото грим", "duration": "90", "price": "100"}
                 ]'>
-                    <h3>Професионален грим (7)</h3>
+                    <h3>Професионален грим (9)</h3>
                     <div class="price">от 70 лв.</div>
                 </div>
                 <div class="subcategory" data-services='[
-                    {"name": "Перманентен грим на вежди", "duration": "120", "price": "250"}
+                    {"name": "Перманентен грим - вежди", "duration": "120", "price": "450"}
                 ]'>
                     <h3>Перманентен грим (1)</h3>
-                    <div class="price">от 250 лв.</div>
+                    <div class="price">от 450 лв.</div>
+                </div>
+                <div class="subcategory" data-services='[
+                    {"name": "Пробиване на уши", "duration": "10", "price": "25"}
+                ]'>
+                    <h3>Други услуги (1)</h3>
+                    <div class="price">от 25 лв.</div>
                 </div>
             </div>
 
@@ -245,10 +235,10 @@ session_start();
                     <div class="price">от 100 лв.</div>
                 </div>
                 <div class="subcategory" data-services='[
-                    {"name": "Спортен масаж", "duration": "60", "price": "120"}
+                    {"name": "Спортен масаж", "duration": "50", "price": "100"}
                 ]'>
                     <h3>Спортен масаж (1)</h3>
-                    <div class="price">от 120 лв.</div>
+                    <div class="price">от 100 лв.</div>
                 </div>
             </div>
 
@@ -278,7 +268,7 @@ session_start();
 
     <?php include 'footer.php'; ?>
     <script src="js/menu.js"></script>
-    <script src="js/booking.js"></script>
+    <script src="js/booking.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>
