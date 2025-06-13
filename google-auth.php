@@ -31,7 +31,10 @@ $client->setScopes(Google_Service_Calendar::CALENDAR);
 $client->setAuthConfig($credentialsPath);
 $client->setAccessType('offline');
 $client->setPrompt('consent'); // Force re-prompt to get refresh token
-$client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/google-auth.php');
+
+// Set redirect URI - update this to match your exact domain and protocol
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+$client->setRedirectUri($protocol . $_SERVER['HTTP_HOST'] . '/google-auth.php');
 
 // Handle authentication flow
 if (isset($_GET['code'])) {

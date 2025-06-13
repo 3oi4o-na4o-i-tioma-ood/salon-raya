@@ -105,6 +105,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         logMessage("Appointment saved successfully for $client_name with ID $appointmentId and duration $total_duration_minutes");
 
+        // Try to add to Google Calendar, but don't fail if it doesn't work
+        try {
+            $calendar_result = addToGoogleCalendar($client_name, $service, $appointment_date, $appointment_time, $comment, $appointmentId, $total_duration_minutes);
+            if ($calendar_result) {
+                logMessage("Appointment added to Google Calendar successfully");
+            } else {
+                logMessage("Warning: Could not add to Google Calendar, but continuing with appointment");
+            }
+        } catch (Exception $e) {
+            logMessage("Error adding to Google Calendar: " . $e->getMessage());
+            // Continue anyway - Google Calendar is optional
+        }
+
         // Try to send confirmation email using the shared email function
         try {
             $emailSent = sendBookingConfirmationEmail(
@@ -143,4 +156,137 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $conn->close();
 logMessage("Connection closed");
+
+/**
+ * Add appointment to Google Calendar
+ * 
+ * @param string $client_name  Client's name
+ * @param string $service      Service name
+ * @param string $date         Appointment date (YYYY-MM-DD)
+ * @param string $time         Appointment time (HH:MM)
+ * @param string $comment      Additional comments (optional)
+ * @param int $appointmentId   Appointment ID
+ * @param int $duration_minutes Duration in minutes
+ */
+function addToGoogleCalendar($client_name, $service, $date, $time, $comment = '', $appointmentId = null, $duration_minutes = 60) {
+    // Path to your Google API credentials JSON file
+    $credentialsPath = __DIR__ . '/credentials/google-credentials.json';
+    $tokenPath = __DIR__ . '/credentials/google-token.json';
+    
+    // Skip if credentials file doesn't exist
+    if (!file_exists($credentialsPath)) {
+        logMessage("Google Calendar credentials file not found: $credentialsPath");
+        return false;
+    }
+    
+    // Skip if token file doesn't exist
+    if (!file_exists($tokenPath)) {
+        logMessage("Google Calendar token file not found: $tokenPath");
+        return false;
+    }
+    
+    try {
+        // Set a reasonable timeout for API operations
+        $original_max_execution_time = ini_get('max_execution_time');
+        set_time_limit(60); 
+        
+        // Create Google API client
+        $client = new Google_Client();
+        $client->setApplicationName('Salon Raya Appointments');
+        $client->setScopes(Google_Service_Calendar::CALENDAR);
+        $client->setAuthConfig($credentialsPath);
+        $client->setAccessType('offline');
+        
+        // Load token
+        $accessToken = json_decode(file_get_contents($tokenPath), true);
+        $client->setAccessToken($accessToken);
+        
+        // Check token validity
+        if ($client->isAccessTokenExpired()) {
+            if ($client->getRefreshToken()) {
+                $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+                file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+                logMessage("Google Calendar token refreshed");
+            } else {
+                logMessage("No refresh token available");
+                return false;
+            }
+        }
+        
+        // Create Calendar service
+        $calendarService = new Google_Service_Calendar($client);
+        
+        // Get primary calendar
+        $calendarList = $calendarService->calendarList->listCalendarList();
+        $primaryCalendarId = 'primary';
+        
+        foreach ($calendarList->getItems() as $calendarListEntry) {
+            if ($calendarListEntry->getPrimary()) {
+                $primaryCalendarId = $calendarListEntry->getId();
+                break;
+            }
+        }
+        
+        // Format date and time for Google Calendar
+        $original_timezone = date_default_timezone_get();
+        date_default_timezone_set('Europe/Sofia');
+        
+        $startDateTime = new DateTime($date . ' ' . $time);
+        $endDateTime = clone $startDateTime;
+        $endDateTime->add(new DateInterval('PT' . $duration_minutes . 'M')); // Use actual duration
+        
+        // Create event
+        $event = new Google_Service_Calendar_Event([
+            'summary' => "[Salon Raya] $service - $client_name",
+            'description' => "Client: $client_name\nService: $service" . ($comment ? "\nComments: $comment" : "") . "\nDuration: $duration_minutes minutes\n\nBooking created via Salon Raya booking system.",
+            'start' => [
+                'dateTime' => $startDateTime->format('c'),
+                'timeZone' => 'Europe/Sofia',
+            ],
+            'end' => [
+                'dateTime' => $endDateTime->format('c'),
+                'timeZone' => 'Europe/Sofia',
+            ],
+            'colorId' => '11', // A distinct color (11 is red in Google Calendar)
+            'reminders' => [
+                'useDefault' => false,
+                'overrides' => [
+                    ['method' => 'popup', 'minutes' => 30],
+                ],
+            ],
+            'extendedProperties' => [
+                'private' => [
+                    'createdBy' => 'salon_raya_booking_system',
+                    'appointmentId' => $appointmentId ?? '',
+                    'serviceType' => $service
+                ]
+            ]
+        ]);
+        
+        // Restore original timezone
+        date_default_timezone_set($original_timezone);
+        
+        // Insert the event
+        try {
+            $createdEvent = $calendarService->events->insert($primaryCalendarId, $event);
+            
+            if ($createdEvent && isset($createdEvent->htmlLink)) {
+                logMessage("Event created in Google Calendar: " . $createdEvent->htmlLink);
+                set_time_limit($original_max_execution_time);
+                return true;
+            } else {
+                logMessage("Failed to create Google Calendar event");
+                set_time_limit($original_max_execution_time);
+                return false;
+            }
+        } catch (Exception $e) {
+            logMessage("Error creating event: " . $e->getMessage());
+            set_time_limit($original_max_execution_time);
+            return false;
+        }
+    } catch (Exception $e) {
+        logMessage("Google Calendar Error: " . $e->getMessage());
+        return false;
+    }
+}
 ?> 
