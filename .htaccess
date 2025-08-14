@@ -1,5 +1,10 @@
 RewriteEngine On
 
+# Set proper content type for XML files (including sitemap)
+<Files "sitemap.xml">
+    Header set Content-Type "application/xml; charset=utf-8"
+</Files>
+
 # Redirect www to non-www
 RewriteCond %{HTTP_HOST} ^www\.salonraia\.eu [NC]
 RewriteRule ^(.*)$ https://salonraia.eu/$1 [L,R=301]
