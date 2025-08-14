@@ -7,7 +7,9 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Детайли за вашата резервация в салон Райа. Информация за избраната услуга, дата и час.">
-    <title>Детайли за резервацията - Салон Рая</title>
+    <title>Детайли за резервацията - Салон 
+Райа
+</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
     <link rel="canonical" href="https://salonraia.eu/booking-details.php">
     <link rel="stylesheet" href="css/style.css">
@@ -746,7 +748,7 @@ session_start();
             </div>
         </div>
 
-        <form id="bookingForm" action="save_appointment.php" method="POST">
+                    <form id="bookingForm" action="save_appointment_with_email.php" method="POST">
             <div class="section-content">
                 <h2 class="section-title">Избрани услуги</h2>
                 <div id="selectedServices">
@@ -858,6 +860,6 @@ session_start();
         <button class="close-modal"><i class="fas fa-times"></i></button>
     </div>
 
-    <script src="js/booking-details.js"></script>
+    <script src="js/booking-details.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

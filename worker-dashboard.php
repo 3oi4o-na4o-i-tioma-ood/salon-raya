@@ -30,7 +30,9 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Работен Панел - Салон Рая</title>
+    <title>Работен Панел - Салон 
+Райа
+</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
     <link rel="canonical" href="https://salonraia.eu/worker-dashboard.php">
     <link rel="stylesheet" href="css/style.css">
@@ -57,7 +59,20 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         </div>
 
         <div class="dashboard-content">
-            <div class="bookings-section">
+            <!-- Navigation Tabs -->
+            <div class="dashboard-tabs">
+                <button class="tab-button active" data-tab="bookings">
+                    <i class="fas fa-calendar"></i> Резервации
+                </button>
+                <button class="tab-button" data-tab="reviews">
+                    <i class="fas fa-star"></i> Добави отзив в страницата
+                </button>
+                <button class="tab-button" data-tab="trash">
+                    <i class="fas fa-trash"></i> Кошче
+                </button>
+            </div>
+
+            <div class="bookings-section tab-content active" id="bookings-tab">
                 <div class="bookings-content">
                     <div class="date-picker">
                         <div id="calendar"></div>
@@ -109,14 +124,57 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                 </div>
             </div>
+
+            <!-- Reviews Management Section -->
+            <div class="reviews-section tab-content" id="reviews-tab">
+                <div class="reviews-header">
+                    <h2>Управление на отзиви</h2>
+                </div>
+
+                <div class="reviews-content">
+                    <div class="stored-reviews">
+                        <h3>Чакащи одобрение</h3>
+                        <div class="reviews-list" id="storedReviews">
+                            <!-- Stored reviews will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="main-page-reviews">
+                        <h3>Отзиви на главната страница</h3>
+                        <div class="reviews-list" id="mainPageReviews">
+                            <!-- Main page reviews will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trash Tab Content -->
+        <div class="tab-content" id="trashContent">
+            <div class="trash-section">
+                <div class="trash-header">
+                    <h2>Кошче</h2>
+                    <small>Изтрити отзиви, които могат да бъдат възстановени</small>
+                </div>
+                <div class="trash-content">
+                    <div class="trash-reviews">
+                        <div class="reviews-list" id="trashReviews">
+                            <!-- Trash reviews will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Calendar functionality
             flatpickr("#calendar", {
                 inline: true,
                 defaultDate: "<?php echo $selectedDate; ?>",
@@ -127,6 +185,238 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                     window.location.href = 'worker-dashboard.php?date=' + dateStr;
                 }
             });
+
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    button.classList.add('active');
+                    
+                    // Show corresponding content
+                    if (targetTab === 'bookings') {
+                        document.getElementById('bookings-tab').classList.add('active');
+                    } else if (targetTab === 'reviews') {
+                        document.getElementById('reviews-tab').classList.add('active');
+                        loadReviews();
+                    } else if (targetTab === 'trash') {
+                        document.getElementById('trashContent').classList.add('active');
+                        loadTrashReviews();
+                    }
+                });
+            });
+
+
+
+            // Load reviews function
+            function loadReviews() {
+                fetch('manage-reviews.php?action=get_reviews')
+                    .then(response => response.json())
+                    .then(data => {
+                        displayReviews(data.stored, 'storedReviews');
+                        displayReviews(data.mainPage, 'mainPageReviews');
+                    })
+                    .catch(error => {
+                        console.error('Error loading reviews:', error);
+                    });
+            }
+
+            // Display reviews function
+            function displayReviews(reviews, containerId) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+
+                if (reviews.length === 0) {
+                    container.innerHTML = '<p class="no-reviews">Няма отзиви</p>';
+                    return;
+                }
+
+                reviews.forEach(review => {
+                    const reviewCard = document.createElement('div');
+                    reviewCard.className = 'review-card';
+                    reviewCard.innerHTML = `
+                        <div class="review-header">
+                            <div class="client-info">
+                                <div class="client-avatar" style="background-color: ${review.background_color}">
+                                    ${review.client_initial || review.client_name.charAt(0)}
+                                </div>
+                                <div class="client-details">
+                                    <h4>${review.client_name}</h4>
+                                    <div class="stars">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</div>
+                                </div>
+                            </div>
+                            <div class="review-actions">
+                                ${containerId === 'storedReviews' ? 
+                                    `<button class="add-to-main-btn" onclick="addToMainPage(${review.id})">
+                                        <i class="fas fa-plus"></i> Добави
+                                    </button>` : 
+                                    `<button class="added-btn" disabled>
+                                        <i class="fas fa-check"></i> Добавено
+                                    </button>`
+                                }
+                                <button class="delete-btn" onclick="deleteReview(${review.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="review-text">${review.review_text}</p>
+                        <div class="review-meta">
+                            <small>Добавен: ${new Date(review.created_at).toLocaleDateString('bg-BG')}</small>
+                            ${review.google_link ? `<a href="${review.google_link}" target="_blank" class="google-link">
+                                <i class="fab fa-google"></i> Google отзив
+                            </a>` : ''}
+                        </div>
+                    `;
+                    container.appendChild(reviewCard);
+                });
+            }
+
+            // Global functions for review actions
+            window.addToMainPage = function(reviewId) {
+                fetch('manage-reviews.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: `action=add_to_main_page&review_id=${reviewId}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        loadReviews();
+                        alert('Отзивът е добавен на главната страница!');
+                    } else {
+                        alert('Грешка: ' + data.message);
+                    }
+                });
+            };
+
+
+
+            window.deleteReview = function(reviewId) {
+                if (confirm('Сигурни ли сте, че искате да преместите този отзив в кошчето?')) {
+                    fetch('manage-reviews.php', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        body: `action=delete&review_id=${reviewId}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            loadReviews();
+                            alert('Отзивът е преместен в кошчето!');
+                        } else {
+                            alert('Грешка: ' + data.message);
+                        }
+                    });
+                }
+            };
+
+            // Load trash reviews function
+            function loadTrashReviews() {
+                fetch('manage-reviews.php?action=get_trash')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            displayTrashReviews(data.trash);
+                        } else {
+                            alert('Грешка при зареждането на кошчето: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Възникна грешка при зареждането на кошчето.');
+                    });
+            }
+
+            function displayTrashReviews(reviews) {
+                const container = document.getElementById('trashReviews');
+                container.innerHTML = '';
+
+                if (reviews.length === 0) {
+                    container.innerHTML = '<div class="no-reviews">Кошчето е празно.</div>';
+                    return;
+                }
+
+                reviews.forEach(review => {
+                    const reviewCard = document.createElement('div');
+                    reviewCard.className = 'review-card trash-review-card';
+                    
+                    reviewCard.innerHTML = `
+                        <div class="review-header">
+                            <div class="user-info">
+                                <div class="user-icon" style="background-color: ${review.background_color};">${review.client_initial}</div>
+                                <div class="user-details">
+                                    <h4>${review.client_name}</h4>
+                                    <div class="stars">
+                                        ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-actions">
+                                <button class="restore-btn" onclick="restoreReview(${review.id})">
+                                    <i class="fas fa-undo"></i> Възстанови
+                                </button>
+                                <button class="permanent-delete-btn" onclick="permanentDeleteReview(${review.id})">
+                                    <i class="fas fa-trash-alt"></i> Изтрий завинаги
+                                </button>
+                            </div>
+                        </div>
+                        <p class="review-text">${review.review_text}</p>
+                        <div class="review-meta">
+                            <small>Изтрит: ${new Date(review.deleted_at).toLocaleDateString('bg-BG')}</small>
+                            ${review.google_link ? `<a href="${review.google_link}" target="_blank" class="google-link">
+                                <i class="fab fa-google"></i> Google отзив
+                            </a>` : ''}
+                        </div>
+                    `;
+                    container.appendChild(reviewCard);
+                });
+            }
+
+            window.restoreReview = function(reviewId) {
+                if (confirm('Искате ли да възстановите този отзив?')) {
+                    fetch('manage-reviews.php', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        body: `action=restore&review_id=${reviewId}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            loadTrashReviews();
+                            alert('Отзивът е възстановен!');
+                        } else {
+                            alert('Грешка: ' + data.message);
+                        }
+                    });
+                }
+            };
+
+            window.permanentDeleteReview = function(reviewId) {
+                if (confirm('ВНИМАНИЕ: Това ще изтрие отзива завинаги! Сигурни ли сте?')) {
+                    fetch('manage-reviews.php', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        body: `action=permanent_delete&review_id=${reviewId}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            loadTrashReviews();
+                            alert('Отзивът е изтрит завинаги!');
+                        } else {
+                            alert('Грешка: ' + data.message);
+                        }
+                    });
+                }
+            };
         });
     </script>
 
@@ -166,6 +456,291 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         .header-actions {
             display: flex;
             gap: 10px;
+        }
+
+        /* Dashboard Tabs */
+        .dashboard-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .tab-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #666;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            color: #a484e8;
+        }
+
+        .tab-button.active {
+            color: #a484e8;
+            border-bottom-color: #a484e8;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        /* Reviews Management Styles */
+        .reviews-section {
+            padding: 1rem;
+        }
+
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .reviews-header h2 {
+            margin: 0;
+            color: #333;
+        }
+
+
+
+        .reviews-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stored-reviews, .main-page-reviews {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stored-reviews h3, .main-page-reviews h3 {
+            margin: 0 0 1rem 0;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .review-card {
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            padding: 1rem;
+            background: #f8f9fa;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .client-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .client-details h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 0.9rem;
+        }
+
+        .review-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .add-to-main-btn, .added-btn, .delete-btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-main-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .add-to-main-btn:hover {
+            background: #218838;
+        }
+
+        .added-btn {
+            background: #6c757d;
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .added-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        .review-text {
+            margin: 0 0 0.75rem 0;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .review-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .google-link {
+            color: #4285f4;
+            text-decoration: none;
+        }
+
+        .google-link:hover {
+            text-decoration: underline;
+        }
+
+        .no-reviews {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 2rem;
+        }
+
+        /* Trash Section Styles */
+        .trash-section {
+            padding: 1rem;
+        }
+
+        .trash-header {
+            margin-bottom: 2rem;
+        }
+
+        .trash-header h2 {
+            margin: 0 0 0.5rem 0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .trash-header small {
+            color: #999;
+            font-style: italic;
+        }
+
+        .trash-content {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .trash-review-card {
+            border-left: 4px solid #dc3545;
+            background: #fff8f8;
+        }
+
+        .restore-btn, .permanent-delete-btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .restore-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .restore-btn:hover {
+            background: #218838;
+        }
+
+        .permanent-delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .permanent-delete-btn:hover {
+            background: #c82333;
+        }
+
+        .trash-reviews .review-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .reviews-content {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-tabs {
+                overflow-x: auto;
+            }
+
+            .tab-button {
+                white-space: nowrap;
+            }
         }
 
         .dashboard-header {

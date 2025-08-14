@@ -6,7 +6,9 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Резервацията е потвърдена - Салон Рая</title>
+    <title>Резервацията е потвърдена - Салон 
+Райа
+</title>
     <link rel="icon" href="images/logo-short.svg" type="image/svg+xml">
     <link rel="canonical" href="https://salonraia.eu/booking-confirmation.php">
     <link rel="stylesheet" href="css/style.css">
@@ -66,7 +68,7 @@ session_start();
             <br><br>
             Очакваме ви!
         </p>
-        <a href="/" class="home-button">Обратно към началната страница</a>
+        <a href="index.php" class="home-button">Обратно към началната страница</a>
     </div>
 </body>
 </html>

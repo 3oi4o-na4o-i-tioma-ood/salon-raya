@@ -451,17 +451,16 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('service_details', JSON.stringify(selectedServices));
 
         try {
-            const response = await fetch('save_appointment.php', {
+            const response = await fetch('save_appointment_with_email.php', {
                 method: 'POST',
                 body: formData
             });
-            const result = await response.json();
 
-            if (result.success) {
+            if (response.ok) {
                 sessionStorage.removeItem('selectedServices');
                 window.location.href = 'booking-confirmation.php';
             } else {
-                alert(`Грешка: ${result.message}`);
+                alert(`Грешка`);
                 submitButton.disabled = false;
                 submitButton.textContent = originalButtonText;
             }

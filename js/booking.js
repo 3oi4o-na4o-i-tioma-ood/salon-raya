@@ -58,8 +58,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add event listeners for remove buttons
             document.querySelectorAll('.remove-service-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Remove button clicked!');
                     const index = parseInt(this.getAttribute('data-index'));
+                    console.log('Removing service at index:', index);
                     removeService(index);
                 });
             });
@@ -121,9 +124,30 @@ document.addEventListener('DOMContentLoaded', function() {
         // Refresh the current view to reflect changes
         const activeSubcategory = document.querySelector('.subcategory.active');
         if (activeSubcategory) {
+            // Save current state of open options before re-rendering
+            const openOptionsStates = {};
+            servicesList.querySelectorAll('.service-item').forEach((item, index) => {
+                const optionsDiv = item.querySelector('.service-options');
+                if (optionsDiv && optionsDiv.classList.contains('show')) {
+                    openOptionsStates[index] = true;
+                }
+            });
+            
             // Find the services data again to re-render
             const servicesData = JSON.parse(activeSubcategory.getAttribute('data-services') || '[]');
             renderServices(servicesData);
+            
+            // Restore open options state after re-rendering
+            servicesList.querySelectorAll('.service-item').forEach((item, index) => {
+                if (openOptionsStates[index]) {
+                    const optionsDiv = item.querySelector('.service-options');
+                    const optionsBtn = item.querySelector('.options-btn');
+                    if (optionsDiv && optionsBtn) {
+                        optionsDiv.classList.add('show');
+                        optionsBtn.textContent = 'опции ▼';
+                    }
+                }
+            });
         }
         
         // Save updated list to session storage
@@ -154,11 +178,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Mark the service item as selected
                     serviceItem.classList.add('service-selected');
                     
-                    // If this service has options, disable the options button too
+                    // If this service has options, style the options button but keep it functional
                     const optionsBtn = serviceItem.querySelector('.options-btn');
                     if (optionsBtn) {
-                        optionsBtn.disabled = true;
                         optionsBtn.style.opacity = '0.5';
+                        optionsBtn.style.pointerEvents = 'none';
                     }
                 }
             }
@@ -237,6 +261,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Re-enable the parent service item
                 const serviceItem = btn.closest('.service-item');
+                if (serviceItem) {
+                    serviceItem.classList.remove('service-selected');
+                    
+                    // Re-enable the options button too
+                    const optionsBtn = serviceItem.querySelector('.options-btn');
+                    if (optionsBtn) {
+                        optionsBtn.style.opacity = '1';
+                        optionsBtn.style.pointerEvents = 'auto';
+                    }
+                }
             }
         });
     }
@@ -329,11 +363,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add click handlers for options buttons
         servicesList.querySelectorAll('.options-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
+            // Remove any existing event listeners to prevent duplicates
+            btn.replaceWith(btn.cloneNode(true));
+        });
+        
+        // Re-select the buttons after cloning
+        servicesList.querySelectorAll('.options-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 const optionsDiv = btn.closest('.service-item').querySelector('.service-options');
+                
                 if (optionsDiv) {
-                    optionsDiv.classList.toggle('show');
-                    btn.textContent = optionsDiv.classList.contains('show') ? 'опции ▲' : 'опции ▼';
+                    const isCurrentlyVisible = optionsDiv.classList.contains('show');
+                    
+                    if (isCurrentlyVisible) {
+                        // If currently visible, just hide it
+                        optionsDiv.classList.remove('show');
+                        btn.textContent = 'опции ▼';
+                    } else {
+                        // If not visible, hide all others first, then show this one
+                        servicesList.querySelectorAll('.service-options').forEach(otherOptions => {
+                            otherOptions.classList.remove('show');
+                        });
+                        servicesList.querySelectorAll('.options-btn').forEach(otherBtn => {
+                            otherBtn.textContent = 'опции ▼';
+                        });
+                        
+                        // Show current options
+                        optionsDiv.classList.add('show');
+                        btn.textContent = 'опции ▲';
+                    }
                 }
             });
         });
@@ -394,6 +455,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Get URL parameters for auto-selection
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceFromUrl = urlParams.get('service');
+    const priceFromUrl = urlParams.get('price');
+    const durationFromUrl = urlParams.get('duration');
+    
+    // Function to auto-select service from URL parameters
+    function autoSelectServiceFromUrl() {
+        console.log('URL Parameters:', {
+            service: serviceFromUrl,
+            price: priceFromUrl,
+            duration: durationFromUrl
+        });
+        
+        if (serviceFromUrl && priceFromUrl && durationFromUrl) {
+            console.log('Auto-selecting service:', serviceFromUrl);
+            // Add a small delay to ensure the page is fully loaded
+            setTimeout(() => {
+                console.log('Calling addSelectedService with:', serviceFromUrl, priceFromUrl, durationFromUrl);
+                addSelectedService(serviceFromUrl, priceFromUrl, durationFromUrl);
+            }, 1000); // Increased delay
+        } else {
+            console.log('Missing URL parameters for auto-selection');
+        }
+    }
+
     // Automatically select the first category and its first subcategory on page load
     if (serviceCategories.length > 0) {
         const firstMainCategory = serviceCategories[0];
@@ -402,6 +489,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         activateAndRenderSubcategory(firstMainCategory, firstSubcategoryElement);
     }
+    
+    // Auto-select service from URL if provided (after everything is loaded)
+    autoSelectServiceFromUrl();
 
     // Handle continue booking click
     document.querySelector('.total-price').addEventListener('click', () => {
@@ -410,12 +500,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'booking-details.php';
         }
     });
-
-    // Get URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const category = urlParams.get('category');
-    const service = urlParams.get('service');
-    const detail = urlParams.get('detail');
 
     // Service mapping for URL parameters to actual service names
     const categoryMapping = {
