@@ -34,16 +34,10 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 <body class="dashboard-body">
     <div class="dashboard-container">
         <div class="dashboard-header">
-            <div class="header-actions">
-                <a href="google-auth.php" class="google-cal-button">
-                    <i class="fas fa-calendar-plus"></i>
-                    Google Календар
-                </a>
-                <a href="sign-in.php?logout=true" class="exit-button">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Изход
-                </a>
-            </div>
+            <a href="sign-in.php?logout=true" class="exit-button">
+                <i class="fas fa-sign-out-alt"></i>
+                Изход
+            </a>
             <div class="salon-info">
                 <img src="images/logo.svg" alt="SALON RAYA LOGO" class="dashboard-logo">
                 <div class="salon-details">
@@ -127,27 +121,6 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
 
     .exit-button:hover {
         background-color: #fff0f0;
-    }
-    
-    .google-cal-button {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        text-decoration: none;
-        color: #4285F4;
-        padding: 6px 12px;
-        border-radius: 4px;
-        transition: background-color 0.3s;
-        font-weight: 500;
-    }
-    
-    .google-cal-button:hover {
-        background-color: #e8f0fe;
-    }
-    
-    .header-actions {
-        display: flex;
-        gap: 10px;
     }
 
     .dashboard-header {

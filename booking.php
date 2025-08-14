@@ -49,7 +49,7 @@ session_start();
             </div>
         </div>
 
-        <div class="service-list">
+        <div class="service-list date-selection-container">
             <!-- Hair Services -->
             <div class="subcategories-list" data-category="hair">
                 <div class="subcategory" data-services='[
