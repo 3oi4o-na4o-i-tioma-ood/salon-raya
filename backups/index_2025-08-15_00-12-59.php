@@ -426,7 +426,7 @@
                 <div class="subcategory" data-services='[
                     {"name": "Подмишници - кола маска", "duration": "15", "price": "15"},
                     {"name": "Цели крака - кола маска", "duration": "60", "price": "40"},
-                    {"name": "1/2 крака - кола маска", "duration": "60", "price": "60"},
+                    {"name": "1/2 крака - кола маска", "duration": "60", "price": "100"},
                     {"name": "Цели ръце - кола маска", "duration": "20", "price": "60"},
                     {"name": "Цяло тяло - кола маска", "duration": "90", "price": "200"},
                     {"name": "Брадичка - кола маска", "duration": "5", "price": "10"},

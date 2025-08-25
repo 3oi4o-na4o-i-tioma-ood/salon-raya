@@ -121,7 +121,7 @@ session_start();
                         {"name": "на дълга гъста коса", "duration": "60", "price": "200"}
                     ]},
                     {"name": "Кичури", "duration": "120", "price": "150"},
-                    {"name": "Матиране", "duration": "30", "price": "40"},
+                    {"name": "Матиране", "duration": "30", "price": "20"},
                     {"name": "Матиране", "duration": "30", "price": "40"}
                 ]'>
                     <h3>Боядисване и кичури (6)</h3>
@@ -167,9 +167,9 @@ session_start();
                     {"name": "Професионален грим", "duration": "60", "price": "70"},
                     {"name": "Вечерен грим", "duration": "60", "price": "70"},
                     {"name": "Сватбен грим", "duration": "90", "price": "100"},
+                    {"name": "Официален грим", "duration": "60", "price": "70"},
                     {"name": "Официален грим", "duration": "60", "price": "90"},
-                    {"name": "Официален грим", "duration": "60", "price": "90"},
-                    {"name": "Ежедневен грим", "duration": "60", "price": "90"},
+                    {"name": "Ежедневен грим", "duration": "60", "price": "70"},
                     {"name": "Ежедневен грим", "duration": "60", "price": "90"},
                     {"name": "Абитуриентски грим", "duration": "90", "price": "100"},
                     {"name": "Фото грим", "duration": "90", "price": "100"}
@@ -194,11 +194,11 @@ session_start();
             <!-- Epilation Services -->
             <div class="subcategories-list" data-category="epilation">
                 <div class="subcategory" data-services='[
-                    {"name": "Подмишници - кола маска", "duration": "15", "price": "15"},
-                    {"name": "Цели крака - кола маска", "duration": "60", "price": "40"},
+                    {"name": "Подмишници - кола маска", "duration": "15", "price": "30"},
+                    {"name": "Цели крака - кола маска", "duration": "60", "price": "60"},
                     {"name": "1/2 крака - кола маска", "duration": "60", "price": "60"},
-                    {"name": "Цели ръце - кола маска", "duration": "20", "price": "60"},
-                    {"name": "Цяло тяло - кола маска", "duration": "90", "price": "200"},
+                    {"name": "Цели ръце - кола маска", "duration": "20", "price": "40"},
+                    {"name": "Цяло тяло - кола маска", "duration": "90", "price": "120"},
                     {"name": "Брадичка - кола маска", "duration": "5", "price": "10"},
                     {"name": "Горна устна - кола маска", "duration": "5", "price": "10"},
                     {"name": "Бакенбарди - кола маска", "duration": "5", "price": "10"},
@@ -260,7 +260,7 @@ session_start();
                     <div class="total-duration"><span>0</span> мин.</div>
                 </div>
                 <div class="summary-right">
-                    <div class="total-price">Избери час <span>0 лв. / 0.00 €</span></div>
+                    <div class="total-price">Избери час <span>0 лв.</span></div>
                 </div>
             </div>
         </div>

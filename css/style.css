@@ -13,6 +13,9 @@
     --dark-purple: #a484e8;
     --title-color: #a484e8;
     --background-color: #111111;
+    /* Admin accent aliases */
+    --accent-color: #a484e8;
+    --accent-dark: #8b6ad4;
 }
 
 * {

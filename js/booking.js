@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear all stored data when page loads
     sessionStorage.clear();
     localStorage.clear();
+
+    // Function to convert LV to Euro and format dual currency display
+    function formatDualCurrency(priceLV) {
+        const euroPrice = Math.ceil((priceLV / 1.95583) * 100) / 100; // Round up to cent
+        return `${priceLV} лв. / ${euroPrice.toFixed(2)} €`;
+    }
     
     const serviceCategories = document.querySelectorAll('.service-category');
     const subcategoriesLists = document.querySelectorAll('.subcategories-list');
@@ -20,17 +26,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedServiceNames = new Set();
 
     // Reset button text on page load
-    totalPriceButton.innerHTML = 'Избери час <span>0 лв.</span>';
+    totalPriceButton.innerHTML = 'Избери час <span>0 лв. / 0.00 €</span>';
 
     // Function to update summary
     function updateSummary() {
         selectedCountElement.textContent = selectedServices.length;
         totalDurationElement.textContent = totalDuration;
-        totalPriceElement.textContent = totalPrice.toFixed(0) + ' лв.';
+        totalPriceElement.textContent = formatDualCurrency(totalPrice.toFixed(0));
         // Update button text based on whether services are selected
         totalPriceButton.innerHTML = selectedServices.length > 0 ? 
-            `Продължи <span>${totalPrice.toFixed(0)} лв.</span>` : 
-            'Избери час <span>0 лв.</span>';
+            `Продължи <span>${formatDualCurrency(totalPrice.toFixed(0))}</span>` : 
+            'Избери час <span>0 лв. / 0.00 €</span>';
             
         // Update selected services list
         updateSelectedServicesList();
@@ -48,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 serviceItem.className = 'selected-service-item';
                 serviceItem.innerHTML = `
                     <div class="selected-service-name">${service.name}</div>
-                    <div class="selected-service-price">${service.price.toFixed(0)} лв.</div>
+                    <div class="selected-service-price">${formatDualCurrency(service.price.toFixed(0))}</div>
                     <button class="remove-service-btn" data-index="${index}">
                         <i class="fas fa-times"></i>
                     </button>
@@ -292,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <span class="option-duration">${option.duration} мин.</span>
                                 </div>
                                 <div class="option-price">
-                                    <span class="price">${option.price} лв.</span>
+                                    <span class="price">${formatDualCurrency(option.price)}</span>
                                     <button class="select-btn ${isSelected ? 'selected' : ''}" 
                                         data-name="${fullServiceName}" 
                                         data-price="${option.price}" 
@@ -325,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ${service.options ? 
                                     `<button class="options-btn">опции ▼</button>` :
                                     `<div class="service-price">
-                                        <span class="price">${service.price} лв.</span>
+                                        <span class="price">${formatDualCurrency(service.price)}</span>
                                         <button class="select-btn ${isDisabled ? 'selected' : ''}" 
                                             data-name="${service.name}" 
                                             data-price="${service.price}" 

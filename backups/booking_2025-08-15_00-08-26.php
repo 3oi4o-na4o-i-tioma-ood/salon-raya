@@ -260,7 +260,7 @@ session_start();
                     <div class="total-duration"><span>0</span> мин.</div>
                 </div>
                 <div class="summary-right">
-                    <div class="total-price">Избери час <span>0 лв. / 0.00 €</span></div>
+                    <div class="total-price">Избери час <span>0 лв.</span></div>
                 </div>
             </div>
         </div>

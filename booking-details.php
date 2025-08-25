@@ -804,7 +804,7 @@ session_start();
 
             <div class="total-section">
                 <div class="total-text">Обща сума:</div>
-                <div class="total-price">0 лв.</div>
+                <div class="total-price">0 лв. / 0.00 €</div>
             </div>
 
             <input type="hidden" id="service" name="service">

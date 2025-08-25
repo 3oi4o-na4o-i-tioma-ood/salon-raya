@@ -70,6 +70,9 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                 <button class="tab-button" data-tab="trash">
                     <i class="fas fa-trash"></i> Кошче
                 </button>
+                <button class="tab-button" data-tab="prices">
+                    <i class="fas fa-euro-sign"></i> Цени
+                </button>
             </div>
 
             <div class="bookings-section tab-content active" id="bookings-tab">
@@ -165,6 +168,34 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
         </div>
+
+        <!-- Prices Tab Content -->
+        <div class="tab-content" id="pricesContent">
+            <div class="prices-section">
+                <div class="prices-header"></div>
+                <div class="prices-content">
+                    <div class="price-list-container">
+                        <div class="price-list-card single-card">
+                            <div class="card-icon">
+                                <i class="fas fa-file-excel"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-actions">
+                                    <a href="generate-xlsx-price-list.php" class="excel-main-btn" target="_blank">
+                                        <i class="fas fa-download"></i>
+                                        Изтегли ценова листа (XLSX)
+                                    </a>
+                                    <button class="sync-btn" onclick="openSyncModal()">
+                                        <i class="fas fa-upload"></i>
+                                        Качи файл с промени
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -210,6 +241,8 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                     } else if (targetTab === 'trash') {
                         document.getElementById('trashContent').classList.add('active');
                         loadTrashReviews();
+                    } else if (targetTab === 'prices') {
+                        document.getElementById('pricesContent').classList.add('active');
                     }
                 });
             });
@@ -417,6 +450,109 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
                     });
                 }
             };
+
+            // Sync Modal Functions
+            window.openSyncModal = function() {
+                document.getElementById('syncModal').classList.remove('hidden');
+            };
+
+            window.closeSyncModal = function() {
+                document.getElementById('syncModal').classList.add('hidden');
+                // Reset form
+                document.getElementById('excelFileInput').value = '';
+                document.querySelector('.sync-upload-btn').disabled = true;
+                document.getElementById('uploadStatus').classList.add('hidden');
+            };
+
+            // File input change handler
+            document.getElementById('excelFileInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    handleFileSelection(file);
+                }
+            });
+
+            // Drag and drop functionality
+            const uploadArea = document.querySelector('.upload-area');
+            
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFileSelection(files[0]);
+                }
+            });
+
+            function handleFileSelection(file) {
+                const allowedTypes = [
+                    'text/csv'
+                ];
+                
+                if (allowedTypes.includes(file.type) || file.name.match(/\.(csv)$/i)) {
+                    document.querySelector('.sync-upload-btn').disabled = false;
+                    showUploadStatus('Файлът е избран: ' + file.name, 'success');
+                } else {
+                    showUploadStatus('Моля, изберете валиден CSV файл (.csv)', 'error');
+                }
+            }
+
+            function showUploadStatus(message, type) {
+                const statusDiv = document.getElementById('uploadStatus');
+                statusDiv.textContent = message;
+                statusDiv.className = 'upload-status ' + type;
+                statusDiv.classList.remove('hidden');
+            }
+
+            window.syncPrices = function() {
+                const fileInput = document.getElementById('excelFileInput');
+                const file = fileInput.files[0];
+                
+                if (!file) {
+                    showUploadStatus('Моля, изберете файл първо', 'error');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('excel_file', file);
+
+                showUploadStatus('Качване и синхронизиране...', 'loading');
+                document.querySelector('.sync-upload-btn').disabled = true;
+
+                fetch('sync-prices.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showUploadStatus('Цените са успешно синхронизирани!', 'success');
+                        setTimeout(() => {
+                            closeSyncModal();
+                            location.reload(); // Reload to show updated prices
+                        }, 2000);
+                    } else {
+                        showUploadStatus('Грешка: ' + data.message, 'error');
+                        document.querySelector('.sync-upload-btn').disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showUploadStatus('Възникна грешка при синхронизирането', 'error');
+                    document.querySelector('.sync-upload-btn').disabled = false;
+                });
+            };
+
         });
     </script>
 
@@ -681,6 +817,200 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
             font-style: italic;
         }
 
+        /* Prices Section Styles */
+        .prices-section {
+            padding: 1rem;
+        }
+
+        .prices-header {
+            margin-bottom: 2rem;
+        }
+
+        .prices-header h2 {
+            margin: 0 0 0.5rem 0;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prices-header small {
+            color: #666;
+            font-style: italic;
+        }
+
+        .prices-content {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .price-list-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .price-list-card {
+            background: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .price-list-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            margin-bottom: 1rem;
+        }
+
+        .card-icon i {
+            font-size: 3rem;
+            color: #28a745;
+        }
+
+        .card-content h3 {
+            margin: 0 0 1rem 0;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .card-content p {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .excel-main-btn, .excel-download-btn, .sync-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .excel-main-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(164, 132, 232, 0.3);
+        }
+
+        .excel-main-btn:hover {
+            background: linear-gradient(135deg, var(--accent-dark), #7c5cc8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(164, 132, 232, 0.4);
+        }
+
+        .excel-download-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(164, 132, 232, 0.3);
+        }
+
+        .excel-download-btn:hover {
+            background: linear-gradient(135deg, var(--accent-dark), #7c5cc8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(164, 132, 232, 0.4);
+        }
+
+        .sync-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(164, 132, 232, 0.3);
+        }
+
+        .sync-btn:hover {
+            background: linear-gradient(135deg, var(--accent-dark), #7c5cc8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(164, 132, 232, 0.4);
+        }
+
+        .single-card {
+            text-align: center;
+        }
+
+        .single-card .card-icon i {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        .single-card .card-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .single-card .card-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .price-summary {
+            background: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .price-summary h4 {
+            margin: 0 0 1rem 0;
+            color: #333;
+            text-align: center;
+        }
+
+        .summary-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .stat-value {
+            color: #a484e8;
+            font-weight: 600;
+        }
+
         .trash-content {
             background: white;
             border-radius: 8px;
@@ -703,21 +1033,21 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         }
 
         .restore-btn {
-            background: #28a745;
+            background: var(--accent-color);
             color: white;
         }
 
         .restore-btn:hover {
-            background: #218838;
+            background: var(--accent-dark);
         }
 
         .permanent-delete-btn {
-            background: #dc3545;
+            background: #5a2b66;
             color: white;
         }
 
         .permanent-delete-btn:hover {
-            background: #c82333;
+            background: #4b2456;
         }
 
         .trash-reviews .review-actions {
@@ -732,6 +1062,35 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         @media (max-width: 768px) {
             .reviews-content {
                 grid-template-columns: 1fr;
+            }
+
+            .price-list-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .excel-main-btn, .excel-download-btn, .sync-btn {
+                width: 100%;
+                justify-content: center;
+                font-size: 1rem;
+                padding: 0.875rem 1.5rem;
+            }
+
+            .single-card .card-icon i {
+                font-size: 3rem;
+            }
+
+            .single-card .card-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .single-card .card-content p {
+                font-size: 1rem;
             }
 
             .dashboard-tabs {
@@ -1052,6 +1411,179 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
             display: none;
         }
 
+        /* Sync Modal Styles */
+        .sync-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .sync-modal.hidden {
+            display: none;
+        }
+
+        .sync-modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .sync-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .sync-modal-header h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .close-modal:hover {
+            background-color: #f0f0f0;
+        }
+
+        .sync-modal-body {
+            padding: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+            transition: border-color 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: #a484e8;
+        }
+
+        .upload-area.dragover {
+            border-color: #a484e8;
+            background-color: #f8f6ff;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .upload-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .upload-btn:hover {
+            background: #0056b3;
+        }
+
+        .sync-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-top: 1px solid #e1e5e9;
+        }
+
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cancel-btn:hover {
+            background: #5a6268;
+        }
+
+        .sync-upload-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sync-upload-btn:hover:not(:disabled) {
+            background: #218838;
+        }
+
+        .sync-upload-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .upload-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .upload-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .upload-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .upload-status.loading {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+
+
         .appointment-card.cancelled {
             background-color: #ffebee;
             border-left: 4px solid #e74c3c;
@@ -1120,6 +1652,40 @@ $appointments = $result->fetch_all(MYSQLI_ASSOC);
         <p>Натиснете бутона по-долу, за да разрешите известия за нови резервации.</p>
         <button id="enableNotifications">Разреши известия</button>
     </div>
+
+    <!-- Sync Modal -->
+    <div id="syncModal" class="sync-modal hidden">
+        <div class="sync-modal-content">
+            <div class="sync-modal-header">
+                <h3>Синхронизирай промени от CSV</h3>
+                <button class="close-modal" onclick="closeSyncModal()">&times;</button>
+            </div>
+            <div class="sync-modal-body">
+                <p>Качете актуализирания CSV файл за да синхронизирате промените в услугите и цените на сайта.</p>
+                <div class="upload-area">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p>Плъзнете и пуснете CSV файла тук или</p>
+                    <input type="file" id="excelFileInput" accept=".csv" style="display: none;">
+                    <button class="upload-btn" onclick="document.getElementById('excelFileInput').click();">
+                        <i class="fas fa-folder-open"></i>
+                        Изберете файл
+                    </button>
+                </div>
+                <div id="uploadStatus" class="upload-status hidden"></div>
+            </div>
+            <div class="sync-modal-footer">
+                <button class="cancel-btn" onclick="closeSyncModal()">Отказ</button>
+                <button class="sync-upload-btn" onclick="syncPrices()" disabled>
+                    <i class="fas fa-sync"></i>
+                    Синхронизирай
+                </button>
+            </div>
+        </div>
+    </div>
+
+
 
     <script>
         let audioPermissionGranted = false;

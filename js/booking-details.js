@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Function to convert LV to Euro and format dual currency display
+    function formatDualCurrency(priceLV) {
+        const euroPrice = Math.ceil((priceLV / 1.95583) * 100) / 100; // Round up to cent
+        return `${priceLV} лв. / ${euroPrice.toFixed(2)} €`;
+    }
+
     // Get selected services from session storage
     const selectedServices = JSON.parse(sessionStorage.getItem('selectedServices') || '[]');
     const servicesContainer = document.getElementById('selectedServices');
@@ -47,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <i class="fas fa-check detail-icon"></i>
                 <div class="detail-text">${service.name}</div>
             </div>
-            <div class="detail-right">${service.price} лв.</div>
+            <div class="detail-right">${formatDualCurrency(service.price)}</div>
         `;
         servicesContainer.appendChild(serviceElement);
         totalPrice += service.price;
@@ -55,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Update total price
-    totalPriceElement.textContent = totalPrice.toFixed(0) + ' лв.';
+    totalPriceElement.textContent = formatDualCurrency(totalPrice.toFixed(0));
     
     // Store services in hidden input
     document.getElementById('service').value = serviceNames.join(', ');

@@ -21,9 +21,34 @@ logMessage("Received POST request");
 logMessage("POST data: " . print_r($_POST, true));
 
 session_start();
-require_once 'vendor/autoload.php';
+
+// Load Composer dependencies if present (optional in local/dev)
+$vendorAvailable = false;
+$vendorAutoloadPath = __DIR__ . '/vendor/autoload.php';
+if (file_exists($vendorAutoloadPath)) {
+    require_once $vendorAutoloadPath;
+    $vendorAvailable = true;
+    logMessage("Vendor autoload loaded");
+} else {
+    logMessage("Vendor autoload NOT found – proceeding without email/calendar");
+}
+
 require_once 'includes/db_config.php';
-require_once 'includes/email.php';
+
+// Load email helper only if vendor libs are available; otherwise define a no-op
+if ($vendorAvailable && file_exists(__DIR__ . '/includes/email.php')) {
+    require_once 'includes/email.php';
+} else {
+    if (!$vendorAvailable) {
+        // Define a stub to avoid fatal errors when email library is unavailable
+        if (!function_exists('sendBookingConfirmationEmail')) {
+            function sendBookingConfirmationEmail($to, $name, $service, $date, $time, $appointmentId, $notes = '') {
+                // Email disabled in this environment
+                return false;
+            }
+        }
+    }
+}
 
 // Database connection
 $conn = getDbConnection();
@@ -106,38 +131,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         logMessage("Appointment saved successfully for $client_name with ID $appointmentId and duration $total_duration_minutes");
 
         // Try to add to Google Calendar, but don't fail if it doesn't work
-        try {
-            $calendar_result = addToGoogleCalendar($client_name, $service, $appointment_date, $appointment_time, $comment, $appointmentId, $total_duration_minutes);
-            if ($calendar_result) {
-                logMessage("Appointment added to Google Calendar successfully");
-            } else {
-                logMessage("Warning: Could not add to Google Calendar, but continuing with appointment");
+        if ($vendorAvailable) {
+            try {
+                $calendar_result = addToGoogleCalendar($client_name, $service, $appointment_date, $appointment_time, $comment, $appointmentId, $total_duration_minutes);
+                if ($calendar_result) {
+                    logMessage("Appointment added to Google Calendar successfully");
+                } else {
+                    logMessage("Warning: Could not add to Google Calendar, but continuing with appointment");
+                }
+            } catch (Exception $e) {
+                logMessage("Error adding to Google Calendar: " . $e->getMessage());
+                // Continue anyway - Google Calendar is optional
             }
-        } catch (Exception $e) {
-            logMessage("Error adding to Google Calendar: " . $e->getMessage());
-            // Continue anyway - Google Calendar is optional
+        } else {
+            logMessage("Google Calendar skipped (vendor not available)");
         }
 
         // Try to send confirmation email using the shared email function
-        try {
-            $emailSent = sendBookingConfirmationEmail(
-                $email,
-                $client_name,
-                $service,
-                $appointment_date,
-                $appointment_time,
-                $appointmentId,
-                $comment
-            );
+        if ($vendorAvailable) {
+            try {
+                $emailSent = sendBookingConfirmationEmail(
+                    $email,
+                    $client_name,
+                    $service,
+                    $appointment_date,
+                    $appointment_time,
+                    $appointmentId,
+                    $comment
+                );
 
-            if (!$emailSent) {
-                logMessage("Warning: Failed to send confirmation email to: " . $email);
-            } else {
-                logMessage("Confirmation email sent successfully to: " . $email);
+                if (!$emailSent) {
+                    logMessage("Warning: Failed to send confirmation email to: " . $email);
+                } else {
+                    logMessage("Confirmation email sent successfully to: " . $email);
+                }
+            } catch (Exception $e) {
+                logMessage("Error sending confirmation email: " . $e->getMessage());
+                // Continue anyway - email is optional
             }
-        } catch (Exception $e) {
-            logMessage("Error sending confirmation email: " . $e->getMessage());
-            // Continue anyway - email is optional
+        } else {
+            logMessage("Email sending skipped (vendor not available)");
         }
 
         // Return success regardless of email status
@@ -169,6 +202,11 @@ logMessage("Connection closed");
  * @param int $duration_minutes Duration in minutes
  */
 function addToGoogleCalendar($client_name, $service, $date, $time, $comment = '', $appointmentId = null, $duration_minutes = 60) {
+    global $vendorAvailable;
+    if (!$vendorAvailable) {
+        logMessage("Google Calendar integration disabled (vendor not available)");
+        return false;
+    }
     // Path to your Google API credentials JSON file
     $credentialsPath = __DIR__ . '/credentials/google-credentials.json';
     $tokenPath = __DIR__ . '/credentials/google-token.json';
